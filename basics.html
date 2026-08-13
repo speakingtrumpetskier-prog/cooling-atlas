@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Cooling Atlas — Colleague Edition</title><style>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Seven Ways a Data Center Sheds Heat — Colleague Edition</title><style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { width: 100%; height: 100%; overflow: hidden; background: #0b0e13; }
 body { font-family: 'Segoe UI', system-ui, sans-serif; color: #dfe6ee; }
@@ -14,7 +14,7 @@ button { font-family: inherit; cursor: pointer; }
 }
 .t-inner { text-align: center; max-width: 760px; padding: 24px; }
 .t-kicker { letter-spacing: 0.42em; font-size: 12px; color: #8fb8d8; margin-bottom: 14px; }
-#title h1 { font-size: 64px; font-weight: 250; letter-spacing: 0.14em; color: #f2f6fa; }
+#title h1 { font-size: 40px; font-weight: 250; letter-spacing: 0.12em; color: #f2f6fa; max-width: 720px; margin: 0 auto; text-wrap: balance; }
 .t-sub { margin: 16px auto 30px; font-size: 15.5px; line-height: 1.55; color: #aab8c6; max-width: 560px; }
 .t-btns { display: flex; gap: 14px; justify-content: center; margin-bottom: 26px; }
 button.big {
@@ -2618,7 +2618,7 @@ parts: {
 
 "direct-to-chip/cold-plates": {
   name: "Cold plates",
-  what: "Copper plates clamped straight onto the processors, with narrow channels cut inside them. Coolant flows through the channels and takes the heat directly off the chip — the shortest path from heat source to pipe anywhere in this hall.",
+  what: "Copper plates clamped straight onto the processors, with narrow channels cut inside them. Coolant flows through the channels and takes the heat directly off the chip — the shortest path from heat source to pipe anywhere in this hall. That directness is what lets the coolant run hot and still do its job, and hot coolant is what makes the refrigeration machine unnecessary.",
   moves: "Coolant threads the channels; visible only in cutaway.",
   numbers: "Cold plates catch roughly three-quarters of a rack's heat; the rest still leaves by air.",
   cite: ["S24", "S18"]
@@ -2647,7 +2647,7 @@ parts: {
 
 "direct-to-chip/cdu": {
   name: "CDU",
-  what: "Coolant Distribution Unit — the border post between two loops: the rack-side loop that touches the chips, and the building water loop that runs out to the yard. Same bucket-brigade arrangement as the chiller plant, with smaller buckets carried closer to the chip. One cabinet holds a heat exchanger, spare pumps, filters, and controls.",
+  what: "Coolant Distribution Unit — the border post between two loops: the rack-side loop that touches the chips, and the building water loop that runs out to the yard. Same bucket-brigade arrangement as the chiller plant, but with the chiller left out. No compressor sits between these two loops; the chip side runs hotter, so the heat crosses on its own. One cabinet holds a heat exchanger, spare pumps, filters, and controls.",
   moves: "Pumps, a control valve, a touchscreen; panels that open for swaps.",
   numbers: "One cabinet can serve about eight of these racks.",
   cite: ["S23", "S18"]
@@ -2688,7 +2688,7 @@ parts: {
 
 "direct-to-chip/dry-cooler": {
   name: "Dry cooler",
-  what: "Finned coils and fans in the yard, handing the loop's heat to outdoor air. Because chips can be cooled with fairly warm water, ordinary outdoor air is usually cold enough to do the job — which means no evaporation and no water used at all.",
+  what: "Finned coils and fans in the yard, handing the loop's heat to outdoor air. Because chips can be cooled with fairly warm water, ordinary outdoor air is usually cold enough to do the job — which means no evaporation and no water used at all. This is where the water saving actually happens. On its own a dry cooler costs electricity, since it cannot cool as deeply as a wet tower; it only comes out ahead because the refrigeration it replaced cost more.",
   moves: "Fan row; shimmer over the coils.",
   numbers: "Sites built this way avoid something like 30 million gallons of water a year each.",
   cite: ["S35", "S17"]
@@ -2954,7 +2954,7 @@ chapters: [
   { cam: { pos: [-29, 2.9, -2.4], look: [-14, 2.5, 6.5], dur: 5 },
     text: "Computers turn electricity into heat. A data center is a building full of computers, so it has to move an enormous amount of heat outdoors, all day, every day. Each bay shows one way of doing that. Every machine here runs somewhere today; each bay says where." },
   { cam: { pos: [-23, 2.7, -2.2], look: [-8, 2.5, 7], dur: 4 },
-    text: "Every system here answers two questions. One: how do you pick the heat up off the chips — with air, or with liquid? Two: how do you push it out of the building — with a refrigeration machine, evaporating water, outside air, or a plain radiator?", layer: "HEAT" },
+    text: "Every system here answers two questions. One: how do you pick the heat up off the chips — with air, or with liquid? Two: how do you push it out of the building — with a refrigeration machine, evaporating water, outside air, or a plain radiator?" },
   { cam: { pos: [-16, 3.0, -5], look: [4, 2.6, 6], dur: 4.5 },
     text: "Every bay here is a complete system: it picks the heat up, moves it, and pushes it outdoors. What changes from bay to bay is how one link in that chain is done — and every one of those changes exists because someone ran into a specific problem.", layer: "ALL" }
 ]},
@@ -3017,17 +3017,17 @@ chapters: [
 
 { id: "ch5", title: "Direct-to-chip liquid", bay: 4, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 5 is direct-to-chip: liquid piped right onto each processor. Two reasons. Necessity — the densest AI chips run too hot for air to keep up. Opportunity — that liquid can run warm, and warm liquid is how a site escapes the trade bay 4 just posed." },
+    text: "Bay 5 is direct-to-chip: liquid piped right onto each processor. Necessity first — the densest AI chips run too hot for air. But the prize is bigger. Liquid can run hot, and hot enough means the refrigeration machine is not needed at all." },
   { pov: "rack", dur: 4.5, act: "explode:0.6",
-    text: "At the back of the rack, two vertical pipes with a connection for every tray. Most of the rack's heat leaves in the coolant, and a fraction still leaves by air. Any one tray can be pulled out without stopping its neighbors." },
+    text: "At the back of the rack, two pipes with a connection for every tray. Most of the rack's heat leaves in the coolant; some still goes by air. And with heat leaving by pipe, the server fans mostly stop — they were eating a tenth or more of each server's power." },
   { pov: "cold-plate", dur: 4.5, act: "explode:0",
-    text: "Copper plates clamp onto the processors, and coolant runs through narrow channels inside them, right over the chip. The coolant runs warm on purpose: warm liquid still cools a hot chip, and warm pipes never sweat." },
+    text: "Here is the move the whole bay rests on. Copper plates touch the chips directly, so the coolant can be hot — around 40 °C — and still carry the heat away. Air never allowed that. Hot coolant is what puts the compressors out of a job." },
   { pov: "cdu-internals", dur: 4.5, act: "xray:1", layer: "WATER",
-    text: "The distribution cabinet is the border between two sealed loops — chip coolant on one side of a stack of plates, building water on the other, trading heat through metal without mixing. One cabinet serves about eight racks." },
+    text: "The cabinet hands heat from the chip loop to the building loop through a stack of plates. Notice what is not inside it: no compressor, no refrigeration. The heat crosses on its own, because the chip side is already the hotter one." },
   { pov: "wall-crossing", dur: 3.5, act: "xray:0",
-    text: "The wall crossing is two sealed loops handing off heat. They hold surprisingly little water — a few dozen gallons at the cabinet — filled at commissioning and kept. Nothing runs to a drain here on an ordinary day." },
+    text: "Two sealed loops, a few dozen gallons at the cabinet, filled once. The catch: this only pays if the loop really is run hot. Many operators chill it to around 20 °C for equipment compatibility, and hand the whole saving back." },
   { pov: "dry-cooler", dur: 4.5,
-    text: "And there is the escape. At these temperatures outdoor air takes the heat almost year-round in a cold climate, so the outdoor box can be the dry cooler: no evaporated water, and much less refrigeration work — though fans and pumps still cost something." }
+    text: "The yard is where the water is saved: a dry cooler evaporates nothing. By itself it costs electricity, because it cannot cool as deeply as a wet tower. It only comes out ahead because the compressors it replaced cost far more." }
 ]},
 
 { id: "ch6", title: "Immersion", bay: 5, steps: [
@@ -3047,15 +3047,15 @@ chapters: [
 
 { id: "ch7", title: "Rear-door heat exchangers", bay: 6, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 7 is the rear-door heat exchanger, and it is a common upgrade right now. An old air-cooled room runs out of airflow long before it runs out of electrical capacity, and rebuilding is expensive — so each rack's back door becomes a water-filled radiator." },
+    text: "Everything so far has assumed a new building. But thousands of air-cooled rooms are already standing, running out of airflow long before they run out of power, and far too costly to gut. Bay 7 is how one of those joins the liquid era in place." },
   { pov: "door", dur: 4.5,
-    text: "The passive door is a car radiator standing on end. The servers' own fans push their exhaust through it, so the door draws no power of its own, and the air rejoins the room close to the temperature it started at." },
+    text: "The swap itself: each rack's back door becomes a water-filled radiator, a car radiator standing on end. The servers' own fans push their exhaust through it, so the door draws no power, and the air rejoins the room close to the temperature it started at." },
   { pov: "active-door", dur: 4,
     text: "The active door adds a column of fans, which roughly doubles what one door can take. Capacity follows the water temperature — colder water, more heat per door — but warmer water buys more chiller-free hours out in the yard." },
   { pov: "manifold", dur: 4,
     text: "Pipes along the row feed every door through its own shut-off valve, and a distribution cabinet keeps the door loop separate from the building water and warm enough that the coils never sweat." },
   { pov: "hoses", dur: 4,
-    text: "The door swings wide on flexible hoses with self-sealing couplings, so the rack opens without breaking the loop. That is all seven systems. What remains is the question they differ on most: what each one does with water." }
+    text: "The door swings wide on flexible hoses with self-sealing couplings, so the rack opens without breaking the loop. New build or old room made over, that is all seven systems. What remains is the question they differ on most: what each does with water." }
 ]},
 
 { id: "ch8", title: "The Water Room", bay: 7, steps: [
@@ -6455,8 +6455,8 @@ const HALL = (function () {
   (function westEnd() {
     add(wall(0.36, 9.6, 19.6, M.precast(), X0 - 0.18, 4.8, 2.6, 3));
     // title graphic
-    const t = K.label('COOLING ATLAS', 9.2, {
-      h: 1.9, kicker: 'Seven ways a data center sheds heat', accent: '#5fb6d8',
+    const t = K.label('SEVEN WAYS A DATA CENTER SHEDS HEAT', 9.2, {
+      h: 1.9, kicker: 'An interactive exhibit', accent: '#5fb6d8',
       back: false                                   // flat against the end wall
     });
     t.rotation.y = Math.PI / 2;
@@ -6725,7 +6725,7 @@ const HALL = (function () {
     add(zn);
 
     // entrance floor graphic
-    const eg = K.stencil('COOLING ATLAS', 7.0, 'rgba(206,222,236,0.30)');
+    const eg = K.stencil('SEVEN WAYS', 7.0, 'rgba(206,222,236,0.30)');
     eg.position.set(-22, 0.021, -5.0);
     add(eg);
   })();
@@ -17758,6 +17758,1549 @@ window.AUDIO = AUDIO;
 
 </script>
 <script>
+// finale.js — THE EPILOGUE. The one place this exhibit's restraint breaks, and the
+// one place it lands back into restraint harder than ever.
+//
+// Offered when the guided tour ends; never auto-starts (harness-safe).
+//   FINALE.start()    snapshots every transform it will touch and takes the camera
+//   FINALE.update(dt) drives the whole thing (called INSTEAD of mode updates)
+//   FINALE.end()      restores the world exactly and gives control back
+//   FINALE.active     bool
+//
+// THE LADDER. Nobody knows what happens next, so the piece does not tell you —
+// it shows you a room losing confidence.
+//   1 THE QUESTION    a caption, a still point in the yard
+//   2 FIRST SIGNS     the luminaires stutter. Nothing has moved yet.
+//   3 A FEW THINGS    six small parts drift off their anchors. You wonder if you saw it.
+//   4 IT SPREADS      bay by bay, small parts then cabinets then tower casings,
+//                     lights failing behind them, counts and amplitude accelerating
+//   5 THE STORM       eye of the cyclone
+//   6 THE POP         one held beat of stillness, then everything goes outward
+//   7 THE AFTERMATH   stark Minnesota wind, and nothing else
+//   8 THE PAPER       one sheet, on the wind, into your hands
+//
+// PHYSICS RESIGNS, THEN WIND. No explosions, no fire, no red alarms. The sun stays
+// where it is, the sky stays where it is, the snow stays where it is.
+//
+// OWNERSHIP: this file adds one new material family (the sheet of paper) plus
+// per-fixture clones of existing lamp materials for the flicker. It creates no
+// lights, touches no exposure, and writes nothing to another file's state that it
+// does not put back.
+"use strict";
+
+const FINALE = (function () {
+
+  // ======================================================================= clock
+  // Seconds from start(). Tuned as one arc — the buildup is two thirds of it.
+  const T = {
+    driftDur:  9.4,    // 1 camera leaves the tour, arcs over the roof to the still point
+    capIn:     1.6,
+    capOut:   10.8,
+
+    flick:    11.0,    // 2 FIRST SIGNS — fixtures start to stutter
+    bankDark: 14.6,    //   the interior run drops out entirely for 1.5 s, and returns
+
+    few:      19.5,    // 3 A FEW THINGS — six small components let go, one at a time
+    fewStep:   1.25,
+
+    loosen:   28.0,    // 4 IT SPREADS — bay by bay, outward from where you stand
+    spread:   17.0,    //   rank spacing shrinks as it goes: 4.2 s, then 2.8, then 1.8
+
+    peel:     52.0,    // 5 the hall itself starts to lift, roof first — inside the
+    peelDur:  20.0,    //   storm, not after it, so the whole campus is airborne at once
+
+    popBeat:  74.0,    // 6 THE POP — one held beat of absolute stillness
+    shove:    74.5,
+    shoveDur:  4.1,
+
+    after:    78.6,    // 7 THE AFTERMATH
+    settleDur: 6.0,
+
+    paperIn:  86.0,    // 8 THE PAPER — 7.4 s of nothing first. Let it sit.
+    paperDur: 11.5,
+    noteIn:   99.8
+  };
+
+  // The still point: out on the snow past the fence, looking back down the length of
+  // the campus. Verified by rendering, not by arithmetic — standing in among the pads
+  // put a 9.5 m wall across the whole frame with no sky and no campus in it. From
+  // here the hall runs to a vanishing point, the yard machines read as machines, the
+  // treeline is on the horizon, and there is air around the viewer for a cyclone.
+  const EYE      = new THREE.Vector3(67.0, 5.00, 40.5);
+  const TGT      = new THREE.Vector3(38.0, 6.20, 11.0);
+  const EYE_END  = new THREE.Vector3(67.0, 1.72, 40.5);   // standing on bare snow
+  const TGT_END  = new THREE.Vector3(38.0, 2.60, 11.0);   // where the campus was
+  const CENTRE   = new THREE.Vector3(58, 0, 8);           // campus centroid, survivor test
+
+  const FOV_WIDE = 66;
+  const BIG_R    = 130;         // geometry this big is landscape, not campus
+  const FAR_KEEP = 150;         // and anything out this far is horizon
+  const TARGET_FLYERS = 2000;
+  const MIN_DEPTH = 2;          // never fly a whole top-level assembly rigidly
+  const MAX_LAMP_CLONES = 48;
+  const N_SCOUTS = 6;
+
+  const CAP_KICK = 'EPILOGUE';
+  const CAP_TEXT = 'Where all this goes, nobody in the room knows. ' +
+                   'Maybe getting it right is the key. And if not —';
+  const NOTE_TEXT = '— press Esc to return —';
+  const PAPER_TEXT = 'Cathy Johnson was here';
+
+  // ======================================================================== math
+  function clamp01(x) { return x < 0 ? 0 : (x > 1 ? 1 : x); }
+  function smoothstep(x) { x = clamp01(x); return x * x * (3 - 2 * x); }
+  function smootherstep(x) { x = clamp01(x); return x * x * x * (x * (x * 6 - 15) + 10); }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  // deterministic per-index hash; no Math.random anywhere in the choreography
+  function hash1(i, salt) {
+    const x = Math.sin(i * 12.9898 + salt * 78.233) * 43758.5453;
+    return x - Math.floor(x);
+  }
+
+  // ======================================================================= state
+  let active = false;
+  let t = 0;             // finale time
+  let ta = 0;            // animation time — stops dead during the held beat
+  let psi = 0;           // integrated angular displacement of the cyclone
+  let stormDone = false;
+  let phase = 'idle';
+  let flickDip = 0;      // 0..1, how much light is missing right now
+
+  const scene = CORE.scene;
+  const cam = CORE.camera;
+
+  let stormGroup = null;
+
+  // flyers ---------------------------------------------------------------------
+  let N = 0;
+  let objs = null;                 // Object3D[]
+  let snapParent = null;           // Object3D[]
+  let snapPos = null, snapQuat = null, snapScl = null;
+  let fA0, fR0, fH0, fRT, fHT, fWS, fRel, fRamp, fBobA, fBobW, fBobP, fSpin, fPsi0, fRad, fDA;
+  let fScl = null;                 // decomposed WORLD scale (3N) — the pop scales from this
+  let fSd = null;                  // local-space origin→centroid offset (3N)
+  let fPop = null;                 // position at the shove (3N)
+  let fDir = null;                 // outward unit direction at the shove (3N)
+  let fAcc = null;                 // outward acceleration
+  let fAx = null;                  // spin axis (3N)
+  let fState = null;               // 0 anchored, 1 flying
+  let popCaptured = false;
+  let fr = 0;                      // frame counter — spreads quaternion renormalisation
+
+  let ghosts = [];                 // flow Points / helper Lines: linger, then vanish
+  let decals = [];                 // multiply contact decals: never fly
+  let decalRel = null;
+  let pools = [];                  // additive floor pools: dim with their fixtures
+  let poolBase = null;
+  let hidden = [];                 // everything we set visible=false on
+  let shadowed = [];               // everything we stopped casting shadows from
+
+  // lamps -----------------------------------------------------------------------
+  let lampMats = [];               // unique {mat, base, big, x}
+  let lampMeshes = [];             // {obj, orig} for exact restore
+  let lampFail = null;
+
+  // borrowed global state -------------------------------------------------------
+  let sRunning = null, sLayer = null, sXray = null;
+  let sFov = 0, sSunShadow = true;
+  const sCamPos = new THREE.Vector3(), sCamQuat = new THREE.Quaternion();
+  let hudEl = null, sHudDisplay = null;
+  let audioOrig = null;
+
+  // scratch — allocated once, never inside the hot loop -------------------------
+  const _v = new THREE.Vector3();
+  const _v2 = new THREE.Vector3();
+  const _p = new THREE.Vector3();
+  const _s = new THREE.Vector3();
+  const _q = new THREE.Quaternion();
+  const _q2 = new THREE.Quaternion();
+  const _ax = new THREE.Vector3();
+  const _m4 = new THREE.Matrix4();
+  const _sph = new THREE.Sphere();
+  const _up = new THREE.Vector3(0, 1, 0);
+  const _camPos = new THREE.Vector3();
+  const _camTgt = new THREE.Vector3();
+  const _fake = new THREE.Vector3();
+  const _qStart = new THREE.Quaternion();
+  const _qEnd = new THREE.Quaternion();
+  const _bez0 = new THREE.Vector3();
+  const _bezC = new THREE.Vector3();
+  const _cAcc = new THREE.Vector3();
+  const _A = new THREE.Vector3();
+  let _cN = 0, _rAcc = 0;
+
+  // ==================================================================== overlay
+  let capEl = null, capK = null, capT = null, noteEl = null;
+  let capShown = false, capHidden = false, noteShown = false;
+
+  function buildDOM() {
+    if (capEl) return;
+    capEl = document.createElement('div');
+    capEl.id = 'finaleCap';
+    capEl.style.cssText = [
+      'position:fixed', 'left:50%', 'bottom:11%', 'transform:translateX(-50%)',
+      'width:640px', 'max-width:calc(100vw - 56px)', 'z-index:40', 'pointer-events:none',
+      'background:rgba(11,15,21,0.90)', 'border:1px solid #263341',
+      'border-left:3px solid #4f89b4', 'padding:15px 20px', 'border-radius:2px',
+      'opacity:0', 'transition:opacity 1.8s ease'
+    ].join(';');
+    capK = document.createElement('div');
+    capK.style.cssText = 'font-size:11px;letter-spacing:0.24em;color:#7da4c4;' +
+      'text-transform:uppercase;margin-bottom:8px';
+    capT = document.createElement('div');
+    capT.style.cssText = "font-size:15px;line-height:1.65;color:#dde7f0;" +
+      "font-family:'Segoe UI',system-ui,sans-serif";
+    capK.textContent = CAP_KICK;
+    capT.textContent = CAP_TEXT;
+    capEl.appendChild(capK);
+    capEl.appendChild(capT);
+    document.body.appendChild(capEl);
+
+    noteEl = document.createElement('div');
+    noteEl.id = 'finaleNote';
+    noteEl.style.cssText = [
+      'position:fixed', 'left:50%', 'bottom:5.5%', 'transform:translateX(-50%)',
+      'z-index:40', 'pointer-events:none', 'white-space:nowrap',
+      "font-family:'Segoe UI',system-ui,sans-serif",
+      'font-size:12px', 'letter-spacing:0.20em', 'color:#9fb4c6',
+      'text-shadow:0 1px 7px rgba(0,0,0,0.85)',
+      'opacity:0', 'transition:opacity 2.6s ease'
+    ].join(';');
+    noteEl.textContent = NOTE_TEXT;
+    document.body.appendChild(noteEl);
+  }
+
+  function killDOM() {
+    if (capEl && capEl.parentNode) capEl.parentNode.removeChild(capEl);
+    if (noteEl && noteEl.parentNode) noteEl.parentNode.removeChild(noteEl);
+    capEl = capK = capT = noteEl = null;
+    capShown = capHidden = noteShown = false;
+  }
+
+  function updateCaptions() {
+    if (!capEl) return;
+    if (!capShown && t >= T.capIn) { capShown = true; capEl.style.opacity = '1'; }
+    if (!capHidden && t >= T.capOut) { capHidden = true; capEl.style.opacity = '0'; }
+    if (!noteShown && t >= T.noteIn) { noteShown = true; noteEl.style.opacity = '1'; }
+  }
+
+  // ===================================================================== the paper
+  // Built once and cached across runs. One doubled plane: a FrontSide mesh carrying
+  // the note and a BackSide child sharing the same (fluttering) geometry.
+  let paper = null, paperBack = null, paperGeo = null, paperBase = null;
+  let paperMatF = null, paperMatB = null;
+  const paperSettleP = new THREE.Vector3();
+  const paperSettleQ = new THREE.Quaternion();
+  const _AX1 = new THREE.Vector3(0.36, 0.28, 0.89).normalize();
+  const _AX2 = new THREE.Vector3(-0.82, 0.51, 0.26).normalize();
+  const _eul = new THREE.Euler(-0.72, 0.05, 0.07, 'XYZ');
+
+  function paperGrain(W, H) {
+    const c = CORE.cvs(W, H), g = c.getContext('2d');
+    g.fillStyle = '#eeece6';
+    g.fillRect(0, 0, W, H);
+
+    const R = CORE.rng(90210);
+    for (let i = 0; i < 3; i++) {           // paper is never one flat value
+      const cx = R() * W, cy = R() * H, rr = (0.35 + R() * 0.4) * H;
+      const gr = g.createRadialGradient(cx, cy, 2, cx, cy, rr);
+      gr.addColorStop(0, 'rgba(214,214,209,0.16)');
+      gr.addColorStop(1, 'rgba(214,214,209,0)');
+      g.fillStyle = gr;
+      g.fillRect(0, 0, W, H);
+    }
+    g.lineWidth = 1;                        // fibres
+    for (let i = 0; i < 1100; i++) {
+      const x = R() * W, y = R() * H, a = R() * Math.PI, l = 1.5 + R() * 4.5;
+      g.strokeStyle = (R() < 0.55)
+        ? 'rgba(163,160,152,' + (0.05 + R() * 0.07).toFixed(3) + ')'
+        : 'rgba(255,255,252,' + (0.06 + R() * 0.09).toFixed(3) + ')';
+      g.beginPath();
+      g.moveTo(x, y);
+      g.lineTo(x + Math.cos(a) * l, y + Math.sin(a) * l);
+      g.stroke();
+    }
+    const edges = [                         // a rim, not a printed border
+      [0, 0, 0, 26], [0, H, 0, H - 26], [0, 0, 22, 0], [W, 0, W - 22, 0]
+    ];
+    for (let i = 0; i < edges.length; i++) {
+      const e = edges[i];
+      const gr = g.createLinearGradient(e[0], e[1], e[2], e[3]);
+      gr.addColorStop(0, 'rgba(150,152,152,0.20)');
+      gr.addColorStop(1, 'rgba(150,152,152,0)');
+      g.fillStyle = gr;
+      g.fillRect(0, 0, W, H);
+    }
+    try {                                   // per-pixel grain
+      const img = g.getImageData(0, 0, W, H), d = img.data;
+      for (let i = 0; i < d.length; i += 4) {
+        const n = (R() - 0.5) * 9;
+        d[i] = Math.max(0, Math.min(255, d[i] + n));
+        d[i + 1] = Math.max(0, Math.min(255, d[i + 1] + n));
+        d[i + 2] = Math.max(0, Math.min(255, d[i + 2] + n * 1.08));
+      }
+      g.putImageData(img, 0, 0);
+    } catch (e) { /* never die for grain */ }
+    return c;
+  }
+
+  // fit the note to the sheet: one line if it reads at size, otherwise two,
+  // broken at the most balanced space
+  function layoutNote(g, W) {
+    const FAM = "'Segoe Script','Bradley Hand','Brush Script MT',cursive";
+    const MAXW = W * 0.80;
+    g.font = '46px ' + FAM;
+    const w1 = g.measureText(PAPER_TEXT).width;
+    if (w1 <= MAXW) return { lines: [PAPER_TEXT], size: 46, fam: FAM };
+    const fit = Math.floor(46 * MAXW / w1);
+    if (fit >= 36) return { lines: [PAPER_TEXT], size: fit, fam: FAM };
+
+    const words = PAPER_TEXT.split(' ');
+    let best = 1, bestd = 1e9;
+    for (let k = 1; k < words.length; k++) {
+      const d = Math.abs(words.slice(0, k).join(' ').length - words.slice(k).join(' ').length);
+      if (d < bestd) { bestd = d; best = k; }
+    }
+    const l1 = words.slice(0, best).join(' '), l2 = words.slice(best).join(' ');
+    const w2 = Math.max(g.measureText(l1).width, g.measureText(l2).width);
+    const size = w2 > MAXW ? Math.max(22, Math.floor(46 * MAXW / w2)) : 46;
+    return { lines: [l1, l2], size: size, fam: FAM };
+  }
+
+  function drawNote(c) {
+    const g = c.getContext('2d'), W = c.width, H = c.height;
+    const R = CORE.rng(1177);
+
+    // a faint pencil smudge. Nothing else is on this page.
+    g.save();
+    g.translate(W * 0.70, H * 0.66);
+    g.rotate(-0.42);
+    g.scale(1, 0.34);
+    const sm = g.createRadialGradient(0, 0, 1, 0, 0, W * 0.20);
+    sm.addColorStop(0, 'rgba(96,100,106,0.13)');
+    sm.addColorStop(1, 'rgba(96,100,106,0)');
+    g.fillStyle = sm;
+    g.beginPath();
+    g.arc(0, 0, W * 0.20, 0, Math.PI * 2);
+    g.fill();
+    g.restore();
+    for (let i = 0; i < 5; i++) {
+      g.strokeStyle = 'rgba(92,96,102,' + (0.030 + R() * 0.035).toFixed(3) + ')';
+      g.lineWidth = 1 + R() * 2.2;
+      g.beginPath();
+      const x0 = W * (0.60 + R() * 0.20), y0 = H * (0.61 + R() * 0.09);
+      g.moveTo(x0, y0);
+      g.lineTo(x0 + 14 + R() * 26, y0 - 4 + R() * 8);
+      g.stroke();
+    }
+
+    // the note: handwritten, per-glyph jitter, drawn twice for ink pooling
+    const L = layoutNote(g, W);
+    const FONT = L.size + 'px ' + L.fam;
+    g.font = FONT;
+    g.textBaseline = 'alphabetic';
+    const lead = L.size * 1.16;
+    const y0 = H * (L.lines.length > 1 ? 0.345 : 0.395);
+
+    for (let ln = 0; ln < L.lines.length; ln++) {
+      const s = L.lines[ln];
+      let wide = 0;
+      for (let i = 0; i < s.length; i++) wide += g.measureText(s[i]).width;
+      wide += (s.length - 1) * 0.7;
+      // second line sits a little right, the way a hand drifts
+      let x = (W - wide) * 0.5 + (ln > 0 ? W * 0.055 : 0) - 3;
+      const yb = y0 + ln * lead;
+      for (let i = 0; i < s.length; i++) {
+        const ch = s[i];
+        const adv = g.measureText(ch).width;
+        if (ch === ' ') { x += adv + 0.7; continue; }
+        const jx = (R() - 0.5) * 1.9;
+        const jy = (R() - 0.5) * 2.6 + Math.sin(i * 0.83 + ln) * 1.5;
+        const jr = (R() - 0.5) * 0.075;
+        g.save();
+        g.translate(x + adv * 0.5 + jx, yb + jy);
+        g.rotate(jr);
+        g.font = FONT;
+        g.fillStyle = 'rgba(48,54,63,' + (0.16 + R() * 0.12).toFixed(3) + ')';
+        g.fillText(ch, -adv * 0.5 + 0.7, 0.8);
+        g.fillStyle = 'rgba(44,50,59,' + (0.70 + R() * 0.26).toFixed(3) + ')';
+        g.fillText(ch, -adv * 0.5, 0);
+        g.restore();
+        x += adv + 0.7;
+      }
+    }
+    return c;
+  }
+
+  function buildPaper() {
+    if (paper) return;
+    const W = 384, H = 542;                     // 0.708 : matches 0.17 x 0.24 m
+    const base = paperGrain(W, H);
+    const front = CORE.cvs(W, H);
+    front.getContext('2d').drawImage(base, 0, 0);
+    drawNote(front);
+
+    // Albedo measured against the snow behind it, not guessed. A physically "white"
+    // sheet in this sun renders 255,255,255 clipped — no edge, no curl, no note, and
+    // it trips the bloom. Held two stops down it reads as paper: a shade darker than
+    // the snowfield, with the fold catching light across it.
+    paperMatF = new THREE.MeshStandardMaterial({
+      map: CORE.tex(front, { srgb: true, clamp: true }),
+      color: 0x55595d, roughness: 0.88, metalness: 0.0,
+      side: THREE.FrontSide, envMapIntensity: 0.22
+    });
+    paperMatB = new THREE.MeshStandardMaterial({
+      map: CORE.tex(base, { srgb: true, clamp: true }),
+      color: 0x494d51, roughness: 0.92, metalness: 0.0,
+      side: THREE.BackSide, envMapIntensity: 0.20
+    });
+
+    paperGeo = new THREE.PlaneGeometry(0.17, 0.24, 8, 11);
+    paperBase = new Float32Array(paperGeo.attributes.position.array);
+
+    paper = new THREE.Mesh(paperGeo, paperMatF);
+    paper.castShadow = false; paper.receiveShadow = false;
+    paper.frustumCulled = false; paper.renderOrder = 4;
+    paperBack = new THREE.Mesh(paperGeo, paperMatB);
+    paperBack.castShadow = false; paperBack.receiveShadow = false;
+    paperBack.frustumCulled = false; paperBack.renderOrder = 4;
+    paper.add(paperBack);
+  }
+
+  // curl + flutter. 99 vertices, and by the time it runs there is nothing else left.
+  function shapePaper(curl, amp, ph) {
+    const pos = paperGeo.attributes.position.array;
+    for (let i = 0; i < pos.length; i += 3) {
+      const u = paperBase[i] / 0.17 + 0.5, v = paperBase[i + 1] / 0.24 + 0.5;
+      const du = u - 0.5;
+      let z = curl * du * du * 3.4;
+      z += amp * Math.sin(u * 5.2 + ph) * (0.25 + 0.75 * v);
+      z += amp * 0.55 * Math.sin(v * 3.4 - ph * 0.7) * (0.30 + 0.70 * u);
+      pos[i + 2] = z;
+    }
+    paperGeo.attributes.position.needsUpdate = true;
+    paperGeo.computeVertexNormals();
+  }
+
+  function computePaperPose() {
+    _m4.lookAt(EYE_END, TGT_END, _up);
+    _qEnd.setFromRotationMatrix(_m4);
+    _v.set(0, 0, -1).applyQuaternion(_qEnd);        // forward
+    _v2.set(0, 1, 0).applyQuaternion(_qEnd);        // up
+    paperSettleP.copy(EYE_END).addScaledVector(_v, 0.44).addScaledVector(_v2, -0.115);
+    _q.setFromEuler(_eul);                          // tipped back, as if held
+    paperSettleQ.copy(_qEnd).multiply(_q);
+  }
+
+  function updatePaper() {
+    const u = clamp01((t - T.paperIn) / T.paperDur);
+    const e = smootherstep(u);
+
+    _bez0.set(EYE_END.x - 9.5, EYE_END.y + 7.0, EYE_END.z - 8.0);
+    _bezC.set(EYE_END.x - 5.0, EYE_END.y + 5.2, EYE_END.z - 4.5);
+    const c2x = EYE_END.x + 1.4, c2y = EYE_END.y + 1.9, c2z = EYE_END.z - 1.5;
+    const mt = 1 - e, a = mt * mt * mt, b = 3 * mt * mt * e, c = 3 * mt * e * e, d = e * e * e;
+    let px = a * _bez0.x + b * _bezC.x + c * c2x + d * paperSettleP.x;
+    let py = a * _bez0.y + b * _bezC.y + c * c2y + d * paperSettleP.y;
+    let pz = a * _bez0.z + b * _bezC.z + c * c2z + d * paperSettleP.z;
+
+    const decay = Math.pow(1 - e, 1.5);             // spiral, exactly zero at the settle
+    const phi = e * 2.6 * Math.PI * 2;
+    px += Math.cos(phi) * 1.9 * decay;
+    py += Math.sin(phi * 0.7 + 0.4) * 0.66 * decay;
+    pz += Math.sin(phi) * 1.9 * decay;
+
+    const sway = 1 - decay;                         // never fully still, never busy
+    px += Math.sin(ta * 0.71) * 0.0035 * sway;
+    py += Math.sin(ta * 0.53 + 1.7) * 0.0042 * sway;
+    paper.position.set(px, py, pz);
+
+    const amp = Math.pow(1 - e, 1.25) * 2.1;        // decaying leaf-tumble
+    const a1 = amp * Math.sin(e * 9.0 + 0.6) + 0.018 * sway * Math.sin(ta * 0.9);
+    const a2 = amp * 0.55 * Math.sin(e * 13.7 + 2.2) + 0.013 * sway * Math.sin(ta * 0.62 + 2.0);
+    paper.quaternion.copy(paperSettleQ);
+    _q.setFromAxisAngle(_AX1, a1);
+    paper.quaternion.premultiply(_q);
+    _q.setFromAxisAngle(_AX2, a2);
+    paper.quaternion.premultiply(_q);
+
+    shapePaper(0.020, lerp(0.0125, 0.0050, e), ta * 1.55);
+  }
+
+  // ======================================================================= audio
+  // Self-contained, procedural, silent if AUDIO.start() was never called.
+  let ACX = null, aOut = null;
+  let aRumSrc = null, aRumLP = null, aRumG = null;
+  let aHisSrc = null, aHisBP = null, aHisG = null;
+  let aBuzOsc = null, aBuzBP = null, aBuzG = null;
+  let aDrG = null;
+  const aDrOsc = [];
+  const aShots = [];
+  let NOISEBUF = null;
+  let aNextTick = 0, aNextGust = 0, aGust = 0;
+
+  function makeNoiseBuf(ctx) {
+    const dur = 4.7, sr = ctx.sampleRate, n = Math.floor(sr * dur);
+    const buf = ctx.createBuffer(1, n, sr);
+    const d = buf.getChannelData(0);
+    const R = CORE.rng(5150);
+    let lp = 0;
+    for (let i = 0; i < n; i++) {
+      const w = R() * 2 - 1;
+      lp = lp * 0.965 + w * 0.035;                   // brown-ish
+      d[i] = Math.max(-1, Math.min(1, lp * 7.5 + w * 0.22));
+    }
+    const fade = Math.floor(sr * 0.05);              // seam-proof the loop
+    for (let i = 0; i < fade; i++) {
+      const k = i / fade;
+      d[i] = d[i] * k + d[n - fade + i] * (1 - k);
+    }
+    return buf;
+  }
+
+  function audioStart() {
+    ACX = (window.AUDIO && AUDIO.ctx) ? AUDIO.ctx : null;
+    if (!ACX) return;
+    try {
+      if (!NOISEBUF || NOISEBUF.sampleRate !== ACX.sampleRate) NOISEBUF = makeNoiseBuf(ACX);
+      aOut = ACX.createGain();
+      aOut.gain.value = 1;
+      aOut.connect(ACX.destination);
+
+      aRumSrc = ACX.createBufferSource();
+      aRumSrc.buffer = NOISEBUF; aRumSrc.loop = true; aRumSrc.playbackRate.value = 0.62;
+      aRumLP = ACX.createBiquadFilter();
+      aRumLP.type = 'lowpass'; aRumLP.frequency.value = 185; aRumLP.Q.value = 0.6;
+      aRumG = ACX.createGain(); aRumG.gain.value = 0.0001;
+      aRumSrc.connect(aRumLP); aRumLP.connect(aRumG); aRumG.connect(aOut);
+      aRumSrc.start();
+
+      aHisSrc = ACX.createBufferSource();
+      aHisSrc.buffer = NOISEBUF; aHisSrc.loop = true; aHisSrc.playbackRate.value = 1.0;
+      aHisBP = ACX.createBiquadFilter();
+      aHisBP.type = 'bandpass'; aHisBP.frequency.value = 560; aHisBP.Q.value = 0.7;
+      aHisG = ACX.createGain(); aHisG.gain.value = 0.0001;
+      aHisSrc.connect(aHisBP); aHisBP.connect(aHisG); aHisG.connect(aOut);
+      aHisSrc.start();
+
+      // ballast buzz — rides the flicker, and only the flicker
+      aBuzOsc = ACX.createOscillator();
+      aBuzOsc.type = 'sawtooth'; aBuzOsc.frequency.value = 120;
+      aBuzBP = ACX.createBiquadFilter();
+      aBuzBP.type = 'bandpass'; aBuzBP.frequency.value = 820; aBuzBP.Q.value = 4.0;
+      aBuzG = ACX.createGain(); aBuzG.gain.value = 0.0001;
+      aBuzOsc.connect(aBuzBP); aBuzBP.connect(aBuzG); aBuzG.connect(aOut);
+      aBuzOsc.start();
+
+      // the bed that stops resolving: a fifth that slides off true
+      aDrG = ACX.createGain(); aDrG.gain.value = 0.0001; aDrG.connect(aOut);
+      const freqs = [55.0, 82.5, 110.0];
+      for (let i = 0; i < freqs.length; i++) {
+        const o = ACX.createOscillator();
+        o.type = 'sine';
+        o.frequency.value = freqs[i];
+        const g = ACX.createGain();
+        g.gain.value = i === 2 ? 0.28 : (i === 1 ? 0.62 : 1.0);
+        o.connect(g); g.connect(aDrG);
+        o.start();
+        aDrOsc.push(o);
+      }
+    } catch (e) { audioStop(); }
+  }
+
+  function audioStop() {
+    const srcs = [aRumSrc, aHisSrc, aBuzOsc];
+    try {
+      for (let i = 0; i < srcs.length; i++) {
+        if (!srcs[i]) continue;
+        try { srcs[i].stop(); } catch (e) {}
+        try { srcs[i].disconnect(); } catch (e) {}
+      }
+      for (let i = 0; i < aDrOsc.length; i++) {
+        try { aDrOsc[i].stop(); } catch (e) {}
+        try { aDrOsc[i].disconnect(); } catch (e) {}
+      }
+      for (let i = 0; i < aShots.length; i++) {
+        try { aShots[i].stop(); } catch (e) {}
+        try { aShots[i].disconnect(); } catch (e) {}
+      }
+      const nodes = [aRumLP, aRumG, aHisBP, aHisG, aBuzBP, aBuzG, aDrG, aOut];
+      for (let i = 0; i < nodes.length; i++) if (nodes[i]) nodes[i].disconnect();
+    } catch (e) { /* silence is an acceptable failure mode */ }
+    aRumSrc = aRumLP = aRumG = null;
+    aHisSrc = aHisBP = aHisG = null;
+    aBuzOsc = aBuzBP = aBuzG = null;
+    aDrG = aOut = null;
+    aDrOsc.length = 0;
+    aShots.length = 0;
+    ACX = null;
+  }
+
+  function thump() {
+    if (!ACX) return;
+    try {
+      const now = ACX.currentTime + 0.01;
+      const o = ACX.createOscillator();
+      o.type = 'sine';
+      o.frequency.setValueAtTime(58, now);
+      o.frequency.exponentialRampToValueAtTime(34, now + 0.75);
+      const g = ACX.createGain();
+      g.gain.setValueAtTime(0.0001, now);
+      g.gain.linearRampToValueAtTime(0.048, now + 0.05);
+      g.gain.exponentialRampToValueAtTime(0.0001, now + 0.95);
+      o.connect(g); g.connect(aOut || ACX.destination);
+      o.start(now);
+      o.stop(now + 1.05);
+      aShots.push(o);
+    } catch (e) { /* no */ }
+  }
+
+  function set(param, v, tc) {
+    try { param.setTargetAtTime(v, ACX.currentTime, tc); } catch (e) {}
+  }
+
+  function updateAudio() {
+    if (!ACX || t < aNextTick) return;
+    aNextTick = t + 0.1;                             // 10 Hz, matching the engine's mixer
+    if (ACX.state !== 'running') return;
+
+    const beat = (t >= T.popBeat && t < T.shove);
+    const storm = smootherstep(clamp01((t - T.few) / (T.popBeat - T.few - 8)));
+    const unease = smootherstep(clamp01((t - T.flick) / 14));
+    const gone = t >= T.shove;
+
+    if (t > T.after && t >= aNextGust) {
+      aNextGust = t + 7 + hash1(Math.floor(t), 2.3) * 8;
+      aGust = 0.35 + hash1(Math.floor(t) + 1, 5.1) * 0.55;
+    }
+    aGust *= 0.985;
+
+    let rum, his, dro, bpf, buz;
+    if (beat) {
+      rum = 0.012; his = 0.004; dro = 0.0001; bpf = 420; buz = 0.0001;
+    } else if (!gone) {
+      rum = 0.008 + storm * 0.152;
+      his = 0.003 + storm * 0.068 + flickDip * 0.020;
+      dro = 0.0001 + unease * 0.020 + storm * 0.042;
+      bpf = 470 + storm * 700;
+      buz = 0.0001 + flickDip * 0.024;
+    } else {
+      const aft = smootherstep(clamp01((t - T.shove) / 5.5));
+      const swell = 1 - smoothstep(clamp01((t - T.shove) / 3.2));
+      rum = lerp(0.150, 0.062, aft) + swell * 0.045 + aGust * 0.030;
+      his = lerp(0.068, 0.030, aft) + swell * 0.024 + aGust * 0.022;
+      dro = 0.0001; buz = 0.0001;
+      bpf = lerp(1100, 640, aft) + aGust * 260;
+    }
+    set(aRumG.gain, rum, beat ? 0.05 : 0.45);
+    set(aHisG.gain, his, beat ? 0.05 : 0.30);
+    set(aDrG.gain, dro, beat ? 0.06 : 1.2);
+    set(aBuzG.gain, buz, 0.03);
+    set(aHisBP.frequency, bpf, 0.9);
+    set(aRumLP.frequency, 150 + storm * 190, 1.2);
+    if (aDrOsc[1]) set(aDrOsc[1].detune, -92 * storm, 2.5);   // the fifth walks off true
+    if (aDrOsc[2]) set(aDrOsc[2].detune, 41 * storm, 2.5);
+  }
+
+  // The exhibit's own ambience is thinned by walking its listener out of the campus:
+  // every machine bed fades on its own proximity curve and the engine's wind bed
+  // comes up in their place. The machines are still audible through the flicker —
+  // that is what makes the flicker frightening.
+  function installAudioHijack() {
+    if (!window.AUDIO || typeof AUDIO.update !== 'function') return;
+    audioOrig = AUDIO.update;
+    AUDIO.update = function (dt, camPos, mode) {
+      try {
+        if (!active) return audioOrig.call(AUDIO, dt, camPos, mode);
+        const walk = 90 * smootherstep(clamp01((t - T.loosen) / 18));
+        if (camPos) _fake.copy(camPos); else _fake.copy(EYE);
+        _fake.z += walk;
+        // 'free' ducks the sparse music away: it stops arriving at all
+        return audioOrig.call(AUDIO, dt, _fake, t < T.loosen ? mode : 'free');
+      } catch (e) { /* never let the epilogue die on a mixer */ }
+    };
+  }
+  function removeAudioHijack() {
+    if (audioOrig && window.AUDIO) AUDIO.update = audioOrig;
+    audioOrig = null;
+  }
+
+  // ======================================================================= lamps
+  // Every emissive fixture gets a private clone of its material, so nothing in the
+  // exhibit's shared material cache is ever mutated. Small standalone fixtures get
+  // their own channel; the big merged luminaire run is one channel for the whole
+  // hall, which is exactly the read from out here in the yard — the building's
+  // lights stutter, and then a whole run drops out and comes back.
+  function isLampMat(m) {
+    if (!m || !m.emissive || !m.emissive.isColor) return false;
+    if (typeof m.emissiveIntensity !== 'number' || m.emissiveIntensity < 0.75) return false;
+    return Math.max(m.emissive.r, m.emissive.g, m.emissive.b) > 0.35;
+  }
+
+  const lampShared = new Map();          // original material -> index into lampMats
+  function claimLamp(o, rad, x) {
+    if (Array.isArray(o.material)) return;
+    const orig = o.material;
+    if (!isLampMat(orig)) return;
+    let mat;
+    if (rad <= 3.5 && lampMats.length < MAX_LAMP_CLONES) {
+      mat = orig.clone();                // its own channel: this fixture alone stutters
+      lampMats.push({ mat: mat, base: orig.emissiveIntensity, big: false, x: x });
+    } else if (lampShared.has(orig)) {
+      const idx = lampShared.get(orig);
+      mat = lampMats[idx].mat;
+      if (rad > 8) lampMats[idx].big = true;
+    } else {
+      mat = orig.clone();                // one channel for the whole merged run
+      lampMats.push({ mat: mat, base: orig.emissiveIntensity, big: rad > 8, x: x });
+      lampShared.set(orig, lampMats.length - 1);
+    }
+    lampMeshes.push({ obj: o, orig: orig });
+    o.material = mat;
+  }
+
+  function lampLevel(i, tt) {
+    if (tt < T.flick) return 1;
+    if (tt >= T.peel) {                                  // the building is leaving
+      const d = tt - T.peel;
+      if (d < 1.2 && hash1(Math.floor(tt * 11) + i, 2.2) < 0.14 * (1 - d / 1.2)) return 0.6;
+      return 0;
+    }
+    const e = lampMats[i];
+    if (e.big && tt >= T.bankDark && tt < T.bankDark + 2.0) {   // the scripted blackout
+      const d = tt - T.bankDark;
+      return d < 1.45 ? 0 : 0.35 + 0.65 * smoothstep((d - 1.45) / 0.55);
+    }
+    const ft = lampFail[i];
+    if (tt < ft) {
+      const press = clamp01((tt - T.flick) / Math.max(0.5, ft - T.flick));
+      if (hash1(Math.floor(tt * 0.75) + i * 31, 4.4) > 0.88 - 0.34 * press) {
+        const k = Math.floor(tt * 14) + i * 7;
+        return hash1(k, 1.9) < 0.55 ? 1 : 0.05 + 0.18 * hash1(k + 3, 6.6);
+      }
+      return 1;
+    }
+    const dead = tt - ft;                                  // failed, with a dying revival
+    if (dead < 2.4) return hash1(Math.floor(tt * 9) + i * 5, 3.3) < 0.26 * (1 - dead / 2.4) ? 0.7 : 0;
+    return 0;
+  }
+
+  function updateLamps() {
+    if (!lampMats.length) { flickDip = 0; return; }
+    let sum = 0;
+    for (let i = 0; i < lampMats.length; i++) {
+      const e = lampMats[i];
+      const L = lampLevel(i, t);
+      e.mat.emissiveIntensity = e.base * L;
+      sum += L;
+    }
+    const mean = sum / lampMats.length;
+    flickDip = 1 - mean;
+    if (poolBase) {
+      for (let i = 0; i < pools.length; i++) {             // floor pools die with them
+        const m = pools[i].material;
+        if (m) m.opacity = poolBase[i] * mean;
+      }
+    }
+  }
+
+  function restoreLamps() {
+    for (let i = 0; i < lampMeshes.length; i++) lampMeshes[i].obj.material = lampMeshes[i].orig;
+    for (let i = 0; i < lampMats.length; i++) {
+      try { lampMats[i].mat.dispose(); } catch (e) {}
+    }
+    if (poolBase) {
+      for (let i = 0; i < pools.length; i++) {
+        const m = pools[i].material;
+        if (m) m.opacity = poolBase[i];
+      }
+    }
+    lampMeshes = []; lampMats = []; lampFail = null;
+    lampShared.clear();
+  }
+
+  // ================================================================ world capture
+  const counts = new Map();
+  let SNOWMAT = null;
+
+  function matOf(o) {
+    const m = o.material;
+    if (!m) return null;
+    return Array.isArray(m) ? m[0] : m;
+  }
+  function isDecal(o) {
+    const m = matOf(o);
+    return !!(m && m.userData && m.userData.decal);
+  }
+  function isPool(o) {
+    const m = matOf(o);
+    return !!(m && m.blending === THREE.AdditiveBlending);
+  }
+  // Two merged meshes in bay 1 ship with a handful of NaN vertices, so their bounding
+  // sphere comes back with radius NaN. Treat any non-finite sphere as absent: one NaN
+  // centroid would otherwise poison a whole chunk's orbit and delete it from the storm.
+  function bsphere(o) {
+    const g = o.geometry;
+    if (!g) return null;
+    if (!g.boundingSphere) { try { g.computeBoundingSphere(); } catch (e) { return null; } }
+    const bs = g.boundingSphere;
+    if (!bs || !isFinite(bs.radius) || !isFinite(bs.center.x)) return null;
+    return bs;
+  }
+  function worldSphere(o) {
+    const bs = bsphere(o);
+    if (!bs) return null;
+    _sph.copy(bs).applyMatrix4(o.matrixWorld);
+    return _sph;
+  }
+
+  // What survives the storm: the sky (never touched), the snowfield, the ploughed
+  // banks, the treelines, the horizon silhouettes. Everything the exhibit BUILT
+  // goes; everything that is Minnesota stays.
+  function isSurvivor(o, tag) {
+    if (!o.isMesh) return false;
+    const ws = worldSphere(o);
+    if (ws && ws.radius >= BIG_R) return true;                       // ground + treelines
+    _v.setFromMatrixPosition(o.matrixWorld);
+    if (_v.distanceTo(CENTRE) > FAR_KEEP) return true;               // horizon props
+    if (tag === 'hall' && SNOWMAT && matOf(o) === SNOWMAT) return true;   // ploughed snow
+    return false;
+  }
+
+  function scan(node, tag) {
+    if (!node.visible) return null;
+    if (node === CORE.sky || node.isLight || node === stormGroup || node === paper) return null;
+    if (node.isPoints || node.isLine || node.isLineSegments) {
+      const gi = { m: 0, p: true, s: false, own: false };
+      counts.set(node, gi);
+      return gi;
+    }
+    let m = 0, p = false, s = false, own = false;
+    if (node.isMesh) {
+      m = 1;
+      own = isSurvivor(node, tag);
+      if (own) s = true;
+      else if (isLampMat(matOf(node))) {
+        const ws = worldSphere(node);
+        claimLamp(node, ws ? ws.radius : 1, ws ? ws.center.x : 0);
+      }
+    }
+    const kids = node.children;
+    for (let i = 0; i < kids.length; i++) {
+      const r = scan(kids[i], tag);
+      if (!r) continue;
+      m += r.m;
+      if (r.p) p = true;
+      if (r.s) s = true;
+    }
+    const info = { m: m, p: p, s: s, own: own };
+    counts.set(node, info);
+    return info;
+  }
+
+  function collect(node, depth, chunkMax, out) {
+    const info = counts.get(node);
+    if (!info) return;
+    if (node.isPoints || node.isLine || node.isLineSegments) { out.ghosts.push(node); return; }
+    if (info.own) return;                                   // a survivor: never touched
+    if (node.isMesh && isDecal(node)) {
+      (isPool(node) ? out.pools : out.decals).push(node);
+      return;
+    }
+    if (info.m === 0) return;
+    if (node.isMesh) { out.fly.push(node); return; }
+    if (depth >= MIN_DEPTH && info.m <= chunkMax && !info.p && !info.s) { out.fly.push(node); return; }
+    const kids = node.children;
+    for (let i = 0; i < kids.length; i++) collect(kids[i], depth + 1, chunkMax, out);
+  }
+
+  // World-space centroid and radius of a node's visible geometry — NOT its origin.
+  // Half this scene is merged meshes whose origin sits at a bay origin metres away,
+  // and a thing must orbit and tumble about its own mass or it sweeps the sky.
+  function accumCentroid(node) {
+    if (!node.visible) return;
+    if (node.isMesh) {
+      const ws = worldSphere(node);
+      if (ws) { _cAcc.add(ws.center); _cN++; }
+    }
+    const kids = node.children;
+    for (let i = 0; i < kids.length; i++) accumCentroid(kids[i]);
+  }
+  function accumRadius(node, c) {
+    if (!node.visible) return;
+    if (node.isMesh) {
+      const ws = worldSphere(node);
+      if (ws) {
+        const d = ws.center.distanceTo(c) + ws.radius;
+        if (d > _rAcc) _rAcc = d;
+      }
+    }
+    const kids = node.children;
+    for (let i = 0; i < kids.length; i++) accumRadius(kids[i], c);
+  }
+  function measure(node, out) {
+    _cAcc.set(0, 0, 0); _cN = 0;
+    accumCentroid(node);
+    if (_cN > 0) out.copy(_cAcc).multiplyScalar(1 / _cN);
+    if (_cN === 0 || !isFinite(out.x) || !isFinite(out.y) || !isFinite(out.z)) {
+      out.setFromMatrixPosition(node.matrixWorld);
+      if (!isFinite(out.x)) out.set(0, 0, 0);
+      return 0.5;
+    }
+    _rAcc = 0;
+    accumRadius(node, out);
+    return isFinite(_rAcc) && _rAcc > 0 ? _rAcc : 0.5;
+  }
+
+  function hideNow(o) {
+    if (o.visible) { o.visible = false; hidden.push(o); }
+  }
+  // Run once per flyer, at the instant it lets go. Its decals go with it, and it
+  // stops casting: 1600 tumbling shadow casters cost a whole shadow pass and buy
+  // nothing, while the HALL keeps casting — so the mullion-gridded daylight band on
+  // the floor, the signature image of this piece, survives until the building does.
+  function onRelease(node) {
+    if (node.isMesh) {
+      if (isDecal(node)) { hideNow(node); return; }
+      if (node.castShadow) { node.castShadow = false; shadowed.push(node); }
+    }
+    const kids = node.children;
+    for (let i = 0; i < kids.length; i++) onRelease(kids[i]);
+  }
+
+  // -------------------------------------------------------------- release schedule
+  const bayRank = new Array(8);
+  function buildRanks() {
+    const order = [];
+    for (let i = 0; i < 8; i++) order.push({ i: i, d: Math.abs(CORE.bayOriginX(i) - EYE.x) });
+    order.sort(function (a, b) { return a.d - b.d; });
+    for (let k = 0; k < order.length; k++) bayRank[order[k].i] = k;
+  }
+  function bayIndexForX(x) {
+    if (x > 118) return 7;
+    return Math.max(0, Math.min(6, Math.round(x / 18)));
+  }
+  // A = world centroid, rad = world radius. tag: 'bay' | 'hall' | 'scene'.
+  function releaseTime(A, tag, bay, i, rad) {
+    const h = hash1(i, 3.7);
+    if (tag === 'hall' && A.z < 12.6) {
+      // the building holds until the very end, then peels from the roof down
+      const yn = clamp01(A.y / 9.5);
+      return Math.min(T.peel + Math.pow(1 - yn, 1.35) * T.peelDur + h * 0.9 - 0.45, T.shove);
+    }
+    // ranks radiate outward from where the viewer is standing, and the gap between
+    // them SHRINKS: 4.2 s, 2.8, 2.3, 2.1, 2.0, 1.8, 1.8. It accelerates.
+    const rank = bayRank[bay === undefined ? bayIndexForX(A.x) : bay];
+    const base = T.loosen + T.spread * Math.pow(rank / 7, 0.72);
+    const size = clamp01((rad - 0.22) / 2.4) * 3.2;   // small parts first, casings last
+    const top = (1 - clamp01(A.y / 6)) * 1.6;         // unrestrained tops before bases
+    const off = tag === 'bay' ? 0 : (tag === 'hall' ? 0.8 : 0.4);
+    return Math.min(base + off + size + top + h * 1.4, T.shove);
+  }
+
+  // ----------------------------------------------------------------- capture/build
+  function capture() {
+    counts.clear();
+    lampShared.clear();
+    hidden.length = 0;
+    shadowed.length = 0;
+    lampMats = []; lampMeshes = [];
+    ghosts = []; decals = []; pools = [];
+
+    try { SNOWMAT = (window.KIT && KIT.M && KIT.M.snow) ? KIT.M.snow() : null; }
+    catch (e) { SNOWMAT = null; }
+
+    scene.updateMatrixWorld(true);
+    buildRanks();
+
+    const roots = [];
+    for (let i = 0; i < CORE.bayGroups.length; i++) {
+      if (CORE.bayGroups[i]) roots.push({ node: CORE.bayGroups[i], tag: 'bay', bay: i });
+    }
+    if (window.HALL && HALL.root) roots.push({ node: HALL.root, tag: 'hall', bay: undefined });
+    const kids = scene.children;
+    for (let i = 0; i < kids.length; i++) {
+      const o = kids[i];
+      if (o === CORE.sky || o.isLight || o === stormGroup || o === paper) continue;
+      if (window.HALL && o === HALL.root) continue;
+      let isBay = false;
+      for (let b = 0; b < CORE.bayGroups.length; b++) if (CORE.bayGroups[b] === o) { isBay = true; break; }
+      if (isBay) continue;
+      roots.push({ node: o, tag: 'scene', bay: undefined, self: true });
+    }
+
+    for (let i = 0; i < roots.length; i++) scan(roots[i].node, roots[i].tag);
+
+    lampFail = new Float32Array(lampMats.length);
+    for (let i = 0; i < lampMats.length; i++) {
+      lampFail[i] = T.loosen + hash1(i, 5.5) * (T.peel - T.loosen) * 0.92;
+    }
+
+    // adaptive chunking: fly individual meshes when the scene is small enough,
+    // otherwise keep small assemblies whole so the storm still reads as machines
+    const STEPS = [1, 2, 4, 8, 16, 32, 64, 128];
+    let out = null;
+    for (let s = 0; s < STEPS.length; s++) {
+      out = { fly: [], ghosts: [], decals: [], pools: [] };
+      for (let i = 0; i < roots.length; i++) {
+        const r = roots[i];
+        collect(r.node, r.self ? MIN_DEPTH : 0, STEPS[s], out);
+      }
+      if (out.fly.length <= TARGET_FLYERS) break;
+    }
+
+    function tagOf(o) {
+      let n = o;
+      while (n) {
+        for (let b = 0; b < CORE.bayGroups.length; b++) if (CORE.bayGroups[b] === n) return { tag: 'bay', bay: b };
+        if (window.HALL && n === HALL.root) return { tag: 'hall', bay: undefined };
+        n = n.parent;
+      }
+      return { tag: 'scene', bay: undefined };
+    }
+
+    objs = out.fly;
+    ghosts = out.ghosts;
+    decals = out.decals;
+    pools = out.pools;
+    N = objs.length;
+
+    poolBase = new Float32Array(pools.length);
+    for (let i = 0; i < pools.length; i++) {
+      const m = pools[i].material;
+      poolBase[i] = m && typeof m.opacity === 'number' ? m.opacity : 1;
+    }
+
+    snapParent = new Array(N);
+    snapPos = new Float32Array(N * 3);
+    snapQuat = new Float32Array(N * 4);
+    snapScl = new Float32Array(N * 3);
+    fA0 = new Float32Array(N); fR0 = new Float32Array(N); fH0 = new Float32Array(N);
+    fRT = new Float32Array(N); fHT = new Float32Array(N); fWS = new Float32Array(N);
+    fRel = new Float32Array(N); fRamp = new Float32Array(N); fRad = new Float32Array(N);
+    fDA = new Float32Array(N);
+    fBobA = new Float32Array(N); fBobW = new Float32Array(N); fBobP = new Float32Array(N);
+    fSpin = new Float32Array(N); fPsi0 = new Float32Array(N);
+    fScl = new Float32Array(N * 3);
+    fSd = new Float32Array(N * 3);
+    fPop = new Float32Array(N * 3);
+    fDir = new Float32Array(N * 3);
+    fAcc = new Float32Array(N);
+    fAx = new Float32Array(N * 3);
+    fState = new Uint8Array(N);
+
+    for (let i = 0; i < N; i++) {
+      const o = objs[i];
+      const i3 = i * 3, i4 = i * 4;
+
+      snapParent[i] = o.parent;
+      snapPos[i3] = o.position.x; snapPos[i3 + 1] = o.position.y; snapPos[i3 + 2] = o.position.z;
+      snapQuat[i4] = o.quaternion.x; snapQuat[i4 + 1] = o.quaternion.y;
+      snapQuat[i4 + 2] = o.quaternion.z; snapQuat[i4 + 3] = o.quaternion.w;
+      snapScl[i3] = o.scale.x; snapScl[i3 + 1] = o.scale.y; snapScl[i3 + 2] = o.scale.z;
+
+      const rad = measure(o, _A);
+      fRad[i] = rad;
+      o.matrixWorld.decompose(_p, _q, _s);
+      fScl[i3] = _s.x; fScl[i3 + 1] = _s.y; fScl[i3 + 2] = _s.z;
+
+      // local-space vector origin→centroid, so the object orbits and tumbles about
+      // its own mass rather than about a merge origin a hundred metres away
+      _v.copy(_A).sub(_p);
+      _q2.copy(_q).invert();
+      _v.applyQuaternion(_q2);
+      fSd[i3] = _v.x; fSd[i3 + 1] = _v.y; fSd[i3 + 2] = _v.z;
+
+      // hand the object to the storm group, world transform preserved
+      const par = snapParent[i];
+      stormGroup.add(o);
+      o.position.copy(_p);
+      o.quaternion.copy(_q);
+      o.scale.copy(_s);
+
+      // polar seat in the cyclone. r0 is NOT clamped: at ramp 0 the formula has to
+      // reproduce the captured centroid to the millimetre or the thing pops.
+      const dx = _A.x - EYE.x, dz = _A.z - EYE.z;
+      const r0 = Math.sqrt(dx * dx + dz * dz);
+      const a0 = r0 < 1e-4 ? hash1(i, 9.1) * Math.PI * 2 : Math.atan2(dz, dx);
+      const h0 = _A.y - EYE.y;
+
+      // Radius layers by original distance but compresses hard, so the far end of
+      // the campus is pulled in close enough to read and the near yard passes just
+      // outside arm's reach: a 10 m inner shell out to about 35 m.
+      // Height is a SHALLOW funnel centred on the eye, not a tower — verified by
+      // rendering: a steep funnel puts the entire storm above the top of frame and
+      // leaves the viewer looking at an empty yard.
+      const h = hash1(i, 1.3), h2 = hash1(i, 4.9), h3 = hash1(i, 7.7);
+      const rT = 3.0 + Math.pow(r0, 0.70) * 1.25 + h * 3.0;
+
+      fA0[i] = a0; fR0[i] = r0; fH0[i] = h0; fRT[i] = rT;
+      fHT[i] = Math.max(1.3 - EYE.y, h0 * 0.35 + (rT - 3.0) * 0.30 + h2 * 9.0 - 4.0);
+      fWS[i] = Math.sqrt(16 / (rT + 6)) * (0.94 + h3 * 0.12);
+
+      const info = tagOf(par);
+      fRel[i] = releaseTime(_A, info.tag, info.bay, i, rad);
+      fRamp[i] = (info.tag === 'hall' && _A.z < 12.6) ? (5.5 + h2 * 2.5) : (8.5 + h3 * 4.5);
+
+      // The campus only occupies a 120° arc as seen from here, so a rigid rotation
+      // would keep it in that arc and swing the whole storm out of frame. Each thing
+      // therefore fans, as it ramps, to a target bearing — clustered by bay, so the
+      // eight machines stay legible as eight machines, spread evenly around the eye.
+      // Architectural runs keep their bearing: swinging a 150 m ribbon 90° is a mess.
+      const gi = (info.tag === 'bay' && info.bay !== undefined) ? info.bay : bayIndexForX(_A.x);
+      const aT = (gi / 8) * Math.PI * 2 + hash1(gi, 21.7) * 0.5 + (h3 - 0.5) * 1.5;
+      let dA = rad > 26 ? 0 : aT - a0;
+      while (dA > Math.PI) dA -= Math.PI * 2;
+      while (dA < -Math.PI) dA += Math.PI * 2;
+      fDA[i] = dA;
+
+      fBobA[i] = 0.5 + h2 * 2.4;
+      fBobW[i] = 0.35 + h3 * 0.50;
+      fBobP[i] = h * Math.PI * 2;
+      fSpin[i] = (0.05 + h3 * 0.38) * (rad > 6 ? 0.35 : 1.0);
+
+      // Architectural-scale merged runs — 150 m luminaire strips, tray runs, roof
+      // deck, floor and yard slabs — must NOT orbit: a 150 m ribbon swung around a
+      // 20 m radius sweeps straight through the viewer and reads as a bug.
+      if (rad > 26) {
+        fBobA[i] *= 0.35;
+        fSpin[i] *= 0.12;
+        if (_A.y < 1.6) {
+          fRel[i] = T.shove;                 // slabs, aprons, roads do not levitate
+        } else {
+          fRT[i] = r0 + 22 + h * 18;         // overhead runs drift up and away instead
+          fHT[i] = h0 + 14 + h * 22;
+          fWS[i] = 0.08;
+        }
+      }
+
+      _ax.set(h * 2 - 1, h2 * 2 - 1 + 0.35, h3 * 2 - 1);
+      if (_ax.lengthSq() < 1e-6) _ax.set(0, 1, 0);
+      _ax.normalize();
+      fAx[i3] = _ax.x; fAx[i3 + 1] = _ax.y; fAx[i3 + 2] = _ax.z;
+
+      fAcc[i] = 95 + h * 150;
+      fState[i] = 0;
+    }
+
+    pickScouts();
+
+    // decals never fly: they blink out when their patch of campus lets go
+    decalRel = new Float32Array(decals.length);
+    for (let i = 0; i < decals.length; i++) {
+      const rad = measure(decals[i], _A);
+      const info = tagOf(decals[i].parent || decals[i]);
+      decalRel[i] = releaseTime(_A, info.tag, info.bay, N + i, rad);
+    }
+  }
+
+  // THE FEW THINGS. Small components, in front of you, at a distance where you can
+  // see what they are: a valve handle, a guard, a placard. One at a time, drifting
+  // millimetres and then metres, with nothing else in the world moving at all.
+  function pickScouts() {
+    _v2.subVectors(TGT, EYE).normalize();
+    const cands = [];
+    for (let i = 0; i < N; i++) {
+      const rad = fRad[i];
+      if (rad < 0.06 || rad > 0.60) continue;
+      const r0 = fR0[i];
+      if (r0 < 10 || r0 > 36) continue;
+      const ax = Math.cos(fA0[i]) * r0, az = Math.sin(fA0[i]) * r0, ay = fH0[i];
+      const l = Math.sqrt(ax * ax + ay * ay + az * az) || 1;
+      if ((ax * _v2.x + ay * _v2.y + az * _v2.z) / l < 0.40) continue;   // must be in frame
+      cands.push({ i: i, s: Math.abs(r0 - 21) + hash1(i, 11.3) * 2 });
+    }
+    cands.sort(function (a, b) { return a.s - b.s; });
+    const n = Math.min(N_SCOUTS, cands.length);
+    for (let k = 0; k < n; k++) {
+      const i = cands[k].i;
+      fRel[i] = T.few + k * T.fewStep + hash1(i, 12.7) * 0.8;
+      fRamp[i] = 24 + hash1(i, 13.1) * 8;          // barely moves for the first while
+      fSpin[i] *= 0.30;                            // a slow, curious turn
+      fBobA[i] *= 0.55;
+      fRT[i] = fR0[i] + 2.0 + hash1(i, 14.3) * 3.0;
+      fHT[i] = fH0[i] + 1.6 + hash1(i, 15.9) * 2.6;
+    }
+  }
+
+  function restore() {
+    if (objs) {
+      for (let i = 0; i < N; i++) {
+        const o = objs[i], i3 = i * 3, i4 = i * 4;
+        const p = snapParent[i];
+        // no recorded parent means capture() threw before reaching this one, so it
+        // was never reparented and there is nothing to put back
+        if (!p) continue;
+        p.add(o);
+        o.position.set(snapPos[i3], snapPos[i3 + 1], snapPos[i3 + 2]);
+        o.quaternion.set(snapQuat[i4], snapQuat[i4 + 1], snapQuat[i4 + 2], snapQuat[i4 + 3]);
+        o.scale.set(snapScl[i3], snapScl[i3 + 1], snapScl[i3 + 2]);
+        o.matrixWorldNeedsUpdate = true;
+      }
+    }
+    for (let i = 0; i < hidden.length; i++) hidden[i].visible = true;
+    hidden.length = 0;
+    for (let i = 0; i < shadowed.length; i++) shadowed[i].castShadow = true;
+    shadowed.length = 0;
+    objs = null; snapParent = null; N = 0; fScl = null;
+    ghosts = []; decals = []; decalRel = null; pools = []; poolBase = null;
+    counts.clear();
+  }
+
+  // ==================================================================== choreography
+  function omegaAt(tt) {
+    const u = clamp01((tt - T.few) / (T.popBeat - T.few));
+    return 0.012 + 0.330 * Math.pow(smootherstep(u), 1.55);
+  }
+
+  function updateFlyers(dt, beat) {
+    if (beat) return;                       // THE BEAT: nothing moves. Not one thing.
+
+    const shoving = t >= T.shove;
+    if (!shoving) psi += omegaAt(t) * dt;
+
+    if (shoving && !popCaptured) {
+      popCaptured = true;
+      capturePop();
+      for (let i = 0; i < ghosts.length; i++) hideNow(ghosts[i]);
+      for (let i = 0; i < decals.length; i++) hideNow(decals[i]);
+      for (let i = 0; i < pools.length; i++) hideNow(pools[i]);
+      thump();
+    }
+
+    if (shoving) {
+      const tau = t - T.shove;
+      const k = tau * tau;
+      const sc = Math.pow(1 - smoothstep(tau / 3.4), 1.6);
+      if (sc <= 0.004) {
+        stormDone = true;
+        stormGroup.visible = false;
+        return;
+      }
+      fr++;
+      for (let i = 0; i < N; i++) {
+        const o = objs[i], i3 = i * 3;
+        const d = fAcc[i] * k;
+        _ax.set(fAx[i3], fAx[i3 + 1], fAx[i3 + 2]);
+        _q.setFromAxisAngle(_ax, fSpin[i] * 1.35 * dt);
+        o.quaternion.multiply(_q);
+        if (((i + fr) & 127) === 0) o.quaternion.normalize();
+        o.scale.set(fScl[i3] * sc, fScl[i3 + 1] * sc, fScl[i3 + 2] * sc);
+        _v.set(fSd[i3], fSd[i3 + 1], fSd[i3 + 2]).applyQuaternion(o.quaternion).multiplyScalar(sc);
+        o.position.set(
+          fPop[i3] + fDir[i3] * d - _v.x,
+          fPop[i3 + 1] + fDir[i3 + 1] * d - _v.y,
+          fPop[i3 + 2] + fDir[i3 + 2] * d - _v.z
+        );
+      }
+      return;
+    }
+
+    // loosening + storm: one continuous formula. At ramp = 0 it reproduces the
+    // captured transform EXACTLY, so nothing ever pops off its anchor — a thing
+    // leaves by millimetres, then by metres, and only then by orbit.
+    fr++;
+    for (let i = 0; i < N; i++) {
+      const rel = fRel[i];
+      if (t < rel) continue;
+      const i3 = i * 3;
+      if (fState[i] === 0) {
+        fState[i] = 1;
+        fPsi0[i] = psi;
+        onRelease(objs[i]);
+      }
+      const o = objs[i];
+      const rmp = smootherstep((t - rel) / fRamp[i]);
+      const wob = Math.sin(ta * fBobW[i] + fBobP[i]);
+      const ang = fA0[i] + fDA[i] * rmp + (psi - fPsi0[i]) * fWS[i];
+      const rr = fR0[i] + (fRT[i] - fR0[i]) * rmp + wob * fBobA[i] * 0.5 * rmp;
+      const hh = fH0[i] + (fHT[i] - fH0[i]) * rmp + wob * fBobA[i] * rmp;
+
+      if (rmp > 0) {
+        _ax.set(fAx[i3], fAx[i3 + 1], fAx[i3 + 2]);
+        _q.setFromAxisAngle(_ax, fSpin[i] * rmp * dt);
+        o.quaternion.multiply(_q);
+        if (((i + fr) & 127) === 0) o.quaternion.normalize();
+      }
+      _v.set(fSd[i3], fSd[i3 + 1], fSd[i3 + 2]).applyQuaternion(o.quaternion);
+      o.position.set(
+        EYE.x + Math.cos(ang) * rr - _v.x,
+        EYE.y + hh - _v.y,
+        EYE.z + Math.sin(ang) * rr - _v.z
+      );
+    }
+  }
+
+  // freeze the world exactly as the beat left it, then work out where each thing
+  // is about to be thrown
+  function capturePop() {
+    for (let i = 0; i < N; i++) {
+      const o = objs[i], i3 = i * 3;
+      _v.set(fSd[i3], fSd[i3 + 1], fSd[i3 + 2]).applyQuaternion(o.quaternion);
+      let px, py, pz;
+      if (fState[i] === 1) {
+        px = o.position.x + _v.x; py = o.position.y + _v.y; pz = o.position.z + _v.z;
+      } else {
+        px = EYE.x + Math.cos(fA0[i]) * fR0[i];      // never released: the floor slabs,
+        py = EYE.y + fH0[i];                          // the last of the building
+        pz = EYE.z + Math.sin(fA0[i]) * fR0[i];
+      }
+      fPop[i3] = px; fPop[i3 + 1] = py; fPop[i3 + 2] = pz;
+
+      let dx = px - EYE.x, dy = py - EYE.y, dz = pz - EYE.z;
+      let len = Math.sqrt(dx * dx + dy * dy + dz * dz);
+      if (len < 0.5) {
+        const a = hash1(i, 6.3) * Math.PI * 2;
+        dx = Math.cos(a); dy = 0.12; dz = Math.sin(a);
+        len = Math.sqrt(1 + 0.0144);
+      }
+      dx /= len; dy /= len; dz /= len;
+      if (dy < 0.06) {                                // nothing burrows into the snow
+        dy = 0.06 + hash1(i, 8.8) * 0.10;
+        const hl = Math.sqrt(dx * dx + dz * dz) || 1;
+        const kk = Math.sqrt(Math.max(0.01, 1 - dy * dy)) / hl;
+        dx *= kk; dz *= kk;
+      }
+      fDir[i3] = dx; fDir[i3 + 1] = dy; fDir[i3 + 2] = dz;
+    }
+  }
+
+  function updateCamera(beat) {
+    if (beat) return;                        // the camera holds its breath too
+
+    if (t < T.driftDur) {
+      // 1 THE QUESTION — up out of wherever the tour ended, over the roof, down into
+      // the yard. Fastest through the deck, so the crossing is a blink.
+      const e = smootherstep(t / T.driftDur);
+      const mt = 1 - e;
+      _bezC.set(
+        (sCamPos.x + EYE.x) * 0.5,
+        Math.max(sCamPos.y, EYE.y) + 9.5,
+        (sCamPos.z + EYE.z) * 0.5 + 6.0
+      );
+      cam.position.set(
+        mt * mt * sCamPos.x + 2 * mt * e * _bezC.x + e * e * EYE.x,
+        mt * mt * sCamPos.y + 2 * mt * e * _bezC.y + e * e * EYE.y,
+        mt * mt * sCamPos.z + 2 * mt * e * _bezC.z + e * e * EYE.z
+      );
+      _m4.lookAt(EYE, TGT, _up);
+      _qEnd.setFromRotationMatrix(_m4);
+      cam.quaternion.copy(_qStart).slerp(_qEnd, e);
+      return;
+    }
+
+    const drift = smootherstep(clamp01((t - T.driftDur) / 9));
+    const settle = smootherstep(clamp01((t - T.after) / T.settleDur));
+
+    _camPos.set(
+      EYE.x + Math.sin(ta * 0.110) * 0.55 * drift,
+      EYE.y + Math.sin(ta * 0.077 + 1.1) * 0.22 * drift,
+      EYE.z + Math.cos(ta * 0.090) * 0.45 * drift
+    );
+    _camTgt.set(
+      TGT.x + Math.sin(ta * 0.063 + 0.7) * 0.9 * drift,
+      TGT.y + Math.sin(ta * 0.048 + 2.2) * 0.5 * drift,
+      TGT.z
+    );
+    if (settle > 0) {                        // 7 down to standing height on bare snow
+      _camPos.lerp(EYE_END, settle);
+      _camTgt.lerp(TGT_END, settle);
+    }
+    cam.position.copy(_camPos);
+    cam.lookAt(_camTgt);
+
+    const wide = smootherstep(clamp01((t - T.loosen) / (T.popBeat - T.loosen)));
+    const fov = lerp(lerp(sFov, FOV_WIDE, wide), sFov, settle);
+    if (Math.abs(cam.fov - fov) > 0.01) {
+      cam.fov = fov;
+      cam.updateProjectionMatrix();
+    }
+  }
+
+  // ======================================================================== public
+  function onKey(e) {
+    if (!active) return;
+    if (e.code === 'Escape') {
+      e.preventDefault();
+      e.stopPropagation();
+      end();
+    }
+  }
+  function onPointer(e) {
+    if (!active) return;
+    e.stopPropagation();                     // the exhibit's click-to-inspect stays out
+    if (t >= T.noteIn) end();
+  }
+
+  function start() {
+    if (active) return true;
+    try {
+      buildDOM();
+      buildPaper();
+      computePaperPose();
+
+      stormGroup = new THREE.Group();
+      stormGroup.name = 'FINALE_STORM';
+      stormGroup.matrixAutoUpdate = false;   // identity, forever
+      stormGroup.updateMatrix();
+      scene.add(stormGroup);
+
+      // borrow the world -------------------------------------------------------
+      sCamPos.copy(cam.position);
+      sCamQuat.copy(cam.quaternion);
+      sFov = cam.fov;
+      sSunShadow = CORE.sun.castShadow;
+      _qStart.copy(cam.quaternion);
+
+      if (typeof APP !== 'undefined' && APP && APP.S) {
+        sRunning = APP.S.running;
+        sLayer = APP.S.layer;
+        sXray = APP.S.xray;
+        APP.S.running = false;               // machinery stops. Physics is resigning.
+        if (sXray) APP.setXray(false);
+        if (sLayer !== 'ALL') APP.setLayer('ALL');
+      } else if (window.KIT) {
+        sLayer = KIT.layer; sXray = KIT.xray;
+        KIT.setXray(false);
+        KIT.setLayer('ALL');
+      }
+
+      hudEl = document.getElementById('hud');
+      if (hudEl) { sHudDisplay = hudEl.style.display; hudEl.style.display = 'none'; }
+
+      capture();
+
+      t = 0; ta = 0; psi = 0;
+      stormDone = false;
+      popCaptured = false;
+      flickDip = 0;
+      phase = 'question';
+      aNextTick = 0; aNextGust = 0; aGust = 0;
+      if (paper) {
+        paper.position.copy(paperSettleP);
+        paper.quaternion.copy(paperSettleQ);
+        shapePaper(0.020, 0.0125, 0);
+        scene.add(paper);
+        paper.visible = false;
+      }
+
+      audioStart();
+      installAudioHijack();
+      window.addEventListener('keydown', onKey, true);
+      window.addEventListener('pointerdown', onPointer, true);
+
+      active = true;
+      return true;
+    } catch (err) {
+      console.warn('[FINALE] start failed, restoring: ' + (err && err.message), err);
+      try { end(); } catch (e2) { /* nothing left to do */ }
+      return false;
+    }
+  }
+
+  function end() {
+    if (!active && !stormGroup && !capEl) return;
+    active = false;
+    phase = 'idle';
+    try { window.removeEventListener('keydown', onKey, true); } catch (e) {}
+    try { window.removeEventListener('pointerdown', onPointer, true); } catch (e) {}
+
+    removeAudioHijack();
+    audioStop();
+    restoreLamps();
+    restore();
+
+    if (stormGroup) {
+      scene.remove(stormGroup);
+      stormGroup = null;
+    }
+    if (paper && paper.parent) paper.parent.remove(paper);
+
+    cam.position.copy(sCamPos);
+    cam.quaternion.copy(sCamQuat);
+    if (sFov) {
+      cam.fov = sFov;
+      cam.updateProjectionMatrix();
+    }
+    CORE.sun.castShadow = sSunShadow;
+
+    if (hudEl) { hudEl.style.display = sHudDisplay || ''; hudEl = null; }
+    killDOM();
+
+    if (typeof APP !== 'undefined' && APP && APP.S) {
+      if (sRunning !== null) APP.S.running = sRunning;
+      if (sXray) APP.setXray(true);
+      if (sLayer && sLayer !== 'ALL') APP.setLayer(sLayer);
+    } else if (window.KIT) {
+      if (sXray) KIT.setXray(true);
+      if (sLayer && sLayer !== 'ALL') KIT.setLayer(sLayer);
+    }
+    sRunning = null; sLayer = null; sXray = null;
+  }
+
+  function update(dt) {
+    if (!active) return;
+    if (!(dt > 0)) dt = 0;
+    if (dt > 0.05) dt = 0.05;
+
+    t += dt;
+    const beat = (t >= T.popBeat && t < T.shove);
+    if (!beat) ta += dt;
+
+    phase = t < T.flick ? 'question'
+      : t < T.few ? 'first-signs'
+      : t < T.loosen ? 'a-few-things'
+      : t < T.peel ? (t < 45 ? 'spreading' : 'storm')
+      : t < T.popBeat ? 'peel'
+      : t < T.after ? 'pop'
+      : t < T.paperIn ? 'aftermath' : 'paper';
+
+    updateCamera(beat);
+    if (!beat) updateLamps();
+    if (!stormDone && N > 0) updateFlyers(dt, beat);
+
+    // decals blink out with their own patch of campus (the shove takes the rest)
+    if (decalRel && t < T.shove) {
+      for (let i = 0; i < decals.length; i++) {
+        if (t >= decalRel[i]) hideNow(decals[i]);
+      }
+    }
+
+    // the roof leaves, and with it the only thing casting the daylight band
+    if (t >= T.peel && CORE.sun.castShadow) CORE.sun.castShadow = false;
+
+    if (paper) {
+      if (!paper.visible && t >= T.paperIn) paper.visible = true;
+      if (paper.visible) updatePaper();
+    }
+
+    updateCaptions();
+    updateAudio();
+  }
+
+  // debug only — never called by the exhibit
+  function seek(target) {
+    if (!active) return;
+    let guard = 0;
+    while (t < target && guard++ < 8000) update(1 / 30);
+  }
+
+  return {
+    start: start,
+    end: end,
+    update: update,
+    seek: seek,
+    get active() { return active; },
+    get phase() { return phase; },
+    get count() { return N; },
+    get lamps() { return lampMats.length; }
+  };
+})();
+
+window.FINALE = FINALE;
+
+</script>
+<script>
 // tour.js — guided mode: dolly rail through CONTENT.chapters, caption cards, autoplay.
 "use strict";
 
@@ -18103,8 +19646,8 @@ const UI = (() => {
     const t = document.createElement('div'); t.id = 'title';
     t.innerHTML = `
       <div class="t-inner">
-        <div class="t-kicker">SEVEN WAYS A DATA CENTER SHEDS HEAT</div>
-        <h1>COOLING ATLAS</h1>
+        <div class="t-kicker">AN INTERACTIVE EXHIBIT</div>
+        <h1>SEVEN WAYS A DATA CENTER SHEDS HEAT</h1>
         <div class="t-sub">Working models of every major cooling architecture — what moves, where the water goes, and what's in it.</div>
         <div class="t-btns">
           <button id="btnGuided" class="big">Guided tour</button>
@@ -18164,6 +19707,10 @@ const UI = (() => {
     };
     window.addEventListener('keydown', e => {
       if (e.code === 'KeyM' && window.AUDIO) { AUDIO.start(); AUDIO.setMuted(!AUDIO.muted); reflectSound(); }
+      if (e.code === 'Escape' && window.FINALE && FINALE.active) {
+        FINALE.end();
+        showTitle(); API.setMode('title');
+      }
     });
     h.querySelectorAll('#modeSwitch button').forEach(b => b.onclick = () => {
       const m = b.dataset.mode;
@@ -18254,7 +19801,21 @@ const UI = (() => {
     $('caption').classList.remove('hidden');
   }
   function tourDone() {
-    caption('End of tour. Switch to free range to explore anything up close.', 'Cooling Atlas');
+    caption('End of tour. Switch to free range to explore anything up close.', 'Seven Ways');
+    // the optional epilogue
+    const nav = $('capNav');
+    if (nav && !$('finaleBtn') && window.FINALE) {
+      const b = document.createElement('button');
+      b.id = 'finaleBtn';
+      b.textContent = '…and where is all this going?';
+      b.onclick = () => {
+        $('caption').classList.add('hidden');
+        $('chapters').classList.add('hidden');
+        if (window.AUDIO && AUDIO.start) AUDIO.start();
+        FINALE.start();
+      };
+      nav.appendChild(b);
+    }
   }
 
   // ---- hover chip + info panel ----
@@ -18471,10 +20032,11 @@ const APP = (() => {
         try { def.update(dt, simT, S); } catch (e) { /* keep frame alive */ }
       }
     }
-    if (S.mode === 'guided' && window.TOUR) TOUR.update(dt);
+    if (window.FINALE && FINALE.active) FINALE.update(dt);
+    else if (S.mode === 'guided' && window.TOUR) TOUR.update(dt);
     else if (S.mode === 'free' && window.EXPLORE) EXPLORE.update(dt);
     else titleDrift(dt);
-    if (window.AUDIO && AUDIO.update) AUDIO.update(dt, CORE.camera.position, S.mode);
+    if (window.AUDIO && AUDIO.update && !(window.FINALE && FINALE.active)) AUDIO.update(dt, CORE.camera.position, S.mode);
   }
 
   // title screen: slow drift down the spine

@@ -173,11 +173,18 @@ spaces; diesel generator emissions are an air-quality question with no PFAS conn
 
 ## 6. The tradeoff nobody gets to avoid
 
-Dry cooling saves roughly 2–4 L/kWh of water at a cooling-energy penalty in the range of
-25–35% (contested — Microsoft claims "nominal" penalty when paired with warm-water chip
-cooling, which changes the arithmetic). Water and electricity are substitutes here. A
-facility that eliminates evaporation has moved its impact to the grid, and the honest
-comparison depends on what that grid burns.
+Dry cooling saves the site's evaporative water at a real energy cost when taken alone:
+roughly 25–35% more cooling electricity at summer peak, and 6–10% worse annual PUE in a
+same-operator comparison (Google's Nevada sites); Uptime frames it as plant PUE ~1.8 dry
+vs ~1.6 evaporative. What changes the arithmetic is warm-water chip cooling: compressors
+are the majority of conventional cooling electricity (~55–75% of plant energy), and a
+40–45 °C coolant loop lets outdoor air do the job without them — while server fans
+(10–20% of server power) mostly go quiet. The package nets ahead on energy only because
+refrigeration is deleted, and only where the loop truly runs warm — operators commonly
+chill CDU loops to 18–24 °C for compatibility and forfeit the win. Microsoft, building
+exactly these zero-water designs, expects "a nominal increase in our annual energy usage."
+Water and electricity remain substitutes at the margin, and the honest comparison depends
+on what the local grid burns.
 
 Warm-water direct-to-chip cooling is what makes this trade favorable: chips that tolerate
 30–45 °C coolant can reject heat to dry coolers in most climates without a chiller, which

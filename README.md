@@ -1,4 +1,4 @@
-# Cooling Atlas
+# Seven Ways a Data Center Sheds Heat
 Seven ways a data center sheds heat — an interactive 3D exhibit. Accurate first, beautiful second.
 
 **Live: https://speakingtrumpetskier-prog.github.io/cooling-atlas/**
