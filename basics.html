@@ -2190,11 +2190,13 @@ button.cite:hover { background: rgba(52,86,116,0.6); }
 
 </script>
 <script>
-// content.js — ALL user-facing text: part cards, tour chapters, sources, water table.
-// Single source of truth per CONTRACT section 5. Data only — no logic.
+// content-basics.js — ALL user-facing text: part cards, tour chapters, sources, water table.
+// COLLEAGUE EDITION — plain-language text layer; same structure as content.js
 "use strict";
 
 const CONTENT = {
+
+edition: 'basics',
 
 parts: {
 
@@ -2202,94 +2204,85 @@ parts: {
 
 "dx-crac/rack": {
   name: "Server rack",
-  what: "A 42U rack of servers — the same heat source in every bay. Servers convert nearly all electrical input to heat and reject it to air pulled front-to-back by internal fans.",
-  moves: "Server fans; front-to-back airflow; status LEDs.",
-  numbers: "Racks historically drew a few kW; air cooling tops out around 20–40 kW per rack · server exhaust 38–49 °C · air-side rise across a modern server 17–28 °C",
+  what: "A tall cabinet holding a few dozen servers. Almost all the electricity they draw comes back out as heat, and fans inside each server push that heat out the back. Every bay in this hall starts from this same rack.",
+  moves: "Server fans; air pulled in the front and blown out the back; status lights.",
+  numbers: "An older rack drew a few kilowatts — a couple of hair dryers. The densest AI racks today draw more than a hundred.",
   cite: ["S2", "S24"]
 },
 
 "dx-crac/raised-floor": {
-  name: "Raised floor plenum",
-  what: "A pressurized supply plenum beneath the hall. The CRAC discharges cold air into it; perforated tiles meter that air up into the cold aisle at the rack fronts.",
-  moves: "Airflow: down through the CRAC, across the plenum, up through perforated tiles.",
-  numbers: "Plenum depth commonly 600–900 mm · IT inlet target 18–27 °C (ASHRAE recommended)",
+  name: "Raised floor",
+  what: "The floor sits up on short legs, leaving a shallow space underneath. The cooling unit blows cold air into that space, and the air comes back up through punched holes in floor tiles placed right in front of the servers.",
+  moves: "Air goes down through the cooling unit, sideways under the floor, and up through the perforated tiles.",
   cite: ["S7", "S6"]
 },
 
 "dx-crac/crac-unit": {
   name: "CRAC unit",
-  what: "Computer Room Air Conditioner: a floor-standing cabinet containing a complete vapor-compression circuit — filters, evaporator coil, expansion valve, compressors, and fans. Heat leaves the room as hot refrigerant gas, not water.",
-  moves: "Base fans run continuously; compressors cycle and unload; the whole airflow loop of the hall passes through this cabinet.",
-  numbers: "15–165 kW per unit (Liebert PDX class) · cabinet roughly 1.8–2.4 m tall × 0.9–3 m wide",
+  what: "CRAC stands for Computer Room Air Conditioner. It is a floor-standing air conditioner, and it works like the one in a house or a car: a loop of refrigerant picks up heat inside and carries it outside. Warm room air goes in the top, cold air comes out the bottom.",
+  moves: "Fans run constantly; the compressors switch on and off as the room demands.",
   cite: ["S3"]
 },
 
 "dx-crac/blower": {
-  name: "EC plug fans",
-  what: "Backward-curved electronically commutated fans in the cabinet base, hanging into the floor plenum. They pull return air down through the coil and drive it under the floor.",
-  moves: "Impellers spin at variable speed, tracking load.",
-  numbers: "Variable-speed EC fans are one of the two main efficiency levers in a DX unit, with compressor unloading",
+  name: "Fans",
+  what: "Wheel-shaped fans in the base of the cabinet, hanging down into the underfloor space. They pull room air down through the cold coil and push it out under the floor.",
+  moves: "Wheels spin faster or slower depending on how much heat the room is making.",
   cite: ["S3"]
 },
 
 "dx-crac/evaporator-coil": {
-  name: "Evaporator coil",
-  what: "A-frame finned copper-tube coil in the upper cabinet. Liquid refrigerant boils inside the tubes, absorbing heat from the return air passing over the fins.",
-  moves: "Refrigerant changes phase inside the tubes — liquid in, vapor out.",
-  numbers: "Return air enters at 38–49 °C and leaves toward the 18–27 °C supply band",
-  water: "Room moisture condenses on the cold fins and leaves through a condensate drain pan. It is a small, untreated water stream — the only liquid water this architecture handles.",
+  name: "Cold coil",
+  what: "A wall of thin copper tubes and aluminum fins folded into an A shape. Liquid refrigerant boils inside the tubes, and boiling is what pulls the heat out of the air passing over them — the same reason rubbing alcohol feels cold on skin as it evaporates.",
+  moves: "Refrigerant enters as liquid and leaves as gas.",
+  water: "Moisture in the room condenses on the cold fins, the way a glass of ice water sweats, and drips into a pan and a small drain. That trickle is the only liquid water this design handles.",
   cite: ["S3", "S6"]
 },
 
 "dx-crac/compressor": {
-  name: "Scroll compressor",
-  what: "The working heart of the refrigeration circuit. An orbiting scroll compresses refrigerant vapor, raising its pressure and temperature so it can reject heat to outdoor air that is hotter than the data hall.",
-  moves: "Orbiting scroll set; digital-scroll units pulse axially to unload capacity in steps.",
-  numbers: "Almost always scroll type in this class — fixed, tandem, digital, or inverter-driven",
+  name: "Compressor",
+  what: "The pump at the heart of any refrigeration loop. It squeezes the refrigerant gas, which makes it hot — hotter than the air outdoors. That is the whole trick: heat only moves toward something cooler, so the refrigerant is deliberately made hotter than the outdoor air it has to dump into.",
+  moves: "A spiral scroll orbits inside; it steps up and down to match the load.",
   cite: ["S3"]
 },
 
 "dx-crac/expansion-valve": {
   name: "Expansion valve",
-  what: "Electronic expansion valve between condenser and evaporator. It drops the refrigerant from condensing pressure to evaporating pressure; part of the liquid flashes to vapor and the mixture arrives at the coil cold.",
-  moves: "Stepper motor modulates the orifice continuously.",
+  what: "A small adjustable opening on the return side of the loop. Refrigerant squeezes through it, its pressure drops, and dropping pressure makes it cold — the same reason an aerosol can gets chilly when you spray it. It arrives back at the coil cold.",
+  moves: "A tiny motor widens and narrows the opening.",
   cite: ["S3"]
 },
 
 "dx-crac/filter": {
-  name: "Filter bank",
-  what: "Pleated air filters at the return side of the cabinet. Every pass of hall air is filtered before it reaches the coil, protecting both coil fins and IT intakes.",
+  name: "Air filters",
+  what: "Pleated filters where air returns into the cabinet. Every lap of hall air passes through them, which keeps dust off the coil fins and out of the servers.",
   cite: ["S3"]
 },
 
 "dx-crac/refrigerant-lines": {
-  name: "Refrigerant line set",
-  what: "Insulated copper lines carrying hot compressed vapor out to the roof condenser and liquid refrigerant back. This is the point where the heat leaves the building envelope in this architecture.",
-  moves: "Refrigerant flow: dense liquid one way, fast sparse vapor the other.",
-  numbers: "R-410A (GWP 2,088) is giving way to R-454B (GWP 466) · AIM Act manufacture cutoff for this equipment class Jan 1, 2027",
+  name: "Refrigerant lines",
+  what: "Two insulated copper pipes running out through the wall — hot gas out to the yard, cool liquid back. This is the spot where the heat actually leaves the building in this design. Federal rules are steering these refrigerants toward blends that do less climate damage when they leak.",
+  moves: "Dense liquid one way, fast-moving gas the other.",
   cite: ["S5"]
 },
 
 "dx-crac/condenser": {
-  name: "Remote condenser",
-  what: "A low outdoor unit with an aluminum microchannel coil. Hot refrigerant vapor condenses back to liquid inside it, handing the rack heat to ambient air.",
-  moves: "Refrigerant condenses along the coil; axial fans above draw air through it.",
-  numbers: "28–220 kW per unit (Liebert MC class) · 1–2 axial EC fans",
+  name: "Outdoor condenser",
+  what: "A low box out in the yard with a coil and fans on top — the same thing as the outdoor half of a home air conditioner. Hot refrigerant gas hands its heat to outdoor air, turns back into liquid, and heads back inside.",
+  moves: "Refrigerant turns back to liquid along the coil; fans above pull air through it.",
   cite: ["S4"]
 },
 
 "dx-crac/condenser-fans": {
   name: "Condenser fans",
-  what: "Axial EC fans on top of the condenser, drawing ambient air across the coil. Speed modulates with condensing pressure and outdoor temperature.",
-  moves: "Variable-speed rotation; slower in cold weather.",
-  numbers: "EC fans cut condenser fan energy 50–95% versus fixed-speed",
+  what: "The fans on top of the outdoor unit, pulling outdoor air across the coil. They slow down when it is cold out, because less air does the same job.",
+  moves: "Variable speed; lazier in winter.",
   cite: ["S4"]
 },
 
 "dx-crac/containment": {
   name: "Aisle containment",
-  what: "Doors and roof panels enclosing the hot aisle. Containment keeps exhaust air from recirculating to rack intakes, so supply temperature can be held with less airflow and less mixing loss.",
-  numbers: "Improves cooling efficiency 20–40% by stopping recirculation and bypass",
+  what: "Doors and roof panels that fence off the hot aisle behind the racks so the hot exhaust cannot drift back around to the fronts. Keeping hot and cold air from mixing is the cheapest improvement available in an air-cooled hall.",
   cite: ["S8"]
 },
 
@@ -2297,141 +2290,130 @@ parts: {
 
 "chilled-water/rack": {
   name: "Server rack",
-  what: "The same rack as bay 0, same heat. Here its exhaust is captured by a chilled-water air handler instead of a refrigerant coil; the refrigeration work moves to a central plant.",
-  moves: "Server fans; front-to-back airflow.",
-  numbers: "Server exhaust 38–49 °C into the hot aisle",
+  what: "The same rack and the same heat as bay 1. What changes is what catches it: here the heat goes into a coil full of cold water, and the refrigeration machinery has moved out of the room to a central plant.",
+  moves: "Server fans; air front to back.",
   cite: ["S2"]
 },
 
 "chilled-water/crah": {
   name: "CRAH unit",
-  what: "Computer Room Air Handler: a cabinet nearly identical to a CRAC but containing only a chilled-water coil, a modulating valve, filters, and fans — no compressor, no refrigerant. All refrigeration happens at the chiller.",
-  moves: "EC fans in the base; the coil valve modulates continuously.",
-  numbers: "26–440 kW per unit (Liebert CW class) · 5,950–24,000 CFM · cabinet 1.83–2.39 m tall",
+  what: "CRAH stands for Computer Room Air Handler. It looks like the CRAC in bay 1, but there is no air conditioner inside — just fans, filters, and a coil with cold water running through it. All the refrigeration happens at the chiller instead.",
+  moves: "Fans in the base; a valve opens and closes to let more or less water through the coil.",
   cite: ["S9", "S10"]
 },
 
 "chilled-water/crah-coil": {
-  name: "CRAH coil and valve",
-  what: "A-frame chilled-water coil with a two-way modulating valve. Hot return air crosses the fins; the water inside warms and carries the heat to the plant.",
-  moves: "Valve strokes open with load; water flow follows.",
-  numbers: "Air 38–49 °C in, 18–27 °C out · water enters at 7–15 °C, returns at roughly 12–18 °C",
+  name: "Water coil and valve",
+  what: "Hot room air blows across a coil of cold water, much like air blowing through a car radiator — only in reverse: here the water takes heat out of the air rather than dumping heat into it. A valve sets how much water flows.",
+  moves: "The valve opens further as the room gets hotter.",
   cite: ["S9", "S10"]
 },
 
 "chilled-water/chiller": {
-  name: "Water-cooled chiller",
-  what: "The central refrigeration machine. It sits between two water loops: it chills the sealed chilled-water loop serving the CRAHs, and rejects that heat plus its compressor work into the open condenser-water loop serving the tower.",
-  moves: "Compressor runs inside; both water loops flow through its barrels.",
-  numbers: "Plant classes: centrifugal (largest), screw (mid), scroll (small/modular)",
+  name: "Chiller",
+  what: "The refrigeration machine for the whole building. It sits between two water loops: it chills the sealed loop that feeds the coils indoors, and it dumps that heat into a second, open loop that runs out to the cooling tower. The two waters never touch.",
+  moves: "A compressor runs inside; water flows through both of its big cylinders.",
   cite: ["S10"]
 },
 
 "chilled-water/compressor": {
   name: "Chiller compressor",
-  what: "Centrifugal impeller or screw rotors compressing refrigerant between the two barrels. Modern large machines use oil-free magnetic-bearing centrifugal compressors.",
-  moves: "Impeller or meshing screw rotors at high speed.",
+  what: "Same job as the compressor in a home air conditioner, at building scale: squeeze the refrigerant gas until it is hot enough to hand its heat to the tower loop. Large machines use spinning impellers rather than pistons, some floating on magnetic bearings so there is no oil to change.",
+  moves: "An impeller, or a pair of meshing screws, spinning fast.",
   cite: ["S10"]
 },
 
 "chilled-water/evaporator-barrel": {
   name: "Evaporator barrel",
-  what: "Shell-and-tube heat exchanger where refrigerant boils on the outside of tubes carrying chilled water, pulling the loop back down to supply temperature.",
-  numbers: "Legacy design 12.8 °C in, 7.2 °C out (55/45 °F) · modern practice elevates supply setpoints; sources agree on the direction but not on a single number",
+  what: "A steel cylinder packed with tubes. The indoor loop's water runs through the tubes, refrigerant boils around them, and the water leaves cold again on its way back to the coils.",
   cite: ["S10"]
 },
 
 "chilled-water/condenser-barrel": {
   name: "Condenser barrel",
-  what: "Shell-and-tube exchanger where refrigerant condenses into the condenser-water loop. Everything the hall produced, plus compressor work, leaves through this barrel toward the tower.",
-  numbers: "Classic design: condenser water enters 29.4 °C, leaves 35 °C (85/95 °F)",
+  what: "The matching cylinder on the other side. Here the refrigerant hands its heat to the tower loop and turns back into liquid. Everything the servers made, plus the energy the compressor itself added, leaves the machine through here.",
   cite: ["S11"]
 },
 
 "chilled-water/chw-pump": {
   name: "Chilled-water pumps",
-  what: "Variable-speed secondary pumps circulating the sealed chilled-water loop between chiller evaporator and CRAH coils. Classic plants pair a constant-flow primary loop with this variable secondary.",
-  moves: "Impellers at variable speed, following coil valve demand.",
-  water: "This loop is closed: filled and treated once, then recirculated. It is not a consumption or discharge path in normal operation.",
+  what: "The pumps that push the indoor loop around — out from the chiller to the coils in the hall and back again.",
+  moves: "Impellers speed up and slow down as the coils call for water.",
+  water: "This loop is sealed, or closed, in the trade's language. It is filled once, treated once, and then just circulates. In normal operation it neither uses up water nor sends any to a drain.",
   cite: ["S10"]
 },
 
 "chilled-water/cw-pump": {
   name: "Condenser-water pumps",
-  what: "Constant-duty pumps pushing the open condenser-water loop from the chiller condenser barrel out to the cooling tower and back.",
-  moves: "Impellers; steady flow whenever the chiller runs.",
-  numbers: "Rule of thumb ~3 GPM per ton of refrigeration (≈855 GPM per MW of load)",
+  what: "The pumps for the outdoor loop, sending warmed water from the chiller out to the cooling tower and pulling cooled water back.",
+  moves: "Steady flow whenever the chiller is running.",
   cite: ["S1", "S11"]
 },
 
 "chilled-water/cooling-tower": {
   name: "Cooling tower",
-  what: "Open evaporative heat rejection: the condenser water itself is distributed over fill and falls in direct contact with fan-drawn air. About 1% of the circulating flow evaporates — that evaporation is where the heat leaves.",
-  moves: "Fan, falling water sheets, basin ripple, vapor plume in cool weather.",
-  numbers: "Evaporation ≈1% of flow (≈8.6 GPM continuous per MW of load) · a conventional 1 MW water-cooled plant consumes ~6.75 million gallons/year",
-  water: "The loop is open to atmosphere, so minerals concentrate as pure water evaporates. Holding chemistry in range requires continuous makeup and a continuous blowdown bleed. All of this architecture's routine water consumption and discharge occurs at the tower.",
+  what: "The tower cools water by letting a little of it evaporate — the same reason sweat cools you. Warm water is spread over plastic sheets, a fan pulls air through, and roughly one drop in a hundred turns to vapor and carries the heat off into the sky.",
+  moves: "Fan, falling sheets of water, ripple in the basin, a visible plume on cold days.",
+  numbers: "A one-megawatt water-cooled plant — a modest data hall — goes through something like 7 million gallons a year.",
+  water: "Only pure water evaporates, so the minerals it leaves behind get more concentrated every lap. The tower therefore needs fresh water coming in constantly, and has to drain concentrated water away just as constantly. All of this design's water use and water discharge happens here.",
   cite: ["S1", "S13"]
 },
 
 "chilled-water/tower-fan": {
   name: "Tower fan",
-  what: "A large, slow axial fan in a stack on top of the cell, drawing air through the fill counter to the falling water.",
-  moves: "Slow rotation; adjustable-pitch blades.",
-  numbers: "Fan diameters commonly 8–14 ft (2.4–4.3 m)",
+  what: "A large, slow fan in the stack on top, pulling air up through the tower against the falling water.",
+  moves: "Slow rotation.",
   cite: ["S13"]
 },
 
 "chilled-water/tower-fill": {
   name: "Fill",
-  what: "Corrugated PVC film sheets that spread the falling water into thin films, maximizing the contact area between water and air where evaporation happens.",
-  moves: "Water sheets trickle continuously down the film surfaces.",
+  what: "Stacks of corrugated plastic sheets, called fill. They spread the falling water into thin films so that far more of it touches air. More contact means more evaporation, and the evaporation is the cooling.",
+  moves: "Water trickles down the sheets constantly.",
   cite: ["S13"]
 },
 
 "chilled-water/spray-header": {
-  name: "Hot-water distribution",
-  what: "Piping and nozzles (or gravity basins on crossflow cells) that spread the returning 35 °C condenser water evenly across the top of the fill.",
+  name: "Water distribution",
+  what: "Pipes and nozzles across the top that spread the returning warm water evenly over the fill, like a very wide shower head.",
   moves: "Spray fans out from each nozzle.",
   cite: ["S13", "S11"]
 },
 
 "chilled-water/drift-eliminators": {
   name: "Drift eliminators",
-  what: "Cellular baffles above the fill that force direction changes on the leaving airstream, knocking entrained droplets back into the tower. Vapor passes; liquid mist mostly does not.",
-  numbers: "Drift limited to ≤0.005% of circulating flow",
-  water: "Drift matters beyond its small volume: the droplets are liquid tower water, so they carry dissolved minerals and treatment chemicals out as aerosol.",
+  what: "Zigzag baffles above the fill. Leaving air has to turn corners to get out, and droplets cannot make the turns, so they are flung back into the tower. Vapor passes; mist mostly does not.",
+  water: "The mist that does escape is called drift, and it matters more than its small volume suggests: those droplets are real tower water, so they carry minerals and treatment chemicals out into the air.",
   cite: ["S1", "S13"]
 },
 
 "chilled-water/basin": {
-  name: "Cold-water basin",
-  what: "The collection pan under the fill where cooled water lands before returning to the condenser pumps. Makeup enters here on a float valve; the blowdown tap draws from this cold side.",
-  moves: "Basin ripple; float valve cycling.",
+  name: "Basin",
+  what: "The pan at the bottom where cooled water collects before being pumped back to the chiller. Fresh water enters here through a float valve, like the one in a toilet tank, and the drain line taps out from here too.",
+  moves: "Ripple; the float valve cycling.",
   cite: ["S13"]
 },
 
 "chilled-water/makeup-line": {
   name: "Makeup line",
-  what: "The tower's fresh-water supply. It replaces exactly what leaves: evaporation plus blowdown plus drift.",
-  numbers: "Makeup = evaporation + blowdown + drift · most systems run 2–4 cycles of concentration; 6+ is achievable · raising 3 cycles to 6 cuts makeup ~20% and blowdown ~50%",
-  water: "Makeup chemistry sets the operating limits: hardness and silica cap the cycles a site can run before scale forms, which in turn sets how much blowdown it must discharge.",
+  what: "The tower's fresh water supply. It replaces exactly what left: the part that evaporated, the part drained on purpose, and the little that blew away as mist.",
+  water: "The local tap water sets the limits. Hard water, full of dissolved minerals, can only go around a few laps before it starts leaving scale behind — which means more of it has to be drained away.",
   cite: ["S33"]
 },
 
 "chilled-water/blowdown-line": {
   name: "Blowdown line",
-  what: "A deliberate continuous bleed off the tower loop, discharged to hold dissolved solids at the target concentration. This is the liquid that actually leaves the site.",
-  numbers: "≈0.5% of circulating flow (≈4.3 GPM per MW) · a 1,000-ton tower at 3 cycles bleeds roughly 20,000–40,000 gallons/day",
-  water: "Blowdown carries the loop's concentrated minerals and treatment-chemical residues. It goes to sanitary sewer under an industrial pretreatment program, to surface water under an NPDES permit, or to on-site treatment and reuse. Real data center permits run to hundreds of thousands of gallons/day.",
+  what: "Blowdown is the bleed-off — water the tower drains on purpose so the minerals left behind by evaporation do not build up and coat the pipes with scale. It runs continuously. This is the liquid that actually leaves the site.",
+  numbers: "A big tower drains tens of thousands of gallons a day, every day it runs.",
+  water: "It carries the concentrated minerals and what is left of the treatment chemicals. It goes to the sanitary sewer under a local permit, to a creek or river under a discharge permit, or to on-site treatment for reuse.",
   cite: ["S1", "S44", "S40"]
 },
 
 "chilled-water/chem-feed": {
   name: "Chemical feed skid",
-  what: "Metering pumps dosing the open loop from day tanks: an oxidizing biocide fed continuously, non-oxidizers rotated in periodically, plus scale and corrosion inhibitors fed in proportion to makeup.",
-  moves: "Diaphragm metering pumps pulse; tank levels fall slowly.",
-  numbers: "Free chlorine residual ~0.5–1 ppm · phosphonates ~1.5–5 ppm · azoles ~1–5 ppm · orthophosphate ~5–15 mg/L",
-  water: "Every dosed chemical appears in the blowdown at its residual concentration, and trace amounts leave as drift aerosol. No PFAS identified in the chemical families used; a product-level SDS review is the definitive check.",
+  what: "Small pumps that dose the open loop from drums: a disinfectant, because warm open water grows bacteria including Legionella, plus additives that keep minerals from scaling and metal from corroding.",
+  moves: "Metering pumps pulse; drum levels drop slowly.",
+  water: "Everything dosed here eventually leaves in the blowdown, much diluted, and traces leave as mist. None of these chemical families are PFAS.",
   cite: ["S42", "S43"]
 },
 
@@ -2439,72 +2421,70 @@ parts: {
 
 "economizer/rack": {
   name: "Server rack",
-  what: "Same rack, same heat. In this bay the atmosphere itself is the heat sink whenever it is cold enough — which, with modern inlet temperature envelopes, is most hours in most cool climates.",
-  moves: "Server fans; front-to-back airflow.",
-  numbers: "ASHRAE recommended inlet 18–27 °C; allowable ranges are wider still",
+  what: "Same rack, same heat. In this bay the outdoors is the destination. Whenever the air outside is cool enough — most hours of the year in a cold climate — it can absorb the hall's heat with no refrigeration running at all.",
+  moves: "Server fans; air front to back.",
   cite: ["S6"]
 },
 
 "economizer/oa-louver": {
   name: "Outside-air louvers",
-  what: "The intake wall: weather louvers admitting outdoor air to the air-handling gallery. On a direct economizer this air, once filtered and tempered, goes straight to the cold aisle.",
-  moves: "Louver blades modulate with damper demand.",
+  what: "The intake wall. Angled slats let outdoor air in while keeping rain and snow out. In a direct system this air, once filtered and blended to the right temperature, goes straight to the servers.",
+  moves: "Slats swing as the controls call for more or less outdoor air.",
   cite: ["S6"]
 },
 
 "economizer/mixing-dampers": {
   name: "Mixing dampers",
-  what: "Opposed-blade dampers blending outdoor air with warm return air to hit the supply setpoint. Full outdoor air on mild days; progressively more recirculation as it gets cold outside.",
-  moves: "Blades sweep continuously between positions.",
+  what: "Sets of pivoting blades that blend cold outdoor air with warm air coming back from the hall, to land on the temperature the servers want. On a mild day it is mostly outdoor air; on a bitter day, mostly recirculated air.",
+  moves: "Blades sweep back and forth between positions.",
   cite: ["S6"]
 },
 
 "economizer/filter-bank": {
   name: "Filter bank",
-  what: "Deep pleated filter wall on the outdoor-air path. Direct economization exposes IT to outdoor dust and pollutants, so filtration carries more duty here than in a sealed hall.",
+  what: "A wall of deep pleated filters on the outdoor-air path. Bringing outdoor air straight to the servers also brings outdoor dust, pollen, and smoke, so filtering does more work here than in a sealed hall.",
   cite: ["S6"]
 },
 
 "economizer/fan-wall": {
   name: "Fan wall",
-  what: "An array of large EC fans in a wall between the cooling gallery and the data hall — functionally a distributed air handler. The array is N+1 redundant: one failed fan removes a small fraction of capacity.",
-  moves: "Every rotor spins; speeds track hall pressure.",
+  what: "An array of large fans set into the wall between the cooling gallery and the data hall — an air handler spread out flat. There is always at least one more fan than the job strictly needs, so losing one costs only a small slice of capacity.",
+  moves: "Every rotor spins; speeds follow the pressure in the hall.",
   cite: ["S9"]
 },
 
 "economizer/mixing-chamber": {
   name: "Mixing chamber",
-  what: "The plenum where outdoor and return airstreams merge and even out before the fan wall. Temperature sensors here close the control loop that positions the dampers.",
-  moves: "Two airstreams visibly converge.",
+  what: "The room where the outdoor and return airstreams meet and even out before they reach the fans. Temperature sensors in here are what tell the dampers how far to move.",
+  moves: "Two airstreams visibly fold into each other.",
   cite: ["S6"]
 },
 
 "economizer/return-duct": {
   name: "Return path",
-  what: "Ceiling return carrying hot-aisle exhaust back to the gallery, where it is either exhausted outdoors, recirculated for mixing, or passed through the heat-exchanger core.",
-  moves: "Hot airflow overhead, opposite the supply direction.",
+  what: "The ceiling route that carries hot exhaust from behind the racks back to the gallery, where it is either pushed outdoors, mixed back in, or run through the heat exchanger.",
+  moves: "Hot air overhead, traveling the opposite way from the supply.",
   cite: ["S6"]
 },
 
 "economizer/relief-louver": {
   name: "Relief louvers",
-  what: "The exit path: exhaust louvers relieving hot return air outdoors so the building does not pressurize while outdoor air comes in. Heat leaves this bay as warm air, full stop.",
-  moves: "Relief blades float open with building pressure.",
+  what: "The way out. Hot air that is not being reused leaves here, so the building does not balloon with pressure while fresh air is coming in. In this bay the heat leaves as warm air and nothing else.",
+  moves: "Blades float open under building pressure.",
   cite: ["S6"]
 },
 
 "economizer/hx-core": {
-  name: "Plate heat-exchanger core",
-  what: "The indirect option: a fixed cross-flow plate core spans the partition. Hot hall air passes through one set of channels; a separate scavenger stream of outdoor air passes through the other and carries the heat away. Nothing rotates, and the two airstreams cross without mixing — outdoor humidity and dust stay outside.",
-  moves: "No moving parts in the core itself; the two airstreams cross through it continuously.",
-  numbers: "Munters-type indirect air-to-air modules run in the ~250 kW to 1 MW class per module · essentially no cross-contamination between airstreams",
+  name: "Plate heat exchanger",
+  what: "The indirect option, for sites that would rather not let outdoor air touch the servers. Hall air and outdoor air run through alternating channels in a block of thin plates — close enough to trade heat through the metal, never close enough to mix. Outdoor humidity, dust, and smoke stay outside.",
+  moves: "Nothing rotates; the two airstreams simply pass through, crosswise.",
   cite: ["S54"]
 },
 
 "economizer/controls": {
   name: "Economizer controls",
-  what: "The changeover logic: run free cooling whenever outdoor conditions can absorb the hall's heat within the inlet envelope, and trim with mechanical cooling only when they cannot. Changeover setpoints are site-specific; no universal figure exists.",
-  moves: "Damper commands and fan speeds shift as the dusk cools.",
+  what: "The decision-maker. Use outdoor air whenever it can carry the heat off and still leave the servers in their comfort range, and start mechanical cooling only when it cannot. Where exactly that switchover sits is set site by site; there is no universal number.",
+  moves: "Damper positions and fan speeds shift as the evening cools.",
   cite: ["S6"]
 },
 
@@ -2512,121 +2492,117 @@ parts: {
 
 "evap-adiabatic/pump-skid": {
   name: "Process pump skid",
-  what: "One shared process loop feeds all the heat-rejection units in this bay, so the differences between them are the point: what gets wet, what evaporates, and what leaves as liquid.",
-  moves: "Pumps run; the loop splits to each unit.",
+  what: "One shared loop of warm fluid feeds all four machines in this bay, so the only differences left are in how each one sheds that heat: what gets wet, what evaporates, and what runs down a drain.",
+  moves: "Pumps run; the loop branches to each unit.",
   cite: ["S1"]
 },
 
 "evap-adiabatic/open-tower": {
   name: "Open cooling tower",
-  what: "Evaporative, open circuit: the process water itself is sprayed over fill and touches air directly. Roughly 1% of the flow evaporates; the rest returns cooler, more concentrated. The water doing the cooling is the water being consumed.",
+  what: "The process water itself is sprayed over plastic sheets and touches the air directly. About one drop in a hundred evaporates, and that is what does the cooling; the rest falls back into the basin cooler and a little more mineral-rich. The water doing the cooling is the water being used up.",
   moves: "Falling water, fan, plume.",
-  numbers: "Evaporation ≈1% of circulating flow · blowdown ≈0.5% · drift ≤0.005%",
-  water: "Consumes water continuously in operation and produces continuous liquid blowdown. Of the water consumed, roughly 70–80% leaves as vapor and 20–30% as blowdown at typical cycles (estimate derived from the blowdown relationship).",
+  water: "Uses water continuously while running, and drains concentrated water continuously. Of the water it consumes, roughly three-quarters leaves as vapor and the remaining quarter or so goes down the drain as liquid.",
   cite: ["S1", "S13", "S33"]
 },
 
 "evap-adiabatic/tower-fan": {
   name: "Tower fan",
-  what: "Axial fan drawing air through the open tower's fill. Identical role to the bay 1 tower fan; shown here for the side-by-side.",
+  what: "The fan pulling air up through the open tower. Same job as the tower fan in bay 2; it is repeated here so the four machines can be compared side by side.",
   moves: "Slow rotation.",
   cite: ["S13"]
 },
 
 "evap-adiabatic/fill": {
   name: "Fill",
-  what: "PVC film sheets where water and air meet in the open tower. Maximum contact area is the design goal; this is where the evaporation happens.",
-  moves: "Continuous water sheets.",
+  what: "The plastic sheets inside the open tower where water and air meet. Spreading the water thin over as much surface as possible is the entire design goal, because that is where evaporation happens.",
+  moves: "Continuous sheets of water.",
   cite: ["S13"]
 },
 
 "evap-adiabatic/spray-header": {
   name: "Spray header",
-  what: "Distribution nozzles laying the returning warm water across the fill of the open tower.",
+  what: "The nozzles that lay the returning warm water evenly across the fill of the open tower.",
   moves: "Spray cones.",
   cite: ["S13"]
 },
 
 "evap-adiabatic/drift-eliminators": {
   name: "Drift eliminators",
-  what: "Baffles that strip droplets from the leaving air. What escapes them — drift — is liquid tower water aerosol, chemically identical to the basin.",
-  numbers: "≤0.005% of circulating flow",
+  what: "Baffles that catch droplets on their way out with the air. What still slips past is called drift — a fine mist of real tower water, carrying the same minerals and chemicals as the basin.",
   cite: ["S1", "S13"]
 },
 
 "evap-adiabatic/basin": {
   name: "Basin",
-  what: "Cold-water collection under the open tower. Makeup float valve and blowdown tap both live on this side of the loop.",
+  what: "The collecting pan under the open tower. Both the fresh-water float valve and the drain tap sit on this side of the loop.",
   moves: "Ripple; float valve.",
   cite: ["S13"]
 },
 
 "evap-adiabatic/blowdown-valve": {
   name: "Blowdown valve",
-  what: "The modulating bleed valve on the open tower. It discharges continuously in proportion to evaporation, holding cycles of concentration at the setpoint.",
-  moves: "Valve modulates; flow to the drain line varies with load.",
-  numbers: "Blowdown = evaporation / (cycles − 1) · most towers run 2–4 cycles",
-  water: "This valve is the physical answer to where does the water go: it is the tower loop's continuous liquid discharge point.",
+  what: "The drain valve on the open tower. It bleeds water off continuously, in step with how much is evaporating, so the minerals left behind never build up to the point where they start coating the pipes with scale.",
+  moves: "The valve modulates; flow down the drain rises and falls with the load.",
+  water: "When someone asks where the water goes, this valve is the physical answer: it is the tower loop's continuous liquid discharge point.",
   cite: ["S33", "S44"]
 },
 
 "evap-adiabatic/closed-circuit-cooler": {
   name: "Closed-circuit cooler",
-  what: "Evaporative, closed circuit: the process fluid stays sealed inside a tube bundle while a separate captive spray loop is pumped over the outside of the coil and evaporates. Closed circuit refers to the process fluid — not to water consumption.",
+  what: "Here the process fluid stays sealed inside a coil, and a separate captive supply of water is sprayed over the outside of that coil and evaporates. Closed circuit describes the fluid being cooled — not the water bill.",
   moves: "Spray pump, fan, water cascading over the coil.",
-  water: "Still consumes water and still produces blowdown: the spray sump concentrates minerals exactly like an open tower, just on a smaller captive volume. Closed-circuit coolers are frequently conflated with open towers.",
+  water: "It still uses water and still drains water: the spray water concentrates minerals exactly like an open tower, only in a smaller captive pool. These units are often mistaken for waterless ones.",
   cite: ["S14"]
 },
 
 "evap-adiabatic/coil-bundle": {
   name: "Coil bundle",
-  what: "The sealed tube bundle inside the closed-circuit cooler. Process fluid flows inside; spray water and air take the heat from the outside surface.",
+  what: "The sealed bundle of tubes inside the closed-circuit cooler. The process fluid runs through the inside; spray water and air take the heat off the outside.",
   cite: ["S14"]
 },
 
 "evap-adiabatic/spray-pump": {
   name: "Spray pump",
-  what: "A small pump bolted to the closed-circuit cooler, lifting sump water to the spray header over the coil. This captive loop is the part that evaporates and concentrates.",
-  moves: "Pump runs whenever the unit operates wet.",
+  what: "A small pump on the side of the closed-circuit cooler that lifts water from its sump up to the sprayers above the coil. This captive water is the part that evaporates and concentrates.",
+  moves: "Runs whenever the unit is operating wet.",
   cite: ["S14"]
 },
 
 "evap-adiabatic/sump": {
   name: "Spray sump",
-  what: "The captive water reservoir of the closed-circuit cooler. Because its water evaporates, it needs makeup, treatment, and its own blowdown — a miniature open tower wrapped around a sealed coil.",
-  water: "Sump blowdown is the closed-circuit cooler's liquid discharge: smaller than an open tower's but the same in kind.",
+  what: "The captive pool of water at the bottom of the closed-circuit cooler. Because that water evaporates, it needs topping up, treating, and draining — a miniature cooling tower wrapped around a sealed coil.",
+  water: "The sump's drain is this machine's liquid discharge: smaller than an open tower's, but the same thing.",
   cite: ["S14"]
 },
 
 "evap-adiabatic/adiabatic-cooler": {
   name: "Adiabatic cooler",
-  what: "A dry cooler with wetted pads: water evaporates into the incoming air upstream of the coils, pulling the air toward its wet-bulb temperature before it reaches the sealed process coil. The water cools the air, never the fluid; the loop stays sealed.",
-  moves: "Fan row; pad solenoids opening in wet mode; wet-dry transition.",
-  numbers: "Water savings up to ~95% versus conventional evaporative cooling · wet mode engages only at peak ambient or high load",
-  water: "Consumes small amounts of water, seasonally. Most designs run water to the pads once-through with no recirculating sump — so no drift, no blowdown, no treatment chemicals. Some designs do recirculate pad water from a small sump and periodically dump it for hygiene; little or no liquid discharge is the accurate statement, not never any.",
+  what: "A dry radiator with a trick: water is dripped onto pads in front of the coils, and as it evaporates it chills the incoming air before that air reaches the coil — a swamp cooler bolted to the front. The water cools the air; it never touches the process fluid, which stays sealed inside.",
+  moves: "Fan row; pad valves opening in wet mode; the switch between wet and dry.",
+  numbers: "Uses up to about 95 percent less water than a conventional evaporative tower.",
+  water: "Uses a small amount of water, and mostly in hot weather. Most designs run the pad water once through, with no pool to treat and nothing to bleed off. Some designs do recycle pad water from a small sump and dump it now and then for hygiene — so little or nothing leaves as liquid is the accurate phrasing, not never.",
   cite: ["S15"]
 },
 
 "evap-adiabatic/wetted-pads": {
   name: "Wetted pads",
-  what: "Cellulose or polymer media cassettes hung on the intake faces. Water trickles through them and evaporates into the airstream; the process fluid never sees this water. \"Adiabatic\" names this mechanism — pre-cooling the air. \"Hybrid\" names a control strategy: running fully dry when ambient conditions allow and wetting only for hot hours. Most adiabatic coolers are operated as hybrids, but a hybrid need not be adiabatic; a combined dry-plus-evaporative closed-circuit cooler sprays a coil rather than the air.",
-  moves: "Pads darken as they wet; the water feed cycles between wet and dry mode on this unit's seasonal loop.",
-  numbers: "Switchover setpoints are site-configured, commonly in the 24–30 °C dry-bulb range · no universal threshold exists",
-  water: "Water consumed here leaves as vapor in the airstream. There is no basin and no blowdown; the only liquid leaving is an occasional pad-flush drain, so the accurate statement is little or no discharge rather than none.",
+  what: "Cassettes of honeycombed media hung across the air intakes. Water trickles through them and evaporates into the passing air. Two words get muddled here: adiabatic names the mechanism, which is pre-cooling the air; hybrid names the operating habit, which is running fully dry when the weather allows and wetting only on hot hours. Most adiabatic coolers are run as hybrids, but not every hybrid is adiabatic — some spray a coil instead of the air.",
+  moves: "Pads darken as they wet; the water feed cycles between wet and dry with the season.",
+  water: "The water used here leaves as vapor in the airstream. There is no pool and no continuous drain; the only liquid that leaves is an occasional flush of the pads.",
   cite: ["S15", "S55", "S14"]
 },
 
 "evap-adiabatic/dry-coils": {
   name: "Dry coils",
-  what: "The V-bank finned coils of the adiabatic unit — and, run without pad water, a plain dry cooler: sealed loop, zero water consumed, nothing discharged, performance limited by the ambient dry-bulb temperature.",
+  what: "The finned coils of the adiabatic unit — and, with the pad water switched off, an ordinary dry cooler: a giant car radiator with fans, sealed loop, no water used and nothing drained. The catch is that it can never chill the fluid below the outdoor air temperature, so it has to be sized for the hottest hour of the year.",
   moves: "Fans only, in dry mode.",
-  numbers: "Dry operation uses 10–35% more electricity at summer peak than evaporative equivalents and must be sized for the hottest hour",
+  numbers: "Running dry takes roughly 10 to 35 percent more electricity on a hot afternoon than an evaporative machine doing the same job.",
   cite: ["S1"]
 },
 
 "evap-adiabatic/comparison-totem": {
   name: "Comparison totem",
-  what: "The bay's scorecard, one line per unit: what gets wet, whether water is consumed, what liquid leaves, and whether the process loop is sealed. Open tower: the process water itself; continuous consumption; continuous blowdown; open loop. Closed-circuit: captive spray water; consumes; sump blowdown; sealed. Adiabatic: the incoming air; small seasonal use; little or none; sealed. Dry: nothing; none; none; sealed.",
+  what: "The bay's scorecard, one line per machine: what gets wet, whether water is used up, what liquid leaves, and whether the fluid loop is sealed. Open tower — the process water itself gets wet, uses water, drains continuously, open loop. Closed-circuit — captive spray water, uses water, drains from its sump, sealed loop. Adiabatic — the incoming air, small seasonal use, little or nothing leaves, sealed loop. Dry — nothing gets wet, no water, no drain, sealed loop.",
   cite: ["S1", "S14", "S15"]
 },
 
@@ -2634,99 +2610,94 @@ parts: {
 
 "direct-to-chip/gpu-rack": {
   name: "AI GPU rack",
-  what: "A GB200 NVL72-class rack: 18 liquid-cooled compute trays and 9 liquid-cooled switch trays behind a conventional front. At this density air cooling is not an option — the rack cannot run without liquid.",
-  moves: "Server fans handle the residual air fraction; coolant runs through every tray.",
-  numbers: "120–132 kW in one rack, ~1.36 t · 115 kW to liquid, 17 kW to air (~87% liquid capture) · coolant flow ≈2 L/s per rack",
+  what: "A rack of AI processors with liquid piped to every tray. At this power density air cannot keep up — there is no way to move enough air past chips this hot in the space available — so the rack cannot run without liquid.",
+  moves: "Coolant runs through every tray; small fans handle the leftover heat the liquid does not catch.",
+  numbers: "One rack draws about 130 kilowatts, roughly the average electricity draw of a hundred homes.",
   cite: ["S18", "S19"]
 },
 
 "direct-to-chip/cold-plates": {
   name: "Cold plates",
-  what: "Copper plates clamped directly to CPU and GPU packages, with microchannel fin fields inside. Coolant flowing through the channels takes heat straight off the die — the shortest heat path in the exhibit.",
-  moves: "Coolant threads the microchannels; visible only in cutaway.",
-  numbers: "Cold-plate systems capture roughly 70–75% of rack heat in general practice; ~87% on GB200 NVL72",
+  what: "Copper plates clamped straight onto the processors, with narrow channels cut inside them. Coolant flows through the channels and takes the heat directly off the chip — the shortest path from heat source to pipe anywhere in this hall.",
+  moves: "Coolant threads the channels; visible only in cutaway.",
+  numbers: "Cold plates catch roughly three-quarters of a rack's heat; the rest still leaves by air.",
   cite: ["S24", "S18"]
 },
 
 "direct-to-chip/manifold": {
   name: "Rack manifold",
-  what: "Two vertical pipes — supply and return — running the rack's full height, studded with a quick-disconnect drop for every tray. The rack's circulatory trunk.",
-  moves: "Steady coolant flow up one pipe, down the other.",
+  what: "Two vertical pipes running the full height of the rack, one supply and one return, with a connection point for every tray. It is the rack's plumbing trunk.",
+  moves: "Steady flow up one pipe and down the other.",
   cite: ["S19"]
 },
 
 "direct-to-chip/quick-disconnects": {
   name: "Quick disconnects",
-  what: "Dripless couplings on every tray hose, built to the OCP UQD standard: valves in both halves seal the instant they part, and blind-mate versions engage automatically as a tray slides in.",
-  moves: "Sleeve pulls back, poppets snap shut during a tray pull.",
+  what: "Couplings on every hose that seal themselves the instant they are pulled apart, so barely a drop escapes. They are built to a shared industry standard, and some versions connect themselves automatically as a tray slides into place.",
+  moves: "A sleeve pulls back and both halves snap shut when a tray comes out.",
   cite: ["S22"]
 },
 
 "direct-to-chip/served-tray": {
   name: "Tray under service",
-  what: "A compute tray partway out of the rack. Its two couplings are closed; every other tray keeps flowing. Serviceability without draining is what the quick-disconnect standard buys.",
-  moves: "Tray slides on rails; QD poppets seal.",
+  what: "A tray pulled partway out for work. Its two couplings are closed and every other tray in the rack keeps running. Servicing one server without draining the rack is exactly what those couplings buy.",
+  moves: "Tray slides on rails; the couplings seal.",
   cite: ["S22"]
 },
 
 "direct-to-chip/cdu": {
   name: "CDU",
-  what: "Coolant Distribution Unit: the boundary between the rack-side coolant loop (TCS) and the facility water loop (FWS). One cabinet holds a plate heat exchanger, redundant pumps, filtration, an expansion tank, and controls.",
-  moves: "Pumps, control valve, touchscreen; hot-swap access panels.",
-  numbers: "In-row units 1.5–2 MW class · one 1.3 MW CDU serves up to 8 NVL72 racks",
+  what: "Coolant Distribution Unit — the border post between two loops: the rack-side loop that touches the chips, and the building water loop that runs out to the yard. One cabinet holds a heat exchanger, spare pumps, filters, and controls.",
+  moves: "Pumps, a control valve, a touchscreen; panels that open for swaps.",
+  numbers: "One cabinet can serve about eight of these racks.",
   cite: ["S23", "S18"]
 },
 
 "direct-to-chip/plate-hx": {
   name: "Plate heat exchanger",
-  what: "The stainless plate stack inside the CDU where the two loops exchange heat without mixing. Rack coolant on one side, facility water on the other — two sealed systems, one thermal handshake.",
-  numbers: "TCS supply to cold plates typically 30–45 °C, returning 10–15 °C hotter · approach across the plates a few °C",
+  what: "A stack of thin stainless plates inside the CDU. Rack coolant flows down one set of gaps, building water down the next, and the heat passes through the metal between them. Two sealed systems, one handshake, no mixing.",
   cite: ["S23", "S20"]
 },
 
 "direct-to-chip/cdu-pumps": {
   name: "CDU pumps",
-  what: "Redundant hot-swappable centrifugal pumps driving the rack-side loop. One can be replaced while its partner carries the flow.",
-  moves: "Impellers; swap-out during live operation.",
+  what: "Two pumps where one would do, so either can be pulled and replaced while the other keeps the coolant moving.",
+  moves: "Impellers; a pump lifted out while the system runs.",
   cite: ["S23"]
 },
 
 "direct-to-chip/filters": {
   name: "Coolant filters",
-  what: "In-line cartridge filters protecting the microchannels — a 0.3 mm cold-plate channel does not forgive debris. Hot-swappable so filtration continues during a cartridge change.",
-  numbers: "25 µm standard, 50 µm option",
+  what: "Cartridge filters in the line. The channels inside a cold plate are about as wide as a few hairs, so a speck of grit is a real problem. Cartridges can be changed without stopping the flow.",
   cite: ["S23"]
 },
 
 "direct-to-chip/expansion-tank": {
   name: "Expansion tank",
-  what: "The closed loop's breathing room: absorbs thermal expansion and holds reserve coolant. The fill and makeup port beside it is used at commissioning and for occasional top-off — not for continuous consumption.",
-  water: "Loop inventories are small: a 1 MW-class CDU holds about 21 gallons on the rack side and 31 on the facility side. A tight closed loop loses less than 5% of its volume per year.",
-  numbers: "~21 gal TCS / ~31 gal FWS per 1 MW CDU (vendor datasheet)",
+  what: "A small tank giving the sealed loop room to breathe, since liquid swells as it warms, plus a bit of reserve. The fill port beside it is used when the system is commissioned and for the occasional top-up — not for steady consumption.",
+  water: "These loops hold surprisingly little. A cabinet serving eight racks holds a few dozen gallons in total, about a bathtub's worth, and a tight loop loses only a few percent of that in a year.",
   cite: ["S45", "S37"]
 },
 
 "direct-to-chip/fws-loop": {
   name: "Facility water loop",
-  what: "Larger-bore piping carrying heat from all the CDUs out to the yard. Its temperature class is the design decision that determines whether the site needs chillers, towers, or only dry coolers.",
-  numbers: "ASHRAE classes W32 (2–32 °C) and W40 (2–40 °C) cover most current liquid designs; W45 reaches 45 °C",
-  water: "A closed, treated loop: filled at construction, discharged episodically if at all. The warmer it runs, the more of the year plain outdoor air can absorb the heat.",
+  what: "The larger pipes that gather heat from all the CDUs and carry it out to the yard. How warm this loop is allowed to run is the design choice that decides everything downstream: warm enough, and the site needs no chillers at all.",
+  water: "A sealed, treated loop. It is filled when the building is built and drained rarely if ever — the opposite of a cooling tower's constant in-and-out.",
   cite: ["S20"]
 },
 
 "direct-to-chip/dry-cooler": {
   name: "Dry cooler",
-  what: "V-bank finned coils and EC fans rejecting the facility loop's heat to outdoor air. Because cold plates tolerate warm water, dry rejection suffices in most climates for most of the year — no evaporated water at all.",
-  moves: "Fan row; coil shimmer.",
-  numbers: "Full dry cooling carries a 25–35% cooling-energy penalty versus an evaporative baseline, shrinking with warm coolant and cold climates · Microsoft's post-2024 designs pair this with closed loops for zero water evaporation, saving >125 million liters/year per site",
+  what: "Finned coils and fans in the yard, handing the loop's heat to outdoor air. Because chips can be cooled with fairly warm water, ordinary outdoor air is usually cold enough to do the job — which means no evaporation and no water used at all.",
+  moves: "Fan row; shimmer over the coils.",
+  numbers: "Sites built this way avoid something like 30 million gallons of water a year each.",
   cite: ["S35", "S17"]
 },
 
 "direct-to-chip/leak-detection": {
   name: "Leak detection",
-  what: "Rope sensors laid serpentine under the floor and along pipe runs, spot sensors in drip pans under manifold connections. Controllers alarm on contact with liquid and can isolate a rack loop by valve.",
-  moves: "A sensed drip lights the rack's location on the monitoring screen.",
-  numbers: "Cable sensors alarm on ~0.3 mL of liquid bridging the conductors",
+  what: "Sensing cable laid in long loops under the floor and along the pipe runs, plus spot sensors in trays beneath the connections. A few drops touching the cable raise an alarm and show which rack it came from, and valves can shut that rack's loop off.",
+  moves: "A sensed drip lights up the rack's location on the monitoring screen.",
   cite: ["S30"]
 },
 
@@ -2734,89 +2705,86 @@ parts: {
 
 "immersion/tank-1p": {
   name: "Single-phase tank",
-  what: "A rack laid on its back and filled with nonconductive oil. Servers hang vertically in slots, fully submerged; warm oil is pumped out, cooled against facility water, and returned. The fluid never boils.",
-  moves: "Slow convection shimmer; pump-driven circulation. No bubbles — bubbles would mean trapped air or a problem.",
-  numbers: "42U-class tanks · capacity scales with facility-water temperature: 13 kW per rack at 32 °C water up to 368 kW at 13 °C · top 8U kept dry for switches",
+  what: "A rack tipped onto its back and filled with oil that does not conduct electricity. Servers stand upright in slots, fully submerged. Warm oil is pumped out, cooled against building water, and returned. The oil never boils. How much heat a tank can take depends directly on how cold that building water is.",
+  moves: "Slow shimmer of convection; pumped circulation. No bubbles — bubbles would mean trapped air or a problem.",
   cite: ["S25"]
 },
 
 "immersion/fluid-1p": {
   name: "Single-phase fluid",
-  what: "Clear hydrocarbon or synthetic-ester dielectric oil. Boards under the surface read as shrink-wrapped in glass. Non-fluorinated: this fluid class is not PFAS.",
-  numbers: "Flash point >200 °C · dielectric strength >40 kV · service life >10 years (Shell GTL class)",
-  water: "No water in the tank and no aqueous discharge. End-of-life fluid goes to a recycler, not a drain.",
+  what: "A clear oil, either a refined hydrocarbon or a synthetic ester, chosen because electricity will not pass through it. Boards under the surface look shrink-wrapped in glass. It contains no fluorine, so this fluid is not PFAS.",
+  numbers: "The oil lasts more than ten years in service.",
+  water: "No water goes into the tank and nothing watery comes out. Worn-out fluid goes to a recycler, not a drain.",
   cite: ["S26"]
 },
 
 "immersion/weir": {
   name: "Weir",
-  what: "An overflow lip at the tank rim. The hottest oil rises past the boards and spills over the weir to the pump suction, so the loop always draws the warmest layer.",
-  moves: "Surface oil slides continuously over the lip.",
+  what: "An overflow lip at the rim of the tank. The hottest oil rises past the boards and spills over the lip toward the pump, so the loop always draws off the warmest layer.",
+  moves: "Oil slides continuously over the lip.",
   cite: ["S25"]
 },
 
 "immersion/loop-1p": {
   name: "Oil circulation loop",
-  what: "Redundant pumps and a liquid-to-liquid plate heat exchanger transferring tank heat to facility water. The oil stays in the tank circuit; the water carries the heat to the yard.",
-  moves: "Pump impellers; two fluids counterflow in the exchanger.",
-  numbers: "Bath typically ~40–55 °C",
+  what: "Pumps and a heat exchanger that hand the tank's heat over to the building water loop. The oil stays in the tank circuit; the water carries the heat out to the yard.",
+  moves: "Pump impellers; the two fluids running past each other in the exchanger.",
   cite: ["S25"]
 },
 
 "immersion/hoist": {
   name: "Service hoist",
-  what: "An overhead crane for pulling a server vertically out of the bath. The board drains over a drip tray back into the tank; service is slower than a tray pull — one reason cold plates won the AI mainstream.",
-  moves: "Hoist travel; a lifted node dripping.",
+  what: "An overhead crane for lifting a server straight up out of the bath. It has to drip over a tray back into the tank before anyone can work on it — slower than sliding a tray out of a rack, and one reason cold plates won the AI mainstream.",
+  moves: "Hoist travel; a lifted server dripping.",
   cite: ["S25", "S31"]
 },
 
 "immersion/tank-2p": {
   name: "Two-phase tank",
-  what: "A sealed stainless tank holding a shallow bath of low-boiling fluorocarbon. Heat moves by boiling and condensation alone — the tank contains no pumps at all.",
-  moves: "Rolling boil below, condensate rain above.",
-  numbers: "DataTank 48U class: 1,900 × 2,494 × 1,158 mm, 2,500 kg · up to 252 kW per tank · pPUE 1.02–1.03 · zero pumps for heat rejection",
+  what: "A sealed steel tank holding a shallow pool of fluid with a very low boiling point. Heat moves by boiling and condensing alone — there is not a single pump inside the tank.",
+  moves: "Rolling boil below, condensate raining down from above.",
+  numbers: "For every 100 watts of computing, only two or three watts go to cooling — the best figure in this hall.",
   cite: ["S27"]
 },
 
 "immersion/sight-glass": {
   name: "Sight glass",
-  what: "Tempered-glass lids for looking down into the boil. The tank must stay sealed to hold its vapor, so the glass is the service window between openings.",
-  numbers: "Three tempered-glass lids with 10 mm sight glasses (DataTank 48U)",
+  what: "Toughened glass lids for looking down at the boil. The tank has to stay shut to keep its vapor inside, so the glass is how anyone checks on it between service visits.",
   cite: ["S27"]
 },
 
 "immersion/boiling-servers": {
   name: "Boiling chip surfaces",
-  what: "The fluid boils directly on hot packages — streams of bubbles off every GPU. Boiling pins the bath at the fluid's boiling point, and the vapor carries the heat upward as latent heat.",
-  moves: "Nucleate boiling on dies; bubble streams racing upward.",
-  numbers: "Workhorse fluids boiled at ~49–61 °C (Novec 649 / 7100 class)",
+  what: "The fluid boils right on the hot chips — streams of bubbles coming off every processor. Boiling holds the whole bath at one steady temperature, and the rising vapor is what carries the heat upward.",
+  moves: "Bubbles forming on the chips and racing upward.",
+  numbers: "These fluids boil around 50 to 60 degrees Celsius, far below water's boiling point.",
   cite: ["S53", "S27"]
 },
 
 "immersion/condenser-coil": {
   name: "Condenser coil",
-  what: "Water-cooled coils in the tank headspace. Vapor hits the cold tubes, condenses, and rains back into the bath; the water inside the coils carries the heat out to ordinary dry coolers.",
-  moves: "Condensate drips continuously from the coil under the lid.",
+  what: "Water-cooled tubes in the space above the fluid. Vapor touches the cold tubes, turns back to liquid, and rains into the bath; the water inside the tubes carries the heat out to plain dry coolers.",
+  moves: "Condensate dripping steadily from the coil under the lid.",
   cite: ["S53", "S27"]
 },
 
 "immersion/fluid-2p": {
   name: "Two-phase fluid",
-  what: "Fluoroketones and perfluorocarbons — PFAS under any definition. 3M, the dominant supplier, announced its exit from PFAS manufacture in December 2022 and completed it at the end of 2025.",
-  numbers: "Two-phase immersion is well under 1% of data center cooling: all immersion is <2% of cooling by IT load, and single-phase holds most of that",
-  water: "The PFAS here is real but its pathway is not water: losses occur as vapor during lid openings, not as liquid discharge. No aqueous discharge exists in this architecture.",
+  what: "This fluid is a fluorinated compound — PFAS under any definition anyone uses. 3M, which supplied most of it, announced in 2022 that it would stop making PFAS, and finished doing so at the end of 2025.",
+  numbers: "Two-phase immersion is well under 1 percent of all data center cooling.",
+  water: "The PFAS here is real, but the path it takes is air, not water: the losses happen as vapor when the lid is opened. This design has no water discharge at all.",
   cite: ["S28", "S29", "S31"]
 },
 
 "immersion/fluid-drums": {
   name: "Fluid reserve drums",
-  what: "Replacement fluid in drums — now the scarce commodity. Remaining fluorochemical suppliers face the same regulatory trajectory; 3M announced its exit in 2022 and completed it at the end of 2025. No hydrocarbon two-phase fluid had qualified at datacenter scale as of mid-2026.",
+  what: "Replacement fluid in drums — now the scarce part of the system. The suppliers still in the market face the same regulatory pressure that pushed 3M out, and as of mid-2026 no non-fluorinated substitute had been proven at data center scale.",
   cite: ["S28", "S32"]
 },
 
 "immersion/dry-cooler": {
   name: "Dry cooler",
-  what: "The immersion bay's yard-side heat rejection: condenser-coil or oil-loop water runs to finned coils and fans. Immersion pairs naturally with dry rejection — warm fluid, no evaporation, no site water.",
+  what: "This bay's yard equipment: water from the condenser coils or the oil loop runs out to finned coils with fans. Immersion pairs naturally with dry cooling, since the fluid runs warm — nothing has to be evaporated and no site water is used.",
   moves: "Fan row.",
   cite: ["S53", "S25"]
 },
@@ -2825,58 +2793,56 @@ parts: {
 
 "rear-door-hx/rack-row": {
   name: "Rack row",
-  what: "A row of standard racks whose rear doors have been replaced with water coils. Exhaust is neutralized at the rack itself, so the room stays near-neutral — a retrofit path for halls that hit their airflow ceiling before their power ceiling.",
+  what: "A row of ordinary racks whose back doors have been swapped for water-filled radiators. The hot exhaust is cooled right at the rack, so the room barely notices it. This is the retrofit path for older halls that run out of airflow before they run out of electrical capacity.",
   moves: "Server fans push air through every door coil.",
-  numbers: "Six passive doors removed ~48% of a 66 kW test load (LBNL demonstration)",
+  numbers: "In a federal lab demonstration, six of these doors removed about half the heat from a test row.",
   cite: ["S2"]
 },
 
 "rear-door-hx/door-coil": {
   name: "Passive door coil",
-  what: "A finned water coil the size of the rack door — the geometry of a car radiator stood upright. Server fans alone push exhaust through it; the air re-enters the hall near room temperature.",
-  numbers: "Suits ~20–30 kW per rack · air-side reduction 10–35 °F depending on flow · ~9 GPM per door (range 4–15+)",
+  what: "A finned water coil the size of the rack door — a car radiator stood on end. The servers' own fans push their exhaust through it, so the door needs no power of its own, and the air comes back out near room temperature.",
+  numbers: "Suits racks in the 20 to 30 kilowatt range.",
   cite: ["S2"]
 },
 
 "rear-door-hx/hinge": {
   name: "Door hinge",
-  what: "The whole coil swings about 90 degrees on its hinge, hoses flexing with it, so technicians reach the rack rear without disconnecting anything.",
-  moves: "Door swing during service.",
+  what: "The whole coil swings open on its hinge, hoses bending along with it, so a technician can reach the back of the rack without disconnecting anything.",
+  moves: "The door swinging during service.",
   cite: ["S2"]
 },
 
 "rear-door-hx/hoses": {
   name: "Supply and return hoses",
-  what: "Flexible hoses with quick-disconnects at the hinge side, fed underfloor or overhead. Coolant is held above the room dew point, so the coil never sweats and needs no drain pan.",
-  numbers: "LBNL demonstration: supply water 22 °C, return 24.4 °C",
+  what: "Flexible hoses with self-sealing couplings at the hinge, fed from under the floor or from overhead. The water is deliberately kept warm enough that the coil never sweats — above the temperature at which room air would condense on it — so there is no drip pan to worry about.",
   cite: ["S2"]
 },
 
 "rear-door-hx/active-door": {
   name: "Active door",
-  what: "The same coil plus a column of EC fans that assist airflow through it, roughly doubling the rack power a door can neutralize. Capacity depends directly on water temperature.",
-  moves: "Door fan column spins; speed follows rack load.",
-  numbers: "68 kW per door with 14 °C water; 44 kW with 24 °C water (nVent class) · active doors serve ~30–50+ kW racks",
+  what: "The same coil with a column of fans added to push more air through it, which roughly doubles how much heat one door can take. Capacity depends directly on how cold the water is: colder water, more heat per door.",
+  moves: "The door's fan column spins; speed follows the rack's load.",
+  numbers: "A single active door can handle around 70 kilowatts on cold water.",
   cite: ["S16"]
 },
 
 "rear-door-hx/manifold": {
   name: "Row manifold",
-  what: "Supply and return headers feeding every door in the row, with isolation valves per door so one rack can be serviced without disturbing its neighbors.",
+  what: "Supply and return pipes running the length of the row, with a shut-off valve for each door so one rack can be worked on without disturbing its neighbors.",
   cite: ["S2"]
 },
 
 "rear-door-hx/cdu": {
   name: "CDU",
-  what: "The row's coolant distribution unit: heat exchanger, pumps, and controls separating the door loop from facility water — and holding the door loop above the room dew point.",
-  moves: "Pumps; modulating facility-side valve.",
+  what: "The row's coolant distribution unit — heat exchanger, pumps, and controls. It keeps the door loop separate from the building's water and holds it warm enough that the coils never condense moisture.",
+  moves: "Pumps; a valve modulating on the building side.",
   cite: ["S2"]
 },
 
 "rear-door-hx/facility-riser": {
   name: "Facility riser",
-  what: "The vertical facility-water connection carrying the row's heat to the plant. In the LBNL demonstration the doors ran chiller-less on treated tower water through a plate-and-frame exchanger.",
-  numbers: "Warm door-water temperatures buy economizer hours; the demonstration nearly eliminated chiller energy for the served load",
+  what: "The vertical pipe connection carrying the row's heat back to the plant. In the federal lab demonstration these doors ran on treated cooling tower water with the chiller switched off entirely.",
   cite: ["S2"]
 },
 
@@ -2884,104 +2850,99 @@ parts: {
 
 "water-room/column-tower": {
   name: "Column: open tower",
-  what: "A glass column for the open evaporative tower: water pours in continuously at the top and two streams leave — a large one as vapor, a steady liquid one as blowdown. It never stops while the plant runs.",
+  what: "A glass column standing in for an open cooling tower. Water pours in at the top without stopping, and two streams leave — a large one as vapor and a steady liquid one down the drain. Neither pauses while the plant runs.",
   moves: "Continuous fill and continuous drain, side by side.",
-  numbers: "WUE 0.09–1.80 L/kWh for optimized hyperscale evaporative cooling; ~1.99–4.00 L/kWh for traditional systems · ~6.75 million gallons/year per conventional 1 MW plant",
-  water: "Roughly 70–80% of the consumed water leaves as vapor and 20–30% as liquid blowdown at typical cycles (estimate). U.S. data centers directly consumed about 17 billion gallons in 2023.",
+  numbers: "U.S. data centers used about 17 billion gallons of water directly in 2023.",
+  water: "Roughly three-quarters of the water consumed leaves as vapor; the rest leaves as liquid down the drain.",
   cite: ["S34", "S35", "S1"]
 },
 
 "water-room/column-closed-circuit": {
   name: "Column: closed-circuit cooler",
-  what: "The sealed-coil evaporative unit. Its process fluid never leaves, but its captive spray sump evaporates and concentrates like a small open tower — so this column still shows continuous makeup and a smaller continuous blowdown.",
+  what: "The sealed-coil evaporative unit. Its process fluid never leaves, but the water sprayed over the coil evaporates and concentrates just like a small tower — so this column still shows water going in continuously and a smaller stream going out.",
   moves: "Smaller but continuous fill and drain.",
-  water: "Same discharge in kind as the open tower, reduced in volume: sump blowdown carrying concentrated minerals and treatment residues.",
+  water: "The same kind of discharge as the open tower, in smaller volume: concentrated minerals and treatment leftovers.",
   cite: ["S14"]
 },
 
 "water-room/column-adiabatic": {
   name: "Column: adiabatic cooler",
-  what: "Water enters only during hot hours, evaporates into the airstream across the pads, and in most designs nothing leaves as liquid. The column runs dry for most of the year.",
-  moves: "Intermittent fill; drain mostly idle.",
-  water: "Up to ~95% less water than conventional evaporative cooling. Some designs recirculate pad water from a small sump and periodically dump it for hygiene — little or no liquid discharge, not never any.",
+  what: "Water enters only during hot hours, evaporates into the air across the pads, and in most designs nothing leaves as liquid at all. The column sits dry for most of the year.",
+  moves: "Occasional fill; the drain mostly idle.",
+  water: "Up to about 95 percent less water than a conventional evaporative tower. Some designs recycle pad water and dump it now and then for hygiene, so little or nothing leaves as liquid — not never anything.",
   cite: ["S15"]
 },
 
 "water-room/column-closed-loop": {
   name: "Column: closed loop",
-  what: "One fill at commissioning, then a flat line. The level barely moves for years; the drain shows a single commissioning-flush event and rare maintenance blips. This is the profile of chilled-water loops, direct-to-chip loops, and rear-door loops alike.",
+  what: "One fill when the building opens, then a flat line. The level barely moves for years, and the drain shows a single flush at commissioning plus rare blips for repairs. This is the shape for chilled-water loops, chip-cooling loops, and rear-door loops alike.",
   moves: "A one-time fill; occasional single blips on the drain.",
-  numbers: "A tight closed loop loses <5% of its volume per year · makeup is needed only after leakage or a repair drain",
+  numbers: "A tight closed loop loses less than 5 percent of its water in a year.",
   cite: ["S36", "S37", "S39"]
 },
 
 "water-room/column-immersion": {
   name: "Column: immersion",
-  what: "Empty. Immersion tanks hold oil or fluorocarbon, not water, and produce no aqueous discharge. Their facility-water side behaves like the closed-loop column beside it.",
-  water: "Single-phase oil goes to a recycler after 10+ years of service. Two-phase fluid losses are vapor from lid openings, not liquid.",
+  what: "Empty. Immersion tanks hold oil or a fluorinated fluid, not water, and have nothing watery to discharge. Their building-water side behaves like the closed-loop column beside them.",
+  water: "Single-phase oil goes to a recycler after a decade or more of service. Two-phase losses are vapor escaping when a lid is opened, not liquid down a drain.",
   cite: ["S25", "S26", "S28"]
 },
 
 "water-room/discharge-channel": {
   name: "Discharge channel",
-  what: "The floor channel collecting every liquid stream in the room, labeled with the three legal destinations: sanitary sewer under an industrial pretreatment program, surface water under an NPDES permit, or on-site treatment and reuse.",
-  moves: "Whatever the columns discharge flows here.",
-  numbers: "Permitted data center examples: up to 460,000 gal/day to a Virginia creek · Twin Cities metro discharges go through MCES pretreatment permits",
-  water: "In every permit and guidance document reviewed, storm-drain discharge of these streams is prohibited. Which path a site uses is set by its permits, not its cooling technology.",
+  what: "The floor channel that collects every liquid stream in the room, labeled with the three places this water is legally allowed to go: the sanitary sewer under a local industrial permit, a creek or river under a discharge permit, or on-site treatment for reuse.",
+  moves: "Whatever the columns drain flows through here.",
+  water: "In every permit and guidance document reviewed, sending these streams to a storm drain is prohibited. Which of the three paths a site uses is set by its permits, not by its cooling technology.",
   cite: ["S40", "S41", "S52"]
 },
 
 "water-room/chem-bench-open": {
   name: "Chemistry bench: open loops",
-  what: "The dosing roster for evaporative systems: oxidizing biocide held at a continuous residual, non-oxidizing biocides rotated in slugs, phosphonate scale inhibitors, azole copper inhibitors, orthophosphate, and polymer dispersants.",
-  numbers: "Free chlorine ~0.5–1 ppm (5–10 ppm during remediation) · HEDP/AMP 3–5 ppm · PBTC 1.5–2.5 ppm · azoles 1–5 ppm · orthophosphate 5–15 mg/L",
-  water: "All of it exits in the blowdown at residual concentrations. The organic treatment chemicals are usually not individually limited in U.S. permits; they are controlled indirectly through residual-oxidant limits and toxicity testing.",
+  what: "What gets added to evaporative systems: a disinfectant held at a steady low level to keep bacteria including Legionella from growing, a second, different disinfectant rotated in occasionally so the bacteria do not adapt to the first, and additives that stop minerals from scaling and metal from corroding.",
+  water: "All of it leaves in the blowdown, heavily diluted. U.S. permits usually do not set a number for each individual chemical; they control them indirectly, through limits on leftover chlorine and metals and through toxicity testing of the discharge as a whole.",
   cite: ["S42", "S43", "S40"]
 },
 
 "water-room/chem-bench-closed": {
   name: "Chemistry bench: closed loops",
-  what: "The closed-loop roster: nitrite or molybdate corrosion inhibitors, azoles for copper, pH buffers — or a propylene-glycol blend with an inhibitor package for freeze-exposed loops. Concentrations are high because the fluid stays put.",
-  numbers: "Nitrite 600–1,200 ppm · molybdate 200–300 ppm · glycol loops 20–40% propylene glycol · rack coolant: PG25 (~25% propylene glycol in deionized water, tolyltriazole-inhibited)",
-  water: "When a loop is drained, the water is sampled and compared to local sewer limits before discharge — molybdenum is often the binding constraint. Glycol never goes to sewer without authorization; drained glycol is recycled or incinerated. None of these formulations are fluorinated.",
+  what: "What gets added to sealed loops: rust inhibitors for the steel, a different additive for the copper, something to hold the acidity steady — and, where pipes can freeze, propylene glycol, the same antifreeze used in RV plumbing and food equipment. The doses are much stronger than in a tower, because nothing is constantly being flushed away.",
+  water: "When a loop is drained, the water is tested against local sewer limits first, and one of the inhibitor metals is usually the deciding factor. Glycol never goes to a sewer without permission; it is recycled or burned. None of these mixtures are fluorinated, so none of them are PFAS.",
   cite: ["S36", "S37", "S38", "S21"]
 },
 
 "water-room/dosing-pump": {
   name: "Dosing pump",
-  what: "A chemical metering pump of the type on every tower chemical skid: small, positive-displacement, dosing parts-per-million quantities against the recirculating flow.",
-  moves: "Diaphragm pulses; stroke rate follows makeup flow.",
+  what: "The kind of small chemical pump found on every tower chemical skid. It injects a steady trickle of treatment into a much larger flow of water — a few parts per million at a time.",
+  moves: "A diaphragm pulses; the rate follows how much fresh water is coming in.",
   cite: ["S42"]
 },
 
 "water-room/pfas-case": {
   name: "PFAS display case",
-  what: "Where PFAS is real in a data center: two-phase immersion fluids (fluoroketones — the fluid itself is PFAS), the fire-suppression agent FK-5-1-12, and, definitionally, some refrigerants — HFOs like R-1234yf degrade in the atmosphere to TFA, a PFAS under the OECD definition but not under U.S. EPA working definitions. Where it is not: no PFAS identified in the chemical families used in standard water and glycol closed-loop coolants or in mainstream cooling tower treatment; a product-level SDS review is the definitive check.",
-  numbers: "Two-phase immersion: well under 1% of data center cooling · refrigerant releases are fugitive air emissions from sealed equipment, not a site water pathway",
-  water: "No measured PFAS detection in data center cooling discharge has been documented. Discharge permits generally do not require PFAS testing — Virginia's data center permits contain none — so the absence of detections partly reflects an absence of monitoring.",
+  what: "Where PFAS actually is in a data center: in two-phase immersion fluid, where the fluid itself is a PFAS compound; in one clean-agent fire suppressant; and, arguably, in some refrigerants — certain ones break down in the atmosphere into a compound that Europe counts as PFAS and U.S. EPA currently does not. Where it is not: the water and antifreeze in ordinary sealed loops, and the standard chemicals used in cooling towers. Neither of those is fluorinated. For any specific product, the safety data sheet is the way to check.",
+  numbers: "Two-phase immersion is well under 1 percent of data center cooling.",
+  water: "Nobody has measured PFAS in data center cooling discharge — partly because nobody is required to test for it. Discharge permits generally do not ask for it, so the absence of findings is partly an absence of looking.",
   cite: ["S28", "S46", "S47", "S48", "S40", "S29"]
 },
 
 "water-room/panel-frequency": {
   name: "Panel: how often do closed loops discharge?",
-  what: "A properly built closed loop is filled once and holds a fixed inventory. It discharges episodically, not continuously. First, once, at commissioning: new piping is flushed and chemically cleaned, and that flush water — one to a few loop volumes — is disposed of as wastewater. Then essentially nothing during normal operation: makeup is needed only after a leak or a repair drain, and a tight loop loses less than 5% of its volume per year. Repairs drain only the isolated section, years apart; industry maintenance practice is built to avoid draining — inhibitors are re-dosed, not replaced with the water. One institutional protocol requires lab analysis with three weeks of lead time before a loop drain may go to sewer, and captures emergency-repair water in totes for return to the loop. Full drains are reserved for major contamination, retrofit, or decommissioning. No authoritative every-N-years statistic exists for drain frequency; primary sources agree on the episodic pattern.",
-  numbers: "Loop inventories: ~21–31 gallons per 1 MW CDU loop; facility loops roughly thousands to tens of thousands of gallons (est.) · a single 1,000-ton cooling tower at 3 cycles discharges 20,000–40,000 gallons of blowdown per day, every day",
-  water: "The scale contrast is the answer: a closed loop's entire lifetime discharge — commissioning flush plus occasional drains — is on the order of days' worth of one evaporative campus's routine blowdown (arithmetic from the sourced figures).",
+  what: "A well-built sealed loop is filled once and holds the same water for years. It discharges in events, not as a stream. There is one guaranteed event at the start: new pipe is full of mill scale and oil, so it gets flushed and chemically cleaned, and that flush water goes out as wastewater. After that, almost nothing — a tight loop loses less than 5 percent of its water in a year, and topping up is only needed after a leak or a repair. Repairs drain just the isolated section, and they come years apart. The whole aim of maintenance practice is to avoid draining, so the chemicals are re-dosed rather than replaced along with the water. One university requires lab testing with three weeks of notice before loop water may go to the sewer, and has crews catch repair water in totes and pour it back in afterward. Full drains are for major contamination, a retrofit, or demolition. There is no reliable industry statistic for how often that happens; the sources agree only that it is occasional.",
+  water: "The contrast is the useful part: everything a sealed loop discharges over its whole life adds up to a few days of one evaporative campus's ordinary daily bleed-off.",
   cite: ["S36", "S37", "S38", "S39", "S45", "S44"]
 },
 
 "water-room/panel-blowdown": {
   name: "Panel: what is in cooling tower blowdown?",
-  what: "Two things: concentrated source-water minerals, and treatment-chemical residues. The minerals are whatever came in the makeup, multiplied by the cycles of concentration — at 3–8 cycles on typical municipal water, blowdown TDS commonly lands near 1,000–3,000+ mg/L (est.), with proportionally concentrated chlorides, sulfate, calcium, magnesium, and silica. The chemical residues: free chlorine near 0.5–1 ppm from continuous hypochlorite or bromine dosing; non-oxidizing biocides (isothiazolinone, glutaraldehyde, DBNPA) from periodic slug doses; phosphonates at roughly 1.5–5 ppm; azole copper inhibitors at 1–5 ppm; orthophosphate at 5–15 mg/L; polymer dispersants in the ppm range. Hexavalent chromate inhibitors were banned from comfort cooling towers in 1990 and are not used. Legally it goes one of three places: to a sanitary sewer under an industrial pretreatment program, to surface water under an NPDES permit with limits on residual chlorine, metals, pH, and temperature, or to on-site treatment and reuse.",
-  numbers: "Blowdown ≈0.5% of circulating flow (≈4.3 GPM per MW) · a permitted Virginia data center discharge: up to 460,000 gal/day · reuse example: Quincy, WA treats mineral-rich blowdown for industrial reuse, saving ~380 million gal/year of potable water",
-  water: "The organic treatment chemicals themselves are usually not individually limited in U.S. discharge permits; control is indirect, through residual-oxidant limits, metals limits, and whole-effluent toxicity testing where applied.",
+  what: "Two things. First, the minerals that were already in the local water, concentrated by however many laps the water made before it was drained — several times the tap-water level, so more chloride, sulfate, calcium, magnesium, and silica. Second, the treatment chemicals: a disinfectant held at a low steady level, a second one added periodically, scale inhibitors, corrosion inhibitors for steel and for copper, and dispersants that keep solids from settling. Chromium-based inhibitors, the genuinely nasty ones, were banned from cooling towers in 1990 and are not used. Legally the blowdown goes one of three places: a sanitary sewer under a local industrial permit, a creek or river under a discharge permit that limits leftover chlorine, metals, acidity, and temperature, or on-site treatment for reuse.",
+  numbers: "One permitted Virginia data center is allowed to discharge up to 460,000 gallons a day.",
+  water: "The organic treatment chemicals themselves are usually not given individual limits in U.S. permits. They are controlled indirectly, through limits on leftover chlorine and on metals, and through toxicity testing of the discharge where that applies.",
   cite: ["S33", "S42", "S43", "S40", "S41", "S52", "S44", "S1"]
 },
 
 "water-room/panel-minnesota": {
   name: "Panel: Minnesota",
-  what: "Minnesota's 2025 law (HF16, 1st Special Session) created a DNR preapplication evaluation for data centers anticipated to use more than 100 million gallons per year — about 274,000 gallons per day on average — with aquifer testing where the commissioner requires it. Any direct discharge to surface or ground water needs an MPCA permit; in the Twin Cities metro, discharges to the regional sanitary system go through Metropolitan Council Environmental Services industrial pretreatment permits. Every Minnesota hyperscale proposal that has disclosed a cooling design so far is closed-loop or dry: Meta's Rosemount project was estimated by the city at roughly 100,000 gallons per day at peak — an order of magnitude below an evaporative equivalent. In Farmington, the city agreement allows Tract up to 2.93 million gallons per day while the developer states an expected average near 137,000 gallons per day with non-evaporative cooling; the gap between permitted maximum and claimed average is the public controversy. Cold-climate economics point the same direction as these disclosures: in Minnesota the discharge story is mostly episodic closed-loop events plus domestic sewage, not continuous blowdown.",
-  numbers: "HF16 threshold: >100 million gal/year triggers DNR preapplication review · Rosemount (Meta): ~100,000 gal/day peak, closed-loop/dry · Farmington (Tract): 2.93 M gal/day permitted max vs ~137,000 gal/day claimed average",
+  what: "A 2025 Minnesota law requires a Department of Natural Resources review before a data center expected to use more than 100 million gallons a year can proceed, with aquifer testing where the state asks for it. Any discharge straight to surface or ground water needs an MPCA permit, and in the Twin Cities, discharges into the regional sewer system go through Metropolitan Council permits. Every Minnesota project that has disclosed a cooling design so far is sealed-loop or dry rather than evaporative. Meta's Rosemount project was estimated by the city at about 100,000 gallons a day at peak. In Farmington, the city agreement allows Tract up to 2.93 million gallons a day, while the developer says it expects to average closer to 137,000 — and the gap between the permitted ceiling and the promised average is what the public argument is about. Cold weather pushes in the same direction as those disclosures: in Minnesota the discharge question is mostly about occasional sealed-loop events and ordinary sewage, not daily tower bleed-off.",
   cite: ["S49", "S41", "S50", "S51"]
 },
 
@@ -2991,137 +2952,138 @@ chapters: [
 
 { id: "ch0", title: "The heat problem", bay: null, steps: [
   { cam: { pos: [-29, 2.9, -2.4], look: [-14, 2.5, 6.5], dur: 5 },
-    text: "Every watt a server draws becomes heat, at the chip, immediately. Removing that heat requires major infrastructure and a significant share of a site's energy. Each bay in this hall starts from the same rack of servers and follows that heat all the way out of the building." },
+    text: "Computers turn electricity into heat. A data center is a building full of computers, so it has to move an enormous amount of heat outdoors, all day, every day. Each bay in this hall shows one way of doing that." },
   { cam: { pos: [-23, 2.7, -2.2], look: [-8, 2.5, 7], dur: 4 },
-    text: "For two decades a rack drew a few kilowatts and air handled it. Current AI racks draw 120–132 kW each — a GB200 NVL72 cannot be air-cooled at all. That climb from roughly 5 to over 130 kW per rack forced every architecture in this hall.", layer: "HEAT" },
+    text: "Every system here answers two questions. One: how do you pick the heat up off the chips — with air, or with liquid? Two: how do you push it out of the building — with a refrigeration machine, evaporating water, outside air, or a plain radiator?", layer: "HEAT" },
   { cam: { pos: [-16, 3.0, -5], look: [4, 2.6, 6], dur: 4.5 },
-    text: "Flows are painted by kind: amber heat, ice-blue and coral air, cyan chilled water, teal tower water, slate raw water, violet refrigerant, chartreuse chip coolant, straw dielectric oil. The glass wall at the back of every bay is the building envelope — watch for the exact point where the heat crosses it.", layer: "ALL" }
+    text: "The hall is laid out in that order. Bays 1 and 2, the old all-air way. Bay 3, the weather. Bay 4, the four outdoor options side by side. Bays 5 and 6, liquid at the chip. Bay 7, a retrofit. Then the Water Room scores them all.", layer: "ALL" }
 ]},
 
 { id: "ch1", title: "Air-cooled DX (CRAC)", bay: 0, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 1: the legacy baseline. A raised-floor hall cooled by a floor-standing CRAC with its own complete refrigeration circuit. Heat leaves the room in refrigerant lines, crosses the wall, and exits through a fan-cooled condenser in the yard." },
+    text: "Bay 1 is the old way, and the simplest. Air picks the heat up off the servers, and an air conditioner standing in the room pushes it outdoors — both halves of the job in one machine. Everything later in the hall is a variation on one half or the other." },
   { pov: "rack-aisle", dur: 4, layer: "AIR",
-    text: "Cold supply air rises from the perforated tiles, is pulled through the servers, and leaves 17–28 °C hotter into the contained hot aisle. The recommended inlet band is 18–27 °C; the ceiling return carries the exhaust back to the top of the CRAC." },
+    text: "Cold air rises out of holes in the floor tiles, gets pulled through the servers, and comes out the back much hotter. Doors and panels pen that hot air in so it cannot loop back to the fronts, and a ceiling duct carries it to the unit." },
   { pov: "crac-internals", dur: 4.5, act: "xray:1",
-    text: "Inside the cabinet, top to bottom: filters, the A-frame evaporator coil, fans, compressors. Refrigerant boils in the coil at low pressure, absorbing the room's heat; the scroll compressor then raises its pressure so it can condense against hot outdoor air." },
+    text: "Inside the cabinet, top to bottom: filters, a cold coil, fans, compressors. Refrigerant boils in the coil and soaks up the room's heat, then the compressor squeezes it until it is hotter than the air outside, so it can dump that heat there." },
   { pov: "wall-crossing", dur: 3.5, act: "xray:0",
-    text: "The envelope crossing: two insulated copper lines through a sealed penetration. Hot compressed vapor out, liquid refrigerant back. No water is involved in this architecture — its trade-off is energy: DX halls are the least efficient mainstream design." },
+    text: "Here is where the heat crosses the wall: two insulated copper pipes, and no water anywhere in this design. What it spends instead is electricity. This is the least efficient of the mainstream layouts, which is why the rest of the hall exists." },
   { pov: "condenser", dur: 4,
-    text: "In the yard, the microchannel condenser rejects the heat: 28–220 kW per unit, one or two EC fans. The refrigerant condenses back to liquid and returns inside. The refrigerants themselves are changing under the AIM Act — R-410A giving way to R-454B, manufacture cutoff 2027." }
+    text: "Out in the yard the refrigerant hands its heat to outdoor air and turns back into liquid. Next door, this one cabinet gets pulled apart: the refrigeration moves out to a central plant, and water carries heat between the pieces." }
 ]},
 
 { id: "ch2", title: "Chilled water plant", bay: 1, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 2: the workhorse of large data centers. Refrigeration moves out of the hall into a central plant, and two water loops appear — a sealed chilled-water loop indoors, and an open condenser-water loop running to the tower outside." },
+    text: "Bay 2 changes only the second half of the job — how heat gets out of the building. In the room, nothing changes: air still picks the heat up. But the refrigeration moves to a central plant, and two water loops appear to shuttle heat along." },
   { pov: "crah-internals", dur: 4.5, layer: "AIR", act: "xray:1",
-    text: "The CRAH looks like a CRAC but holds no compressor — only a chilled-water coil, a modulating valve, filters, and fans. Hot return air crosses the coil and leaves at 18–27 °C; the water inside warms from roughly 7–15 °C toward 12–18 °C and carries the heat away." },
+    text: "The cabinet in the room looks the same, but there is no air conditioner inside — just fans, filters, and a coil full of cold water. Hot air crosses the coil, the water warms up, and the water carries the heat out of the room." },
   { pov: "chiller", dur: 4.5,
-    text: "The chiller is the plant's engine. Refrigerant boils in the evaporator barrel to re-chill the sealed loop, and condenses in the condenser barrel into the open tower loop, which warms from about 29 to 35 °C. Two water systems meet here and never mix." },
+    text: "The chiller is the plant's engine. It chills the sealed loop feeding the coils indoors, and dumps that heat, plus the work its own compressor added, into a second open loop headed for the tower. The two waters meet but never mix." },
   { pov: "wall-crossing", dur: 3.5, act: "xray:0", layer: "WATER",
-    text: "The envelope crossing is plumbing: insulated condenser-water mains through sleeved penetrations. Indoors, a sealed loop that is filled once and kept. Outdoors, an open loop that is exposed to the atmosphere at the tower, where it loses water continuously." },
+    text: "Here the wall crossing is plumbing. Indoors, a sealed loop filled once and kept. Outdoors, an open loop that meets the air at the tower — and loses water there, continuously, for as long as the plant runs." },
   { pov: "tower", dur: 4.5,
-    text: "The cooling tower is where the heat actually leaves — as vapor. Warm water spreads over PVC fill and falls through fan-drawn air; about 1% of the circulating flow evaporates. A conventional 1 MW water-cooled plant consumes about 6.75 million gallons per year." },
+    text: "The tower is where the heat finally leaves, as vapor. Warm water spreads over plastic sheets and falls through moving air; about one drop in a hundred evaporates, and that is the cooling. A modest plant goes through millions of gallons a year." },
   { pov: "tower-water", dur: 5, layer: "WATER", act: "rate:blowdown:2.5",
-    text: "Only pure water evaporates, so minerals concentrate — and the loop bleeds continuously. Blowdown, about 0.5% of flow, leaves for a sanitary sewer under a pretreatment permit or surface water under an NPDES permit. Makeup replaces evaporation, blowdown, and drift." }
+    text: "Only pure water evaporates, so the minerals stay behind and grow more concentrated every lap. The tower has to bleed some water away constantly to keep up. That bleed — blowdown — goes to a sewer or a creek, under permit." }
 ]},
 
 { id: "ch3", title: "Free cooling", bay: 2, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 3: free cooling. When outdoor air is colder than the exhaust — most hours in most cool climates — the atmosphere can do the work. Direct designs bring filtered outdoor air to the racks; indirect designs move only the heat across the wall." },
+    text: "Bay 3 answers the second question a different way: use the weather. When the air outside is cooler than the exhaust — which is most hours of the year in a cold climate — no refrigeration is needed at all." },
   { pov: "intake", dur: 4, layer: "AIR",
-    text: "Outside air enters the louvered wall and blends with return air in the mixing chamber to hit the supply setpoint; the mixed stream then passes the deep filter bank on its way to the fan wall. The dampers do the arithmetic continuously — more outdoor air as the evening cools, more recirculation when outside would overshoot." },
+    text: "Outdoor air comes in through louvers and is blended with warm return air to land on the right supply temperature, then crosses a deep wall of filters. The dampers redo that arithmetic continuously as the evening cools." },
   { pov: "fan-wall", dur: 3.5,
-    text: "A wall of EC fans moves the mixed air into the hall, speeds tracking hall pressure. The array is N+1 redundant: one failed fan removes a small fraction of capacity. There is no refrigeration in this picture." },
+    text: "A wall of fans pushes the mixed air into the hall, speeds following the pressure inside. There is one more fan than the job needs, so losing one costs little. Notice what is missing: no refrigeration machine anywhere in this picture." },
   { pov: "hx-core", dur: 4.5, act: "xray:1",
-    text: "The indirect option: a fixed cross-flow plate core between two divided airstreams. Hall air heats one set of channels; a scavenger stream of outdoor air carries the heat off the other. Nothing rotates, and the streams never mix — humidity and dust stay outside." },
+    text: "For sites that would rather not let outdoor air touch the servers, there is an indirect version: hall air and outdoor air run through alternating channels in a block of thin plates, trading heat through the metal without ever mixing." },
   { pov: "relief", dur: 4, act: "xray:0",
-    text: "Return air that is not recirculated leaves through the relief louvers, and that is the whole story: heat out as warm air, no water consumed in the base design, nothing discharged." }
+    text: "Air that is not reused leaves through the relief louvers, and that is the whole job: heat out as warm air, no water used, nothing drained. Next door, the outdoor machines that do this job are lined up side by side." }
 ]},
 
 { id: "ch4", title: "Evaporative, adiabatic, dry", bay: 3, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 4 exists to unpick four look-alike machines. All reject heat from a fluid loop to outdoor air; they differ in what gets wet, what is consumed, and what leaves as liquid. The three names are often used interchangeably; the units differ in what gets wet." },
+    text: "Bay 4 is the comparison shelf for the second half of the job. Four machines in the yard, all moving heat from a fluid loop into the outdoors. They look alike and get confused constantly. What separates them is what gets wet." },
   { pov: "open-tower", dur: 4.5, layer: "WATER",
-    text: "Open tower: the process water itself is sprayed over fill in direct contact with air. About 1% of the flow evaporates — that evaporation is the cooling. The water that remains concentrates, so the basin bleeds blowdown continuously, about 0.5% of flow." },
+    text: "Open tower: the working water itself is sprayed into moving air. About one drop in a hundred evaporates, and that is the cooling. What stays behind gets more concentrated, so the basin bleeds a little away continuously." },
   { pov: "closed-circuit", dur: 4.5,
-    text: "Closed-circuit cooler: the process fluid is sealed inside a coil, but a captive spray loop rains over that coil and evaporates. The sump concentrates like a small tower — makeup, treatment, and blowdown included. Closed describes the fluid, not the water bill." },
+    text: "Closed-circuit cooler: the working fluid stays sealed inside a coil, and a separate captive supply of water rains over that coil and evaporates. Closed describes the fluid, not the water bill — this machine still drains." },
   { pov: "adiabatic", dur: 4.5, act: "rate:pads:1",
-    text: "Adiabatic cooler: water wets pads to pre-cool the air, not the fluid. Evaporation happens in the airstream ahead of a sealed dry coil, and only in hot hours. Up to ~95% less water than conventional evaporative cooling — and in most designs, no blowdown at all." },
+    text: "Adiabatic cooler: water wets pads that chill the incoming air, like a swamp cooler, with a sealed coil behind them. The water cools the air, never the fluid, and only on hot days — up to 95 percent less water than a tower." },
   { pov: "water-lines", dur: 4.5, layer: "WATER",
-    text: "Follow the drain lines. The open tower and the spray sump discharge continuously toward the treatment path. The adiabatic drain is mostly idle — some designs periodically dump pad water for hygiene. The dry cooler has no water line at all." },
+    text: "Follow the drain lines. The open tower and the spray sump run to the drain constantly. The adiabatic drain sits mostly idle, with an occasional flush for hygiene. The dry cooler has no water line at all." },
   { pov: "overview", dur: 4,
-    text: "The trade is explicit: evaporative machines spend water to save electricity; dry machines spend 10–35% more peak electricity to spend none. The adiabatic middle wets only the hottest hours. Climate, water price, and grid decide which is right." }
+    text: "The trade is plain: evaporative machines spend water to save electricity, dry machines spend electricity to save water, and the adiabatic middle gets wet only on hot days. Every bay so far has changed the second half. Next door, the first half changes." }
 ]},
 
 { id: "ch5", title: "Direct-to-chip liquid", bay: 4, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 5: direct-to-chip, the dominant architecture for AI racks. Coolant flows through cold plates on the processors themselves, through a CDU heat exchanger, and out to the yard. This rack draws 120–132 kW; it cannot be air-cooled." },
+    text: "Bay 5 is about the first half of the job — getting heat off the chip with liquid instead of air. For decades a rack drew a few kilowatts and air was plenty. An AI rack draws more than a hundred, and air simply cannot keep up." },
   { pov: "rack", dur: 4.5, act: "explode:0.6",
-    text: "At the rack rear: two vertical manifolds with a dripless quick-disconnect drop per tray. Of 132 kW, 115 leave in the coolant and 17 still leave by air. Roughly 2 L/s of coolant serves the whole rack; a tray can be pulled without stopping its neighbors." },
+    text: "At the back of the rack, two vertical pipes with a connection for every tray. Most of the rack's heat leaves in the coolant, and a fraction still leaves by air. Any one tray can be pulled out without stopping its neighbors." },
   { pov: "cold-plate", dur: 4.5, act: "explode:0",
-    text: "Copper cold plates clamp to each package; coolant threads microchannel fins directly over the die. Supply runs 30–45 °C — warm on purpose. Warm coolant still cools a 90 °C chip, and it keeps every pipe above the room dew point, so nothing sweats." },
+    text: "Copper plates clamp onto the processors, and coolant runs through narrow channels inside them, right over the chip. The coolant runs warm on purpose: warm liquid still cools a hot chip, and warm pipes never sweat." },
   { pov: "cdu-internals", dur: 4.5, act: "xray:1", layer: "WATER",
-    text: "The CDU is the boundary: rack coolant on one side of a plate heat exchanger, facility water on the other — two loops, one exchanger, never mixed. Redundant hot-swap pumps, 25 µm filters, an expansion tank. One 1.3 MW in-row unit can serve eight racks." },
+    text: "The distribution cabinet is the border between two sealed loops — chip coolant on one side of a stack of plates, building water on the other, trading heat through metal without mixing. One cabinet serves about eight racks." },
   { pov: "wall-crossing", dur: 3.5, act: "xray:0",
-    text: "The envelope crossing is two closed loops handing off heat. Inventories are small — tens of gallons at the CDU — filled at commissioning and kept. Discharge is episodic: one commissioning flush, rare repair drains. No continuous water stream leaves this bay." },
+    text: "The wall crossing is two sealed loops handing off heat. They hold surprisingly little water — a few dozen gallons at the cabinet — filled at commissioning and kept. Nothing runs to a drain here on an ordinary day." },
   { pov: "dry-cooler", dur: 4.5,
-    text: "Warm coolant is the unlock: at 30–45 °C, outdoor air can absorb the heat nearly year-round in a cold climate, so the yard needs only dry coolers — no chillers, no evaporation. Closed-loop designs of this type avoid over 125 million liters of water per site per year." }
+    text: "Warm coolant is what unlocks the yard. At these temperatures outdoor air can take the heat almost year-round in a cold climate, so plain radiators with fans will do: no chillers, no evaporation, no water used." }
 ]},
 
 { id: "ch6", title: "Immersion", bay: 5, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 6: servers under liquid. Two variants — an open oil bath cooled by pumped circulation, and a sealed tank whose fluorocarbon boils on the chips. Neither touches water in the white space; both hand heat to facility water and dry coolers." },
+    text: "Bay 6 pushes the first half of the job further still: the servers go into the liquid. Two versions here — an open bath of oil that gets pumped around, and a sealed tank whose fluid boils right on the chips." },
   { pov: "tub", dur: 4.5,
-    text: "Single-phase: servers hang vertically in clear dielectric oil that never boils. Warm oil rises, spills over the weir, and is pumped through a heat exchanger. Capacity follows water temperature: 13 kW per rack at 32 °C, up to 368 kW at 13 °C." },
+    text: "Single-phase: servers stand upright in a clear oil that electricity will not pass through, and that never boils. Warm oil spills over a lip at the rim, gets pumped through a heat exchanger, and comes back cooler." },
   { pov: "lifted-blade", dur: 4,
-    text: "Service is the trade-off: a hoisted server drains over the tank before work can start. The fluid lasts over 10 years and the boards run silent, sealed against dust and humidity — but hyperscalers largely chose cold plates for standard racks and faster hands-on work." },
+    text: "Service is the catch. A server has to be hoisted straight up and left to drip before anyone can touch it. The fluid lasts over ten years and the boards stay sealed from dust — but hands-on work is slow." },
   { pov: "two-phase", dur: 4.5, act: "rate:boil:1.6",
-    text: "Two-phase: the fluid boils directly on hot silicon at roughly 49–61 °C, and the vapor carries the heat upward as latent heat. There are no pumps in the tank; the phase change is the transport. Partial PUE runs 1.02–1.03, the best number in this hall." },
+    text: "Two-phase: the fluid boils right on the chips at around 50 to 60 degrees Celsius, and the rising vapor carries the heat up. There are no pumps in the tank at all — the boiling does the moving. It is the most efficient setup here." },
   { pov: "condenser", dur: 4,
-    text: "Water-cooled coils in the headspace condense the vapor, which rains back into the bath. The tank must stay sealed: every lid opening loses fluid as vapor — and the fluid is the expensive part." },
+    text: "Water-cooled tubes above the bath turn that vapor back into liquid, and it rains down again. The tank has to stay shut: every lid opening loses fluid as vapor, and the fluid is the expensive part." },
   { pov: "drums", dur: 4.5,
-    text: "Fluoroketones are PFAS, and 3M — the dominant supplier — completed its exit from PFAS manufacture at the end of 2025. No hydrocarbon two-phase fluid had qualified at datacenter scale by mid-2026. The hardware is proven; qualification of replacement fluids is not." }
+    text: "That fluid is PFAS, and 3M, which made most of it, finished leaving the PFAS business at the end of 2025. No non-fluorinated replacement had been proven at this scale by mid-2026. The hardware works; the supply does not." }
 ]},
 
 { id: "ch7", title: "Rear-door heat exchangers", bay: 6, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 7: the retrofit. Replace a rack's rear door with a water coil and the exhaust is neutralized at the rack itself. Legacy halls hit their underfloor-airflow ceiling long before their power ceiling; doors add capacity without new floor units." },
+    text: "Bay 7 upgrades the first half of the job without rebuilding the room. Swap a rack's back door for a water-filled radiator and the exhaust gets cooled right there. Old halls run out of airflow long before they run out of power." },
   { pov: "door", dur: 4.5,
-    text: "The passive door is a radiator the size of the door itself. Server fans alone push exhaust through it — the door draws no power. It suits 20–30 kW racks; in the LBNL demonstration, doors on 22 °C water at ~9 GPM cooled exhaust air by 10–35 °F." },
+    text: "The passive door is a car radiator standing on end. The servers' own fans push their exhaust through it, so the door draws no power of its own, and the air rejoins the room close to the temperature it started at." },
   { pov: "active-door", dur: 4,
-    text: "The active door adds a column of EC fans, roughly doubling capacity. Door capacity tracks water temperature: 68 kW per door with 14 °C water, 44 kW with 24 °C. Warmer water costs door capacity but buys chiller-free hours upstream." },
+    text: "The active door adds a column of fans, which roughly doubles what one door can take. Capacity follows the water temperature — colder water, more heat per door — but warmer water buys more chiller-free hours out in the yard." },
   { pov: "manifold", dur: 4,
-    text: "Row manifolds feed every door through isolation valves; a CDU keeps the door loop separate from facility water and above the room dew point, so the coils never condense moisture. The LBNL demonstration ran chiller-less, on treated tower water through a plate exchanger." },
+    text: "Pipes along the row feed every door through its own shut-off valve, and a distribution cabinet keeps the door loop separate from the building water and warm enough that the coils never sweat." },
   { pov: "hoses", dur: 4,
-    text: "The door swings 90 degrees on flexible hoses with dripless quick-disconnects — full rear access without breaking the loop. Water at the rack turns out to be an incremental step, not a leap: the same hoses, manifolds, and CDUs reappear in bay 4." }
+    text: "The door swings wide on flexible hoses with self-sealing couplings, so the rack opens without breaking the loop. The same hoses, pipes, and cabinets show up again in bay 5 — water at the rack is a step, not a leap." }
 ]},
 
 { id: "ch8", title: "The Water Room", bay: 7, steps: [
   { pov: "overview", dur: 4,
-    text: "The Water Room compares what the seven systems actually do with water: what goes in, what comes out, how often, and what is dissolved in it. Five columns, one shared drain channel, two chemistry benches, one display case." },
+    text: "The Water Room scores all seven systems on the water question — which, as the hall has shown, is almost entirely a question about the second half of the job. Five columns, one shared drain, two chemistry benches, one display case." },
   { pov: "columns", dur: 5,
-    text: "The columns run in real time. Open tower: continuous fill, continuous blowdown. Closed-circuit: the same, smaller. Adiabatic: seasonal sips, drain mostly idle. Closed loop: one fill, then a flat line for years. Immersion: no water at all." },
+    text: "The columns run live. Open tower: constant fill, constant drain. Closed-circuit: the same, smaller. Adiabatic: a sip on hot days. Sealed loop: one fill, then a flat line for years. Immersion: no water at all." },
   { pov: "tower-vs-closed", dur: 5, layer: "WATER",
-    text: "The frequency answer in one contrast: a 1,000-ton tower at 3 cycles discharges 20,000–40,000 gallons of blowdown every day. A closed loop holds a fixed inventory — tens of gallons at a CDU, thousands to tens of thousands in a facility loop (est.) — discharged once at commissioning, then episodically at repairs, years apart." },
+    text: "Here is the whole contrast. A big tower drains tens of thousands of gallons a day, every day it runs. A sealed loop holds a fixed amount of water, lets it go once at startup, and after that only when something is repaired." },
   { pov: "chem-bench", dur: 5, layer: "CHEM",
-    text: "Blowdown is concentrated source-water minerals — TDS commonly 1,000–3,000+ mg/L (est.) — plus treatment residues: chlorine near 0.5–1 ppm, phosphonates 1.5–5 ppm, azoles 1–5 ppm, orthophosphate 5–15 mg/L. It leaves via a pretreatment sewer, an NPDES outfall, or reuse." },
+    text: "Blowdown is two things: the minerals already in the local water, concentrated, and the leftovers of treatment — disinfectant, scale inhibitors, corrosion inhibitors. It leaves through a sewer, a creek, or reuse, always under permit." },
   { pov: "pfas-case", dur: 5,
-    text: "PFAS is real in three places here: two-phase immersion fluid, the fire agent FK-5-1-12, and refrigerants whose breakdown product TFA is PFAS under OECD but not US EPA definitions. Water and glycol loops and tower chemicals are non-fluorinated. No detection in cooling discharge is documented; permits generally do not require testing." },
+    text: "PFAS is here in three places: two-phase immersion fluid, one fire suppressant, and arguably some refrigerants. Not in sealed-loop water and antifreeze, not in tower chemicals. Nobody has measured it in cooling discharge — and nobody is required to test." },
   { pov: "columns", dur: 5,
-    text: "Minnesota: projects expecting over 100 million gallons a year face DNR preapplication review; metro discharges pass through MCES pretreatment. Every disclosed Minnesota design so far is closed-loop or dry — Rosemount at ~100,000 gal/day peak; Farmington permitted to 2.93 M gal/day against a claimed ~137,000 average." }
+    text: "Minnesota: a project expecting more than 100 million gallons a year gets a state review first, and metro discharges go through Metropolitan Council permits. Every Minnesota design disclosed so far is sealed-loop or dry." }
 ]},
 
 { id: "ch9", title: "Choosing", bay: null, steps: [
   { cam: { pos: [96, 2.6, -4], look: [108, 2.5, 6], dur: 4.5 },
-    text: "System choice follows climate, density, and the local price of water and power. Dry rejection spends electricity; evaporative rejection spends water; the chip's tolerance for warm coolant decides how hard that trade bites." },
+    text: "Back to the two questions. How is the heat picked up — air, or liquid? How is it pushed out of the building — a refrigeration machine, evaporating water, outside air, or a dry radiator? Every real data center is one answer to each." },
   { cam: { pos: [104, 2.8, -4.5], look: [116, 2.6, 2], dur: 4.5 },
-    text: "The direction of the industry is visible in this hall: AI densities force liquid to the chip, warm loops make dry rejection affordable, and new hyperscale designs increasingly close the water loop entirely — evaporating nothing, discharging episodically." },
+    text: "The water question lives almost entirely in that second answer. Evaporating water saves electricity and spends water; a dry radiator saves water and spends electricity. How warm the chips will run decides how hard that bites." },
   { cam: { pos: [110, 3.0, -4], look: [126, 2.4, 2], dur: 5 },
-    text: "The rail ends here. Free-range mode opens every bay: fly close, click anything labeled, isolate the heat or water layers, switch machines to x-ray. The Water Room stays open at the end of the spine." }
+    text: "Where it is heading: AI density is forcing liquid onto the chip, warm loops make dry radiators affordable, and new builds increasingly seal the water loop entirely. Free-range mode opens every bay — click anything labeled." }
 ]}
 
 ],
+
 
 sources: {
 S1:  { label: "Uptime Institute Journal — data center water consumption: evaporation, blowdown, drift, gallons per MW", url: "https://journal.uptimeinstitute.com/dont-ignore-water-consumption/" },
@@ -3183,53 +3145,53 @@ S54: { label: "Munters — Oasis indirect air-to-air heat exchanger (fixed core,
 
 waterTable: [
 { system: "Open cooling tower",
-  waterIn: "Continuous: evaporation ≈1% of circulating flow (≈8.6 GPM per MW); WUE 0.09–1.80 L/kWh optimized hyperscale, 1.99–4.00 L/kWh traditional",
-  discharge: "Blowdown ≈0.5% of flow (≈4.3 GPM per MW); 1,000-ton tower at 3 cycles ≈ 20,000–40,000 gal/day",
+  waterIn: "Constant. About one drop in a hundred evaporates on every lap, and that evaporation is the cooling.",
+  discharge: "Blowdown — a continuous bleed that keeps minerals from building up. A big tower drains tens of thousands of gallons a day.",
   frequency: "Continuous while operating",
-  chemicals: "Concentrated minerals (TDS ~1,000–3,000+ mg/L (est.)) + chlorine ~0.5–1 ppm, phosphonates 1.5–5 ppm, azoles 1–5 ppm, orthophosphate 5–15 mg/L",
-  pfas: "None identified in standard treatment chemistry; discharge not routinely monitored for PFAS" },
+  chemicals: "Concentrated local minerals, plus disinfectant and scale and corrosion inhibitors",
+  pfas: "None in standard tower chemistry; nobody is required to test the discharge for it" },
 
 { system: "Closed-circuit fluid cooler",
-  waterIn: "Continuous in wet operation: captive spray water evaporates over the sealed coil",
-  discharge: "Spray-sump blowdown — same in kind as a tower, smaller volume",
+  waterIn: "Constant when running wet: a captive supply of water is sprayed over a sealed coil and evaporates",
+  discharge: "A bleed off the spray sump — the same thing as a tower's, in smaller volume",
   frequency: "Continuous in wet mode",
-  chemicals: "Sump runs a reduced tower program: biocide, scale and corrosion inhibitors",
+  chemicals: "A smaller version of the tower program: disinfectant, scale and corrosion inhibitors",
   pfas: "None identified" },
 
 { system: "Adiabatic cooler",
-  waterIn: "Small and seasonal: pad wetting in hot hours only; up to ~95% less than evaporative",
-  discharge: "Little or none; some designs periodically dump pad-sump water for hygiene (est.)",
+  waterIn: "Small and seasonal: the pads are wetted on hot days only, using up to about 95 percent less water than a tower",
+  discharge: "Little or none; some designs flush the pad water occasionally for hygiene",
   frequency: "Hot hours only; discharge rare to none",
-  chemicals: "Usually none recirculating — most designs run pad water once-through",
+  chemicals: "Usually nothing — most designs run the pad water once through rather than recirculating it",
   pfas: "None" },
 
 { system: "Dry cooler",
   waterIn: "None",
   discharge: "None",
-  frequency: "n/a — 10–35% more peak electricity is the cost instead",
-  chemicals: "Sealed water/glycol loop only; nothing consumed or discharged",
-  pfas: "None in the loop; chiller/CRAC refrigerant leaks are an air pathway — HFOs degrade to TFA, PFAS under OECD but not US EPA definitions" },
+  frequency: "Not applicable — the cost is 10 to 35 percent more electricity on hot afternoons",
+  chemicals: "A sealed water or antifreeze loop; nothing used up and nothing drained",
+  pfas: "None in the loop. Refrigerant leaks from sealed equipment are an air pathway, not a water one" },
 
 { system: "Chilled water + tower",
-  waterIn: "Tower side continuous: ~6.75 million gal/yr per MW for a conventional plant",
-  discharge: "Continuous tower blowdown + rare chilled-loop drain events",
-  frequency: "Blowdown continuous; sealed CHW loop episodic (commissioning, repairs)",
-  chemicals: "Open side: full tower program. Sealed side: nitrite 600–1,200 ppm or molybdate 200–300 ppm + azoles",
-  pfas: "None identified in either loop's chemistry" },
+  waterIn: "The tower side runs constantly; a modest plant goes through millions of gallons a year",
+  discharge: "Continuous tower blowdown, plus rare drains of the sealed indoor loop",
+  frequency: "Blowdown continuous; the sealed loop only at commissioning and repairs",
+  chemicals: "Open side: the full tower program. Sealed side: strong rust and copper inhibitors that stay put",
+  pfas: "None identified in either loop" },
 
 { system: "Closed-loop direct-to-chip",
-  waterIn: "Filled once: ~21–31 gal per 1 MW CDU loop; facility loops thousands of gal (est.); makeup <5%/yr if tight",
-  discharge: "Episodic only: commissioning flush (≈1–3 loop volumes (est.)), partial repair drains, leak events",
-  frequency: "Years apart; no authoritative interval statistic exists",
-  chemicals: "PG25 (~25% propylene glycol, tolyltriazole-inhibited) or treated DI water; nitrite/molybdate in facility loops; sampled against sewer limits before any drain",
-  pfas: "None — formulations are non-fluorinated" },
+  waterIn: "Filled once. A cabinet serving eight racks holds a few dozen gallons, and a tight loop loses under 5 percent a year",
+  discharge: "In events only: one flush when the system is commissioned, then partial drains for repairs or leaks",
+  frequency: "Years apart; no reliable industry figure exists for the interval",
+  chemicals: "Treated water, or water with propylene glycol and rust inhibitors; tested against sewer limits before any drain",
+  pfas: "None — these mixtures are not fluorinated" },
 
 { system: "Immersion (1P / 2P)",
-  waterIn: "~None — tanks hold oil or fluorocarbon, not water",
-  discharge: "No aqueous discharge; 1P oil to a recycler after 10+ yr; 2P losses are vapor at lid openings",
-  frequency: "n/a",
-  chemicals: "1P: hydrocarbon/ester dielectric oil. 2P: fluoroketone/PFC fluid",
-  pfas: "2P fluid IS PFAS — primary supply ended with 3M's exit (end 2025); successor fluids face the same restrictions; well under 1% of data center cooling. 1P oils are non-fluorinated" }
+  waterIn: "Essentially none — the tanks hold oil or a fluorinated fluid, not water",
+  discharge: "Nothing watery. Single-phase oil goes to a recycler after ten years or more; two-phase losses are vapor at lid openings",
+  frequency: "Not applicable",
+  chemicals: "Single-phase: a hydrocarbon or ester oil. Two-phase: a fluorinated fluid",
+  pfas: "The two-phase fluid IS PFAS; its main supplier stopped making it at the end of 2025, and it is well under 1 percent of data center cooling. Single-phase oils are not fluorinated" }
 ]
 
 };
