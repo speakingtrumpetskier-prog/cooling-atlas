@@ -17889,6 +17889,10 @@ const FINALE = (function () {
   let popCaptured = false;
   let fr = 0;                      // frame counter — spreads quaternion renormalisation
 
+  // free look — drag offsets riding on top of the scripted camera ---------------
+  let offYaw = 0, offPitch = 0;
+  let dragOn = false, dragX = 0, dragY = 0, dragDist = 0;
+
   let ghosts = [];                 // flow Points / helper Lines: linger, then vanish
   let decals = [];                 // multiply contact decals: never fly
   let decalRel = null;
@@ -19111,6 +19115,15 @@ const FINALE = (function () {
     cam.position.copy(_camPos);
     cam.lookAt(_camTgt);
 
+    // free look rides on top of the scripted framing, eased away as the camera
+    // settles so the paper still lands in frame
+    const look = 1 - settle;
+    if (look > 0 && (offYaw !== 0 || offPitch !== 0)) {
+      _q.setFromAxisAngle(_up, offYaw * look);
+      cam.quaternion.premultiply(_q);        // yaw about world up
+      cam.rotateX(offPitch * look);          // pitch about the yawed screen-right
+    }
+
     const wide = smootherstep(clamp01((t - T.loosen) / (T.popBeat - T.loosen)));
     const fov = lerp(lerp(sFov, FOV_WIDE, wide), sFov, settle);
     if (Math.abs(cam.fov - fov) > 0.01) {
@@ -19131,7 +19144,23 @@ const FINALE = (function () {
   function onPointer(e) {
     if (!active) return;
     e.stopPropagation();                     // the exhibit's click-to-inspect stays out
-    if (t >= T.noteIn) end();
+    dragOn = true; dragX = e.clientX; dragY = e.clientY; dragDist = 0;
+  }
+  function onPointerMove(e) {
+    if (!active || !dragOn) return;
+    const dx = e.clientX - dragX, dy = e.clientY - dragY;
+    dragX = e.clientX; dragY = e.clientY;
+    dragDist += Math.abs(dx) + Math.abs(dy);
+    if (t < T.driftDur) return;              // the opening arc keeps its framing
+    // same sense and rate as free-range drag-look (explore.js)
+    offYaw -= dx * 0.0032;
+    offPitch = Math.max(-1.2, Math.min(1.2, offPitch - dy * 0.0032));
+  }
+  function onPointerUp() {
+    if (!active) return;
+    const wasClick = dragDist < 6;
+    dragOn = false;
+    if (wasClick && t >= T.noteIn) end();    // a clean click on the note still exits
   }
 
   function start() {
@@ -19173,6 +19202,7 @@ const FINALE = (function () {
       capture();
 
       t = 0; ta = 0; psi = 0;
+      offYaw = 0; offPitch = 0; dragOn = false;
       stormDone = false;
       popCaptured = false;
       flickDip = 0;
@@ -19190,6 +19220,8 @@ const FINALE = (function () {
       installAudioHijack();
       window.addEventListener('keydown', onKey, true);
       window.addEventListener('pointerdown', onPointer, true);
+      window.addEventListener('pointermove', onPointerMove, true);
+      window.addEventListener('pointerup', onPointerUp, true);
 
       active = true;
       return true;
@@ -19206,6 +19238,8 @@ const FINALE = (function () {
     phase = 'idle';
     try { window.removeEventListener('keydown', onKey, true); } catch (e) {}
     try { window.removeEventListener('pointerdown', onPointer, true); } catch (e) {}
+    try { window.removeEventListener('pointermove', onPointerMove, true); } catch (e) {}
+    try { window.removeEventListener('pointerup', onPointerUp, true); } catch (e) {}
 
     removeAudioHijack();
     audioStop();
