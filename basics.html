@@ -2352,10 +2352,10 @@ parts: {
 
 "chilled-water/cooling-tower": {
   name: "Cooling tower",
-  what: "The tower cools water by letting a little of it evaporate — the same reason sweat cools you. Warm water is spread over plastic sheets, a fan pulls air through, and roughly one drop in a hundred turns to vapor and carries the heat off into the sky.",
+  what: "The tower cools water by letting a little of it evaporate — the same reason sweat cools you. The same water circulates continuously: warm water is spread over plastic sheets, a fan pulls air through, and on each pass roughly one drop in a hundred turns to vapor and carries the heat off. The other ninety-nine land in the basin cooled and go around again.",
   moves: "Fan, falling sheets of water, ripple in the basin, a visible plume on cold days.",
-  numbers: "A one-megawatt water-cooled plant — a modest data hall — goes through something like 7 million gallons a year.",
-  water: "Only pure water evaporates, so the minerals it leaves behind get more concentrated every lap. The tower therefore needs fresh water coming in constantly, and has to drain concentrated water away just as constantly. All of this design's water use and water discharge happens here.",
+  numbers: "A one-megawatt water-cooled plant — a modest data hall — evaporates something like 7 million gallons a year.",
+  water: "Evaporation carries off pure water only, so the minerals dissolved in it stay behind and the circulating loop slowly turns harder, like a pot boiling down. To keep that in bounds the tower drains a small side stream continuously — far less than it evaporates — and replaces everything lost with fresh makeup. All of this design's water use and discharge happens here.",
   cite: ["S1", "S13"]
 },
 
@@ -2403,7 +2403,7 @@ parts: {
 
 "chilled-water/blowdown-line": {
   name: "Blowdown line",
-  what: "Blowdown is the bleed-off — water the tower drains on purpose so the minerals left behind by evaporation do not build up and coat the pipes with scale. It runs continuously. This is the liquid that actually leaves the site.",
+  what: "Blowdown is the bleed-off — a small side stream the tower drains on purpose so the minerals left behind by evaporation do not build up and coat the pipes with scale. It runs continuously, at roughly half the rate water is evaporating, so most of what the tower consumes still leaves as vapor rather than down this pipe. It is the liquid that actually leaves the site.",
   numbers: "A big tower drains tens of thousands of gallons a day, every day it runs.",
   water: "It carries the concentrated minerals and what is left of the treatment chemicals. It goes to the sanitary sewer under a local permit, to a creek or river under a discharge permit, or to on-site treatment for reuse.",
   cite: ["S1", "S44", "S40"]
@@ -2499,7 +2499,7 @@ parts: {
 
 "evap-adiabatic/open-tower": {
   name: "Open cooling tower",
-  what: "The first of the four. The working water itself is sprayed over plastic sheets and touches the air directly. About one drop in a hundred evaporates, and that is what does the cooling; the rest falls back into the basin cooler and a little more mineral-rich. The water doing the cooling is the water being used up.",
+  what: "The first of the four. The working water itself is sprayed over plastic sheets and touches the air directly, and the same water recirculates all day. On each pass about one drop in a hundred evaporates, and that is what does the cooling; the other ninety-nine fall back into the basin cooled, and a little more mineral-rich, ready to go around again. The water doing the cooling is the water being used up.",
   moves: "Falling water, fan, plume.",
   water: "Uses water continuously while running, and drains concentrated water continuously. Of the water it consumes, roughly three-quarters leaves as vapor and the remaining quarter or so goes down the drain as liquid.",
   cite: ["S1", "S13", "S33"]
@@ -2541,7 +2541,7 @@ parts: {
 
 "evap-adiabatic/blowdown-valve": {
   name: "Blowdown valve",
-  what: "The drain valve on the open cooling tower. It bleeds water off continuously, in step with how much is evaporating, so the minerals left behind never build up to the point where they start coating the pipes with scale.",
+  what: "The drain valve on the open cooling tower. It bleeds off a small side stream continuously — roughly half the rate at which water is evaporating — so the minerals left behind never concentrate to the point of coating the pipes with scale. It is a trickle beside the flow going round the loop.",
   moves: "The valve modulates; flow down the drain rises and falls with the load.",
   water: "When someone asks where the water goes, this valve is the physical answer: it is the tower loop's continuous liquid discharge point.",
   cite: ["S33", "S44"]
@@ -2952,7 +2952,7 @@ chapters: [
 
 { id: "ch0", title: "The heat problem", bay: null, steps: [
   { cam: { pos: [-29, 2.9, -2.4], look: [-14, 2.5, 6.5], dur: 5 },
-    text: "Computers turn electricity into heat. A data center is a building full of computers, so it has to move an enormous amount of heat outdoors, all day, every day. Each bay in this hall shows one way of doing that." },
+    text: "Computers turn electricity into heat. A data center is a building full of computers, so it has to move an enormous amount of heat outdoors, all day, every day. Each bay shows one way of doing that. Every machine here runs somewhere today; each bay says where." },
   { cam: { pos: [-23, 2.7, -2.2], look: [-8, 2.5, 7], dur: 4 },
     text: "Every system here answers two questions. One: how do you pick the heat up off the chips — with air, or with liquid? Two: how do you push it out of the building — with a refrigeration machine, evaporating water, outside air, or a plain radiator?", layer: "HEAT" },
   { cam: { pos: [-16, 3.0, -5], look: [4, 2.6, 6], dur: 4.5 },
@@ -2961,9 +2961,9 @@ chapters: [
 
 { id: "ch1", title: "Air-cooled DX (CRAC)", bay: 0, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 1 is air cooling, with the air conditioner built right into the room — one room-sized refrigerator per hall, self-contained and simple. It was plenty when halls were small. Picking the heat up is easy; getting it outdoors is not." },
+    text: "Bay 1 is air cooling, with the air conditioner built right into the room — one room-sized refrigerator per hall. It is still the default for small server rooms, edge sites, and telecom closets, though nobody builds a large data center this way now." },
   { pov: "rack-aisle", dur: 4, layer: "AIR",
-    text: "The easy part first. Cold air rises out of holes in the floor tiles, gets pulled through the servers, and comes out the back much hotter. Doors and panels pen that hot air in so it cannot drift back around to the fronts." },
+    text: "Start with the easy part: picking the heat up. Cold air rises out of holes in the floor tiles, gets pulled through the servers, and comes out the back much hotter. Doors and panels pen it in so it cannot drift back around to the fronts." },
   { pov: "crac-internals", dur: 4.5, act: "xray:1",
     text: "Now the hard part. Heat only moves from hot to cold, and a summer afternoon is hotter than the room — so a machine has to force it. That machine is refrigeration, and your kitchen fridge and a window air conditioner are this exact machine." },
   { pov: "wall-crossing", dur: 3.5, act: "xray:0",
@@ -2974,22 +2974,22 @@ chapters: [
 
 { id: "ch2", title: "Chilled water plant", bay: 1, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 2 is a chilled water plant: instead of an air conditioner in every hall, one big central chiller, which at building scale is cheaper. Room air warms a coil, a chilled water loop takes that heat to the chiller, and a second loop carries it to the tower." },
+    text: "Bay 2 is a chilled water plant: one big central chiller instead of one per hall, which is cheaper at scale. It has been the workhorse of large-scale computing for twenty years, and Google's fleet runs it today — though new AI builds increasingly skip it." },
   { pov: "crah-internals", dur: 4.5, layer: "AIR", act: "xray:1",
-    text: "The first handoff. The box in the room looks the same as bay 1 but holds no refrigeration — just fans, filters, and a coil of cold water. Hot air crosses the coil and the water warms. That warm water heads for the chiller." },
+    text: "The chain: room air warms this coil, a chilled water loop carries that heat to the chiller, the chiller lifts it into a second loop, and that loop takes it out to the tower. This box holds no refrigeration — just fans, filters, and cold water." },
   { pov: "chiller", dur: 4.5,
     text: "The chiller is the same machine as bay 1, scaled up and moved out of the room. It sits between the two loops: refrigerant evaporates to pull heat out of the cooler loop, then the compressor squeezes it hot enough to hand that heat to the warmer one." },
   { pov: "wall-crossing", dur: 3.5, act: "xray:0", layer: "WATER",
     text: "The two loops differ in one way that matters. The indoor one is sealed — filled once and kept. The outdoor one is open: it meets the air at the tower, and it loses water there continuously, for as long as the plant runs." },
   { pov: "tower", dur: 4.5,
-    text: "The tower is where the heat finally leaves, as vapor. Warm water spreads over plastic sheets and falls through moving air; about one drop in a hundred evaporates, and that is the cooling. A modest plant goes through millions of gallons a year." },
+    text: "The tower is where the heat finally leaves, as vapor. The same water circulates round and round; on each pass about one drop in a hundred evaporates, and the rest falls back into the basin cooled. A modest plant still evaporates millions of gallons a year." },
   { pov: "tower-water", dur: 5, layer: "WATER", act: "rate:blowdown:2.5",
-    text: "Only pure water evaporates, so the minerals stay behind and grow more concentrated every lap. The tower has to bleed some water away constantly to keep up. That bleed — blowdown — goes to a sewer or a creek, under permit." }
+    text: "Evaporation takes only pure water, so minerals stay behind and the loop slowly turns harder, like a pot boiling down. To check that, the tower drains a small stream continuously — the blowdown — and tops up with fresh. It goes to sewer or creek, under permit." }
 ]},
 
 { id: "ch3", title: "Free cooling", bay: 2, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 3 is free cooling. Running that compressor is the expensive part, and outdoor air costs nothing — so this bay skips the chiller entirely whenever the air outside is cold enough to do the job, which in Minnesota is most of the year." },
+    text: "Bay 3 is free cooling: skip the chiller whenever the air outside is cold enough, which in Minnesota is most of the year. Running that compressor is the expensive part, and outdoor air costs nothing. Standard practice today — most modern halls blend it in." },
   { pov: "intake", dur: 4, layer: "AIR",
     text: "Outdoor air comes in through louvers and is blended with warm return air to land on the right supply temperature, then crosses a deep wall of filters. The dampers redo that arithmetic continuously as the evening cools." },
   { pov: "fan-wall", dur: 3.5,
@@ -3002,22 +3002,22 @@ chapters: [
 
 { id: "ch4", title: "The four outdoor boxes", bay: 3, steps: [
   { pov: "overview", dur: 4,
-    text: "You have been seeing boxes out on the yard since bay 1 — a condenser, a cooling tower. Every system needs one, and there are only four kinds. Bay 4 lines them up, because choosing between them is choosing between water and electricity." },
+    text: "You have been seeing boxes out on the yard since bay 1 — a condenser, a cooling tower. Every system needs one, and there are only four kinds. All four are live choices today, and choosing among them means choosing between water and electricity." },
   { pov: "open-tower", dur: 4.5, layer: "WATER",
-    text: "The first two are what people mean by evaporative cooling: both work by evaporating water. In the open cooling tower, the water being cooled is itself sprayed into the air — about one drop in a hundred evaporates, and what stays behind must be bled off." },
+    text: "In the open cooling tower the water being cooled is sprayed into the air, and the same water goes round and round. Each pass, about one drop in a hundred evaporates and takes the heat with it. The other ninety-nine fall back cooled and go around again." },
   { pov: "closed-circuit", dur: 4.5,
-    text: "The closed-circuit cooler evaporates water too, but keeps the working water sealed inside a coil while a separate spray does the evaporating on the outside. Closed describes the working water, not the water bill — this one still drains." },
+    text: "The closed-circuit cooler evaporates water too — these first two are what people mean by evaporative cooling. It keeps the working water sealed in a coil while a separate spray evaporates outside it. Closed describes the working water, not the water bill." },
   { pov: "adiabatic", dur: 4.5, act: "rate:pads:1",
     text: "The adiabatic cooler wets only the incoming air. Water trickles down pads and chills that air before it reaches a sealed coil, exactly like a swamp cooler. It runs wet only on hot days — up to 95 percent less water than an open cooling tower." },
   { pov: "water-lines", dur: 4.5, layer: "WATER",
-    text: "The dry cooler is the fourth: a big radiator, nothing wet at all. That is the ladder, left to right — less and less water touches anything. Watch the drain lines: constant, constant, barely, none." },
+    text: "The dry cooler is the fourth: a big radiator, nothing wet at all. That is the ladder, left to right — less and less water touches anything. Watch the drain lines: constant, constant, barely, none. New builds increasingly pick from this end." },
   { pov: "overview", dur: 4,
-    text: "The trade is plain: the wet machines spend water to save electricity, the dry cooler spends electricity to save water — though electricity is not free of water either, since power plants use cooling water too. Next door, liquid comes all the way to the chip." }
+    text: "So the choice is: pay in water, or pay in electricity — and electricity is not free of water either, since power plants use cooling water too. For twenty years that was the whole choice. The AI era changes what happens inside instead." }
 ]},
 
 { id: "ch5", title: "Direct-to-chip liquid", bay: 4, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 5 is direct-to-chip cooling: instead of blowing air past the processors, thin pipes carry liquid right onto each one. The newest AI chips run too hot for air to keep up. Everything downstream stays familiar — loops, a handoff, an outdoor box." },
+    text: "Bay 5 is direct-to-chip: liquid piped right onto each processor. Two reasons. Necessity — the densest AI chips run too hot for air to keep up. Opportunity — that liquid can run warm, and warm liquid is how a site escapes the trade bay 4 just posed." },
   { pov: "rack", dur: 4.5, act: "explode:0.6",
     text: "At the back of the rack, two vertical pipes with a connection for every tray. Most of the rack's heat leaves in the coolant, and a fraction still leaves by air. Any one tray can be pulled out without stopping its neighbors." },
   { pov: "cold-plate", dur: 4.5, act: "explode:0",
@@ -3027,12 +3027,12 @@ chapters: [
   { pov: "wall-crossing", dur: 3.5, act: "xray:0",
     text: "The wall crossing is two sealed loops handing off heat. They hold surprisingly little water — a few dozen gallons at the cabinet — filled at commissioning and kept. Nothing runs to a drain here on an ordinary day." },
   { pov: "dry-cooler", dur: 4.5,
-    text: "Warm coolant unlocks the yard: at these temperatures outdoor air can take the heat almost year-round in a cold climate, so the outdoor box can be the dry cooler — not a drop of water. Next door, the same liquid idea goes all the way: whole servers submerged." }
+    text: "And there is the escape. At these temperatures outdoor air takes the heat almost year-round in a cold climate, so the outdoor box can be the dry cooler: no evaporated water, and much less refrigeration work — though fans and pumps still cost something." }
 ]},
 
 { id: "ch6", title: "Immersion", bay: 5, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 6 is immersion cooling. The last bay put liquid onto each chip; this one lowers the whole computer into it. Two versions — an open bath of oil that gets pumped around, and a sealed tank whose fluid boils right on the chips." },
+    text: "Bay 6 takes that logic to its limit: submerge the whole computer, no server fans at all, every watt caught by liquid. Two versions — an oil bath that gets pumped around, real but niche today, and a sealed tank whose fluid boils on the chips, which is on hold." },
   { pov: "tub", dur: 4.5,
     text: "Single-phase: servers stand upright in a clear oil that electricity will not pass through, and that never boils. Warm oil spills over a lip at the rim, gets pumped through a heat exchanger, and comes back cooler." },
   { pov: "lifted-blade", dur: 4,
@@ -3047,7 +3047,7 @@ chapters: [
 
 { id: "ch7", title: "Rear-door heat exchangers", bay: 6, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 7 is the rear-door heat exchanger, a retrofit. An old air-cooled room runs out of airflow long before it runs out of electrical capacity, and rebuilding it is expensive — so each rack's back door becomes a water-filled radiator." },
+    text: "Bay 7 is the rear-door heat exchanger, and it is a common upgrade right now. An old air-cooled room runs out of airflow long before it runs out of electrical capacity, and rebuilding is expensive — so each rack's back door becomes a water-filled radiator." },
   { pov: "door", dur: 4.5,
     text: "The passive door is a car radiator standing on end. The servers' own fans push their exhaust through it, so the door draws no power of its own, and the air rejoins the room close to the temperature it started at." },
   { pov: "active-door", dur: 4,
@@ -3062,7 +3062,7 @@ chapters: [
   { pov: "overview", dur: 4,
     text: "The Water Room scores bay 4's four outdoor boxes, plus the sealed loops, on the water question. Everything measured in this room is water used at the site. Five columns, one shared drain, two chemistry benches, one display case." },
   { pov: "columns", dur: 5,
-    text: "The columns run live. Open cooling tower: constant fill, constant drain. Closed-circuit cooler: the same, smaller. Adiabatic cooler: a sip on hot days. Sealed loop: one fill, then a flat line for years. Immersion: no water in the tank itself — its outside loop is sealed, like the one before it." },
+    text: "The columns run live. Open cooling tower: constant fill, constant drain. Closed-circuit cooler: the same, smaller. Adiabatic cooler: a sip on hot days. Sealed loop: one fill, then a flat line. Immersion: no water in the tank, and a sealed loop outside it." },
   { pov: "tower-vs-closed", dur: 5, layer: "WATER",
     text: "Here is the whole contrast. A big open cooling tower drains tens of thousands of gallons a day, every day it runs. A sealed loop holds a fixed amount of water, lets it go once at startup, and after that only when something is repaired." },
   { pov: "chem-bench", dur: 5, layer: "CHEM",

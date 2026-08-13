@@ -2366,10 +2366,10 @@ parts: {
 
 "chilled-water/cooling-tower": {
   name: "Cooling tower",
-  what: "Open evaporative heat rejection: the condenser water itself is distributed over fill and falls in direct contact with fan-drawn air. About 1% of the circulating flow evaporates — that evaporation is where the heat leaves.",
+  what: "Open evaporative heat rejection: the condenser water itself is distributed over fill and falls in direct contact with fan-drawn air. The loop recirculates continuously — on each pass about 1% of the circulating flow evaporates, and the remaining 99% collects in the basin cooled and returns to the condenser. That 1% evaporation is where the heat leaves.",
   moves: "Fan, falling water sheets, basin ripple, vapor plume in cool weather.",
   numbers: "Evaporation ≈1% of flow (≈8.6 GPM continuous per MW of load) · a conventional 1 MW water-cooled plant consumes ~6.75 million gallons/year",
-  water: "The loop is open to atmosphere, so minerals concentrate as pure water evaporates. Holding chemistry in range requires continuous makeup and a continuous blowdown bleed. All of this architecture's routine water consumption and discharge occurs at the tower.",
+  water: "The loop is open to atmosphere, and evaporation removes pure water only, so the minerals left behind concentrate lap after lap. Holding chemistry in range requires a small continuous blowdown bleed — roughly 0.5% of flow against 1% evaporating, so about half the evaporation rate — plus continuous makeup to replace both. All of this architecture's routine water consumption and discharge occurs at the tower.",
   cite: ["S1", "S13"]
 },
 
@@ -2420,7 +2420,7 @@ parts: {
 
 "chilled-water/blowdown-line": {
   name: "Blowdown line",
-  what: "A deliberate continuous bleed off the tower loop, discharged to hold dissolved solids at the target concentration. This is the liquid that actually leaves the site.",
+  what: "A deliberate, small continuous bleed off the recirculating tower loop — about 0.5% of circulating flow, roughly half the evaporation rate — discharged to hold dissolved solids at the target concentration. Most of what the tower consumes still leaves as vapor; this is the fraction that leaves as liquid, and the liquid that actually leaves the site.",
   numbers: "≈0.5% of circulating flow (≈4.3 GPM per MW) · a 1,000-ton tower at 3 cycles bleeds roughly 20,000–40,000 gallons/day",
   water: "Blowdown carries the loop's concentrated minerals and treatment-chemical residues. It goes to sanitary sewer under an industrial pretreatment program, to surface water under an NPDES permit, or to on-site treatment and reuse. Real data center permits run to hundreds of thousands of gallons/day.",
   cite: ["S1", "S44", "S40"]
@@ -2519,7 +2519,7 @@ parts: {
 
 "evap-adiabatic/open-tower": {
   name: "Open cooling tower",
-  what: "Evaporative, open circuit: the process water itself is sprayed over fill and touches air directly. Roughly 1% of the flow evaporates; the rest returns cooler, more concentrated. The water doing the cooling is the water being consumed.",
+  what: "Evaporative, open circuit: the process water itself is sprayed over fill and touches air directly, recirculating all the while. On each pass roughly 1% of the flow evaporates; the other 99% returns to the basin cooler and marginally more concentrated, then goes round again. The water doing the cooling is the water being consumed.",
   moves: "Falling water, fan, plume.",
   numbers: "Evaporation ≈1% of circulating flow · blowdown ≈0.5% · drift ≤0.005%",
   water: "Consumes water continuously in operation and produces continuous liquid blowdown. Of the water consumed, roughly 70–80% leaves as vapor and 20–30% as blowdown at typical cycles (estimate derived from the blowdown relationship).",
@@ -2563,7 +2563,7 @@ parts: {
 
 "evap-adiabatic/blowdown-valve": {
   name: "Blowdown valve",
-  what: "The modulating bleed valve on the open tower. It discharges continuously in proportion to evaporation, holding cycles of concentration at the setpoint.",
+  what: "The modulating bleed valve on the open tower. It discharges a small side stream continuously, in proportion to evaporation and at roughly half its rate, holding cycles of concentration at the setpoint. A trickle beside the flow going round the loop.",
   moves: "Valve modulates; flow to the drain line varies with load.",
   numbers: "Blowdown = evaporation / (cycles − 1) · most towers run 2–4 cycles",
   water: "This valve is the physical answer to where does the water go: it is the tower loop's continuous liquid discharge point.",
@@ -2993,14 +2993,14 @@ chapters: [
   { cam: { pos: [-29, 2.9, -2.4], look: [-14, 2.5, 6.5], dur: 5 },
     text: "Every watt a server draws becomes heat, at the chip, immediately. Removing that heat requires major infrastructure and a significant share of a site's energy. Every system here is a chain — capture at the rack, transport through the building, rejection outdoors — and the bays vary different links; pickup methods and outdoor units combine rather than compete. Each bay starts from the same rack and follows the heat out of the building." },
   { cam: { pos: [-23, 2.7, -2.2], look: [-8, 2.5, 7], dur: 4 },
-    text: "For two decades a rack drew a few kilowatts and air handled it. Current AI racks draw 120–132 kW each — a GB200 NVL72 cannot be air-cooled at all. That climb from roughly 5 to over 130 kW per rack forced every architecture in this hall.", layer: "HEAT" },
+    text: "For two decades a rack drew a few kilowatts and air handled it. Current AI racks draw 120–132 kW each — a GB200 NVL72 cannot be air-cooled at all. That climb from roughly 5 to over 130 kW per rack forced every architecture in this hall. All of them remain in service somewhere; each bay states where and at what scale.", layer: "HEAT" },
   { cam: { pos: [-16, 3.0, -5], look: [4, 2.6, 6], dur: 4.5 },
     text: "Flows are painted by kind: amber heat, ice-blue and coral air, cyan chilled water, teal tower water, slate raw water, violet refrigerant, chartreuse chip coolant, straw dielectric oil. The glass wall at the back of every bay is the building envelope — watch for the exact point where the heat crosses it.", layer: "ALL" }
 ]},
 
 { id: "ch1", title: "Air-cooled DX (CRAC)", bay: 0, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 1: the legacy baseline. A raised-floor hall cooled by a floor-standing CRAC with its own complete refrigeration circuit. Heat leaves the room in refrigerant lines, crosses the wall, and exits through a fan-cooled condenser in the yard." },
+    text: "Bay 1: the baseline, and still current at small scale. A raised-floor hall cooled by a floor-standing CRAC carrying its own complete refrigeration circuit. This class remains in production — standard in server rooms, edge sites, and telecom spaces, though not in new large halls. Heat leaves in refrigerant lines to a yard condenser." },
   { pov: "rack-aisle", dur: 4, layer: "AIR",
     text: "Cold supply air rises from the perforated tiles, is pulled through the servers, and leaves 17–28 °C hotter into the contained hot aisle. The recommended inlet band is 18–27 °C; the ceiling return carries the exhaust back to the top of the CRAC." },
   { pov: "crac-internals", dur: 4.5, act: "xray:1",
@@ -3013,7 +3013,7 @@ chapters: [
 
 { id: "ch2", title: "Chilled water plant", bay: 1, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 2: the workhorse of large data centers. Refrigeration moves out of the hall into a central plant, and two water loops appear — a sealed chilled-water loop indoors, and an open condenser-water loop running to the tower outside." },
+    text: "Bay 2: the workhorse of large-scale computing for two decades and still today — Google's fleet runs chilled-water plants at roughly 1.09 PUE. Refrigeration moves to a central plant and two water loops appear: sealed chilled water indoors, open condenser water to the tower. New AI builds increasingly skip it." },
   { pov: "crah-internals", dur: 4.5, layer: "AIR", act: "xray:1",
     text: "The CRAH looks like a CRAC but holds no compressor — only a chilled-water coil, a modulating valve, filters, and fans. Hot return air crosses the coil and leaves at 18–27 °C; the water inside warms from roughly 7–15 °C toward 12–18 °C and carries the heat away." },
   { pov: "chiller", dur: 4.5,
@@ -3021,14 +3021,14 @@ chapters: [
   { pov: "wall-crossing", dur: 3.5, act: "xray:0", layer: "WATER",
     text: "The envelope crossing is plumbing: insulated condenser-water mains through sleeved penetrations. Indoors, a sealed loop that is filled once and kept. Outdoors, an open loop that is exposed to the atmosphere at the tower, where it loses water continuously." },
   { pov: "tower", dur: 4.5,
-    text: "The cooling tower is where the heat actually leaves — as vapor. Warm water spreads over PVC fill and falls through fan-drawn air; about 1% of the circulating flow evaporates. A conventional 1 MW water-cooled plant consumes about 6.75 million gallons per year." },
+    text: "The cooling tower is where the heat actually leaves — as vapor. Warm water spreads over PVC fill and falls through fan-drawn air. The loop recirculates: about 1% evaporates on each pass, the rest lands in the basin cooled and returns. A conventional 1 MW plant consumes about 6.75 million gallons per year." },
   { pov: "tower-water", dur: 5, layer: "WATER", act: "rate:blowdown:2.5",
-    text: "Only pure water evaporates, so minerals concentrate — and the loop bleeds continuously. Blowdown, about 0.5% of flow, leaves for a sanitary sewer under a pretreatment permit or surface water under an NPDES permit. Makeup replaces evaporation, blowdown, and drift." }
+    text: "Only pure water evaporates, so the minerals stay behind and the recirculating loop concentrates, like a pot boiling down. Holding that in range takes a small continuous bleed — blowdown, about 0.5% of flow, roughly half the evaporation rate — to a sanitary sewer or an NPDES outfall. Makeup replaces evaporation, blowdown, and drift." }
 ]},
 
 { id: "ch3", title: "Free cooling", bay: 2, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 3: free cooling. When outdoor air is colder than the exhaust — most hours in most cool climates — the atmosphere can do the work. Direct designs bring filtered outdoor air to the racks; indirect designs move only the heat across the wall." },
+    text: "Bay 3: free cooling, standard practice today — most modern facilities blend it with mechanical cooling. When outdoor air is colder than the exhaust, which is most hours in most cool climates, the atmosphere does the work. Direct designs bring filtered outdoor air to the racks; indirect designs move only the heat across the wall." },
   { pov: "intake", dur: 4, layer: "AIR",
     text: "Outside air enters the louvered wall and blends with return air in the mixing chamber to hit the supply setpoint; the mixed stream then passes the deep filter bank on its way to the fan wall. The dampers do the arithmetic continuously — more outdoor air as the evening cools, more recirculation when outside would overshoot." },
   { pov: "fan-wall", dur: 3.5,
@@ -3041,9 +3041,9 @@ chapters: [
 
 { id: "ch4", title: "The four outdoor units", bay: 3, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 4 lines up the four outdoor heat-rejection units: open tower, closed-circuit cooler, adiabatic cooler, dry cooler. All reject heat from a fluid loop to outdoor air; they differ in what gets wet, what is consumed, and what leaves as liquid. The first two are both called \"evaporative\" in common usage — the label obscures the difference that matters." },
+    text: "Bay 4: the four outdoor heat-rejection units — open tower, closed-circuit cooler, adiabatic cooler, dry cooler. All four are current choices; new builds increasingly favour the adiabatic and dry end. They differ in what gets wet and what leaves as liquid. The first two are both called \"evaporative\", which hides that difference." },
   { pov: "open-tower", dur: 4.5, layer: "WATER",
-    text: "Open tower: the process water itself is sprayed over fill in direct contact with air. About 1% of the flow evaporates — that evaporation is the cooling. The water that remains concentrates, so the basin bleeds blowdown continuously, about 0.5% of flow." },
+    text: "Open tower: the process water itself is sprayed over fill in direct contact with air. The loop recirculates — about 1% evaporates on each pass and carries the heat off; the other 99% falls into the basin cooled and goes round again. Evaporation leaves the minerals behind, so a small bleed — blowdown, ~0.5% of flow — runs continuously." },
   { pov: "closed-circuit", dur: 4.5,
     text: "Closed-circuit cooler: the process fluid is sealed inside a coil, but a captive spray loop rains over that coil and evaporates. The sump concentrates like a small tower — makeup, treatment, and blowdown included. Closed describes the fluid, not the water bill." },
   { pov: "adiabatic", dur: 4.5, act: "rate:pads:1",
@@ -3051,12 +3051,12 @@ chapters: [
   { pov: "water-lines", dur: 4.5, layer: "WATER",
     text: "Follow the drain lines. The open tower and the spray sump discharge continuously toward the treatment path. The adiabatic drain is mostly idle — some designs periodically dump pad water for hygiene. The dry cooler has no water line at all." },
   { pov: "overview", dur: 4,
-    text: "The trade is explicit: evaporative machines spend water to save electricity; dry machines spend 10–35% more peak electricity to spend none. The adiabatic middle wets only the hottest hours. Climate, water price, and grid decide which is right." }
+    text: "The trade is explicit: evaporative machines spend water to save electricity; dry machines spend 10–35% more peak electricity to spend none. For two decades that was the whole choice — air rooms inside, a tower or condenser outside. The AI era changes the inside instead." }
 ]},
 
 { id: "ch5", title: "Direct-to-chip liquid", bay: 4, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 5: direct-to-chip, the dominant architecture for AI racks. Coolant flows through cold plates on the processors themselves, through a CDU heat exchanger, and out to the yard. This rack draws 120–132 kW; it cannot be air-cooled." },
+    text: "Bay 5: direct-to-chip — today's frontier, and rapidly the default for AI racks. Two drivers. Necessity: this rack draws 120–132 kW and a GB200 NVL72 cannot be air-cooled at all. Opportunity: coolant at 30–45 °C is warm enough to reject to outdoor air year-round in cool climates — the escape from bay 4's trade." },
   { pov: "rack", dur: 4.5, act: "explode:0.6",
     text: "At the rack rear: two vertical manifolds with a dripless quick-disconnect drop per tray. Of 132 kW, 115 leave in the coolant and 17 still leave by air. Roughly 2 L/s of coolant serves the whole rack; a tray can be pulled without stopping its neighbors." },
   { pov: "cold-plate", dur: 4.5, act: "explode:0",
@@ -3071,7 +3071,7 @@ chapters: [
 
 { id: "ch6", title: "Immersion", bay: 5, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 6: servers under liquid. Two variants — an open oil bath cooled by pumped circulation, and a sealed tank whose fluorocarbon boils on the chips. Neither touches water in the white space; both hand heat to facility water and dry coolers." },
+    text: "Bay 6: the same liquid logic at its limit — submerge everything, no server fans, maximum capture per rack. Status splits by variant: single-phase, an open pumped oil bath, is real but niche in a segment under 2% of cooling; two-phase, whose fluorocarbon boils on the chips, is effectively paused — hardware proven, fluid supply gone." },
   { pov: "tub", dur: 4.5,
     text: "Single-phase: servers hang vertically in clear dielectric oil that never boils. Warm oil rises, spills over the weir, and is pumped through a heat exchanger. Capacity follows water temperature: 13 kW per rack at 32 °C, up to 368 kW at 13 °C." },
   { pov: "lifted-blade", dur: 4,
@@ -3086,7 +3086,7 @@ chapters: [
 
 { id: "ch7", title: "Rear-door heat exchangers", bay: 6, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 7: the retrofit. Replace a rack's rear door with a water coil and the exhaust is neutralized at the rack itself. Legacy halls hit their underfloor-airflow ceiling long before their power ceiling; doors add capacity without new floor units." },
+    text: "Bay 7: the retrofit, and a common one right now. Replace a rack's rear door with a water coil and the exhaust is neutralized at the rack itself. Legacy halls hit their underfloor-airflow ceiling long before their power ceiling; doors add capacity without new floor units." },
   { pov: "door", dur: 4.5,
     text: "The passive door is a radiator the size of the door itself. Server fans alone push exhaust through it — the door draws no power. It suits 20–30 kW racks; in the LBNL demonstration, doors on 22 °C water at ~9 GPM cooled exhaust air by 10–35 °F." },
   { pov: "active-door", dur: 4,
