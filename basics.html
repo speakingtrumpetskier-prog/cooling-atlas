@@ -17792,33 +17792,35 @@ const FINALE = (function () {
 
   // ======================================================================= clock
   // Seconds from start(). Tuned as one arc — the buildup is two thirds of it.
+  // Retimed 2026-08-13 (client: "start a bit faster") — the front compressed
+  // ~35%, the back half (pop, aftermath, paper) untouched in duration and feel.
   const T = {
-    driftDur:  9.4,    // 1 camera leaves the tour, arcs over the roof to the still point
-    capIn:     1.6,
-    capOut:   10.8,
+    driftDur:  6.0,    // 1 camera leaves the tour, arcs over the roof to the still point
+    capIn:     1.2,
+    capOut:    6.4,
 
-    flick:    11.0,    // 2 FIRST SIGNS — fixtures start to stutter
-    bankDark: 14.6,    //   the interior run drops out entirely for 1.5 s, and returns
+    flick:     6.8,    // 2 FIRST SIGNS — fixtures start to stutter
+    bankDark:  9.4,    //   the interior run drops out entirely for 1.5 s, and returns
 
-    few:      19.5,    // 3 A FEW THINGS — six small components let go, one at a time
-    fewStep:   1.25,
+    few:      12.0,    // 3 A FEW THINGS — six small components let go, one at a time
+    fewStep:   0.9,
 
-    loosen:   28.0,    // 4 IT SPREADS — bay by bay, outward from where you stand
+    loosen:   19.5,    // 4 IT SPREADS — bay by bay, outward from where you stand
     spread:   17.0,    //   rank spacing shrinks as it goes: 4.2 s, then 2.8, then 1.8
 
-    peel:     52.0,    // 5 the hall itself starts to lift, roof first — inside the
+    peel:     40.0,    // 5 the hall itself starts to lift, roof first — inside the
     peelDur:  20.0,    //   storm, not after it, so the whole campus is airborne at once
 
-    popBeat:  74.0,    // 6 THE POP — one held beat of absolute stillness
-    shove:    74.5,
+    popBeat:  62.0,    // 6 THE POP — one held beat of absolute stillness
+    shove:    62.5,
     shoveDur:  4.1,
 
-    after:    78.6,    // 7 THE AFTERMATH
+    after:    66.7,    // 7 THE AFTERMATH
     settleDur: 6.0,
 
-    paperIn:  86.0,    // 8 THE PAPER — 7.4 s of nothing first. Let it sit.
+    paperIn:  74.0,    // 8 THE PAPER — 7.3 s of nothing first. Let it sit.
     paperDur: 11.5,
-    noteIn:   99.8
+    noteIn:   87.5
   };
 
   // The still point: out on the snow past the fence, looking back down the length of
@@ -19250,7 +19252,7 @@ const FINALE = (function () {
     phase = t < T.flick ? 'question'
       : t < T.few ? 'first-signs'
       : t < T.loosen ? 'a-few-things'
-      : t < T.peel ? (t < 45 ? 'spreading' : 'storm')
+      : t < T.peel ? (t < T.loosen + T.spread ? 'spreading' : 'storm')
       : t < T.popBeat ? 'peel'
       : t < T.after ? 'pop'
       : t < T.paperIn ? 'aftermath' : 'paper';
