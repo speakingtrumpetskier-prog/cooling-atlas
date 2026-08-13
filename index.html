@@ -19698,11 +19698,11 @@ const UI = (() => {
         <div class="t-edition" id="editionLink"></div>
       </div>`;
     root.appendChild(t);
-    // edition cross-link (deep ↔ colleague)
+    // edition cross-link (plain-language ↔ detailed)
     const ed = (typeof CONTENT !== 'undefined' && CONTENT.edition === 'basics');
     document.getElementById('editionLink').innerHTML = ed
-      ? 'Colleague edition — plain language. <a href="./index.html">Switch to the detailed edition</a>'
-      : '<a href="./basics.html">Colleague edition</a> — same exhibit, plain-language captions';
+      ? 'Plain Language Edition. <a href="./index.html">Switch to the detailed edition</a>'
+      : '<a href="./basics.html">Plain Language Edition</a> — same exhibit, simpler captions';
 
     // ---- HUD ----
     const h = document.createElement('div'); h.id = 'hud';

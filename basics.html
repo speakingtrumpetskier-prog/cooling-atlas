@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Seven Ways a Data Center Sheds Heat — Colleague Edition</title><style>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Seven Ways a Data Center Sheds Heat — Plain Language Edition</title><style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { width: 100%; height: 100%; overflow: hidden; background: #0b0e13; }
 body { font-family: 'Segoe UI', system-ui, sans-serif; color: #dfe6ee; }
@@ -19660,11 +19660,11 @@ const UI = (() => {
         <div class="t-edition" id="editionLink"></div>
       </div>`;
     root.appendChild(t);
-    // edition cross-link (deep ↔ colleague)
+    // edition cross-link (plain-language ↔ detailed)
     const ed = (typeof CONTENT !== 'undefined' && CONTENT.edition === 'basics');
     document.getElementById('editionLink').innerHTML = ed
-      ? 'Colleague edition — plain language. <a href="./index.html">Switch to the detailed edition</a>'
-      : '<a href="./basics.html">Colleague edition</a> — same exhibit, plain-language captions';
+      ? 'Plain Language Edition. <a href="./index.html">Switch to the detailed edition</a>'
+      : '<a href="./basics.html">Plain Language Edition</a> — same exhibit, simpler captions';
 
     // ---- HUD ----
     const h = document.createElement('div'); h.id = 'hud';
