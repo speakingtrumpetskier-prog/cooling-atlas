@@ -15,7 +15,7 @@ back to applying one type's facts to another.
 
 | System | Water consumed | Liquid discharge | How often |
 |---|---|---|---|
-| **Open evaporative tower** | High — the working water itself evaporates | Blowdown, continuous | Every day, all day |
+| **Open evaporative tower** | High — the working water itself evaporates | Blowdown, typically continuous | Every day, all day |
 | **Closed-circuit (fluid) cooler** | Moderate — a separate spray circuit evaporates | Blowdown from the spray sump only | Continuous while spraying |
 | **Adiabatic** | Low — water wets pads to pre-cool *air* | Little or none | Pad flush only; seasonal |
 | **Dry cooler / air-cooled** | None | None | — |
@@ -159,7 +159,7 @@ spaces; diesel generator emissions are an air-quality question with no PFAS conn
 - **Discharge jurisdiction:** direct discharge to surface or ground water requires an MPCA
   permit. In the Twin Cities metro, discharges to the regional sanitary system go through
   Metropolitan Council Environmental Services industrial pretreatment permits.
-- **Every Minnesota hyperscale proposal that has disclosed a cooling design is closed-loop
+- **The Minnesota hyperscale proposals reviewed here that disclose a cooling design are closed-loop
   or dry.** Meta's Rosemount project was estimated by the city at roughly 100,000 gal/day
   at peak — an order of magnitude below an evaporative equivalent. In Farmington, the city
   agreement allows Tract up to **2.93 million gal/day** while the developer states an

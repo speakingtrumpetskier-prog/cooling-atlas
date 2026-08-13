@@ -2980,7 +2980,7 @@ parts: {
 
 "water-room/panel-minnesota": {
   name: "Panel: Minnesota",
-  what: "Minnesota's 2025 law (HF16, 1st Special Session) created a DNR preapplication evaluation for data centers anticipated to use more than 100 million gallons per year — about 274,000 gallons per day on average — with aquifer testing where the commissioner requires it. Any direct discharge to surface or ground water needs an MPCA permit; in the Twin Cities metro, discharges to the regional sanitary system go through Metropolitan Council Environmental Services industrial pretreatment permits. Every Minnesota hyperscale proposal that has disclosed a cooling design so far is closed-loop or dry: Meta's Rosemount project was estimated by the city at roughly 100,000 gallons per day at peak — an order of magnitude below an evaporative equivalent. In Farmington, the city agreement allows Tract up to 2.93 million gallons per day while the developer states an expected average near 137,000 gallons per day with non-evaporative cooling; the gap between permitted maximum and claimed average is the public controversy. Cold-climate economics point the same direction as these disclosures: in Minnesota the discharge story is mostly episodic closed-loop events plus domestic sewage, not continuous blowdown.",
+  what: "Minnesota's 2025 law (HF16, 1st Special Session) created a DNR preapplication evaluation for data centers anticipated to use more than 100 million gallons per year — about 274,000 gallons per day on average — with aquifer testing where the commissioner requires it. Any direct discharge to surface or ground water needs an MPCA permit; in the Twin Cities metro, discharges to the regional sanitary system go through Metropolitan Council Environmental Services industrial pretreatment permits. The Minnesota hyperscale proposals reviewed here that disclose a cooling design are closed-loop or dry: Meta's Rosemount project was estimated by the city at roughly 100,000 gallons per day at peak — an order of magnitude below an evaporative equivalent. In Farmington, the city agreement allows Tract up to 2.93 million gallons per day while the developer states an expected average near 137,000 gallons per day with non-evaporative cooling; the gap between permitted maximum and claimed average is the public controversy. Cold-climate economics point the same direction as these disclosures: in Minnesota the discharge story is mostly episodic closed-loop events plus domestic sewage, not continuous blowdown.",
   numbers: "HF16 threshold: >100 million gal/year triggers DNR preapplication review · Rosemount (Meta): ~100,000 gal/day peak, closed-loop/dry · Farmington (Tract): 2.93 M gal/day permitted max vs ~137,000 gal/day claimed average",
   cite: ["S49", "S41", "S50", "S51"]
 },
@@ -2991,7 +2991,7 @@ chapters: [
 
 { id: "ch0", title: "The heat problem", bay: null, steps: [
   { cam: { pos: [-29, 2.9, -2.4], look: [-14, 2.5, 6.5], dur: 5 },
-    text: "Every watt a server draws becomes heat, at the chip, immediately. Removing that heat requires major infrastructure and a significant share of a site's energy. Each bay in this hall starts from the same rack of servers and follows that heat all the way out of the building." },
+    text: "Every watt a server draws becomes heat, at the chip, immediately. Removing that heat requires major infrastructure and a significant share of a site's energy. Every system here is a chain — capture at the rack, transport through the building, rejection outdoors — and the bays vary different links; pickup methods and outdoor units combine rather than compete. Each bay starts from the same rack and follows the heat out of the building." },
   { cam: { pos: [-23, 2.7, -2.2], look: [-8, 2.5, 7], dur: 4 },
     text: "For two decades a rack drew a few kilowatts and air handled it. Current AI racks draw 120–132 kW each — a GB200 NVL72 cannot be air-cooled at all. That climb from roughly 5 to over 130 kW per rack forced every architecture in this hall.", layer: "HEAT" },
   { cam: { pos: [-16, 3.0, -5], look: [4, 2.6, 6], dur: 4.5 },
@@ -3006,7 +3006,7 @@ chapters: [
   { pov: "crac-internals", dur: 4.5, act: "xray:1",
     text: "Inside the cabinet, top to bottom: filters, the A-frame evaporator coil, fans, compressors. Refrigerant boils in the coil at low pressure, absorbing the room's heat; the scroll compressor then raises its pressure so it can condense against hot outdoor air." },
   { pov: "wall-crossing", dur: 3.5, act: "xray:0",
-    text: "The envelope crossing: two insulated copper lines through a sealed penetration. Hot compressed vapor out, liquid refrigerant back. No water is involved in this architecture — its trade-off is energy: DX halls are the least efficient mainstream design." },
+    text: "The envelope crossing: two insulated copper lines through a sealed penetration. Hot compressed vapor out, liquid refrigerant back. No cooling-water loop and no evaporative consumption — the only water here is the coil's small condensate drain. The trade-off is energy: DX halls are the least efficient mainstream design." },
   { pov: "condenser", dur: 4,
     text: "In the yard, the microchannel condenser rejects the heat: 28–220 kW per unit, one or two EC fans. The refrigerant condenses back to liquid and returns inside. The refrigerants themselves are changing under the AIM Act — R-410A giving way to R-454B, manufacture cutoff 2027." }
 ]},
@@ -3039,9 +3039,9 @@ chapters: [
     text: "Return air that is not recirculated leaves through the relief louvers, and that is the whole story: heat out as warm air, no water consumed in the base design, nothing discharged." }
 ]},
 
-{ id: "ch4", title: "Evaporative, adiabatic, dry", bay: 3, steps: [
+{ id: "ch4", title: "The four outdoor units", bay: 3, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 4 exists to unpick four look-alike machines. All reject heat from a fluid loop to outdoor air; they differ in what gets wet, what is consumed, and what leaves as liquid. The three names are often used interchangeably; the units differ in what gets wet." },
+    text: "Bay 4 lines up the four outdoor heat-rejection units: open tower, closed-circuit cooler, adiabatic cooler, dry cooler. All reject heat from a fluid loop to outdoor air; they differ in what gets wet, what is consumed, and what leaves as liquid. The first two are both called \"evaporative\" in common usage — the label obscures the difference that matters." },
   { pov: "open-tower", dur: 4.5, layer: "WATER",
     text: "Open tower: the process water itself is sprayed over fill in direct contact with air. About 1% of the flow evaporates — that evaporation is the cooling. The water that remains concentrates, so the basin bleeds blowdown continuously, about 0.5% of flow." },
   { pov: "closed-circuit", dur: 4.5,
@@ -3077,7 +3077,7 @@ chapters: [
   { pov: "lifted-blade", dur: 4,
     text: "Service is the trade-off: a hoisted server drains over the tank before work can start. The fluid lasts over 10 years and the boards run silent, sealed against dust and humidity — but hyperscalers largely chose cold plates for standard racks and faster hands-on work." },
   { pov: "two-phase", dur: 4.5, act: "rate:boil:1.6",
-    text: "Two-phase: the fluid boils directly on hot silicon at roughly 49–61 °C, and the vapor carries the heat upward as latent heat. There are no pumps in the tank; the phase change is the transport. Partial PUE runs 1.02–1.03, the best number in this hall." },
+    text: "Two-phase: the fluid boils directly on hot silicon at roughly 49–61 °C, and the vapor carries the heat upward as latent heat. There are no pumps in the tank; the phase change is the transport. Vendor-reported partial PUE runs 1.02–1.03 — a pump-only boundary, not comparable to whole-facility figures." },
   { pov: "condenser", dur: 4,
     text: "Water-cooled coils in the headspace condense the vapor, which rains back into the bath. The tank must stay sealed: every lid opening loses fluid as vapor — and the fluid is the expensive part." },
   { pov: "drums", dur: 4.5,
@@ -3101,7 +3101,7 @@ chapters: [
   { pov: "overview", dur: 4,
     text: "The Water Room compares what the seven systems actually do with water: what goes in, what comes out, how often, and what is dissolved in it. Five columns, one shared drain channel, two chemistry benches, one display case." },
   { pov: "columns", dur: 5,
-    text: "The columns run in real time. Open tower: continuous fill, continuous blowdown. Closed-circuit: the same, smaller. Adiabatic: seasonal sips, drain mostly idle. Closed loop: one fill, then a flat line for years. Immersion: no water at all." },
+    text: "The columns run in real time. Open tower: continuous fill, continuous blowdown. Closed-circuit: the same, smaller. Adiabatic: seasonal sips, drain mostly idle. Closed loop: one fill, then a flat line for years. Immersion: no water in the tank — its facility-water side behaves like the closed loop's." },
   { pov: "tower-vs-closed", dur: 5, layer: "WATER",
     text: "The frequency answer in one contrast: a 1,000-ton tower at 3 cycles discharges 20,000–40,000 gallons of blowdown every day. A closed loop holds a fixed inventory — tens of gallons at a CDU, thousands to tens of thousands in a facility loop (est.) — discharged once at commissioning, then episodically at repairs, years apart." },
   { pov: "chem-bench", dur: 5, layer: "CHEM",
@@ -3114,7 +3114,7 @@ chapters: [
 
 { id: "ch9", title: "Choosing", bay: null, steps: [
   { cam: { pos: [96, 2.6, -4], look: [108, 2.5, 6], dur: 4.5 },
-    text: "System choice follows climate, density, and the local price of water and power. Dry rejection spends electricity; evaporative rejection spends water; the chip's tolerance for warm coolant decides how hard that trade bites." },
+    text: "System choice follows climate, density, and the local price of water and power. Dry rejection spends electricity; evaporative rejection spends water. Every figure in the Water Room is on-site consumptive use — electricity carries its own indirect water cost at whichever plants supply the grid, smaller and grid-dependent, so dry cooling shifts a reduced share of water use off-site rather than eliminating it." },
   { cam: { pos: [104, 2.8, -4.5], look: [116, 2.6, 2], dur: 4.5 },
     text: "The direction of the industry is visible in this hall: AI densities force liquid to the chip, warm loops make dry rejection affordable, and new hyperscale designs increasingly close the water loop entirely — evaporating nothing, discharging episodically." },
   { cam: { pos: [110, 3.0, -4], look: [126, 2.4, 2], dur: 5 },
@@ -3222,7 +3222,7 @@ waterTable: [
   discharge: "Episodic only: commissioning flush (≈1–3 loop volumes (est.)), partial repair drains, leak events",
   frequency: "Years apart; no authoritative interval statistic exists",
   chemicals: "PG25 (~25% propylene glycol, tolyltriazole-inhibited) or treated DI water; nitrite/molybdate in facility loops; sampled against sewer limits before any drain",
-  pfas: "None — formulations are non-fluorinated" },
+  pfas: "None identified in reviewed standard formulations; SDS is the check" },
 
 { system: "Immersion (1P / 2P)",
   waterIn: "~None — tanks hold oil or fluorocarbon, not water",
@@ -5449,12 +5449,8 @@ const KIT = (function () {
     g.putImageData(img, 0, 0);
   }
 
-  // Wall / hanging sign. Face points +z ('in'); pass {facing:'out'} to face -z.
-  function label(text, width, o) {
-    o = o || {};
-    const w = width || 3.0;
-    const h = o.h || w * 0.22;
-    const W = 1024, H = Math.max(96, Math.round(W * h / w));
+  // one printed sign face -> texture. Factored so a sign can carry two of them.
+  function signFace(text, o, W, H) {
     const c = CORE.cvs(W, H), g = c.getContext('2d');
     g.fillStyle = '#111820'; g.fillRect(0, 0, W, H);
     const gr = g.createLinearGradient(0, 0, 0, H);
@@ -5477,29 +5473,68 @@ const KIT = (function () {
     g.fillStyle = o.ink || '#e9f1f8';
     const px = fitTracked(g, String(text).toUpperCase(), avail, Math.round(H * (o.kicker ? 0.42 : 0.52)), '500', FAM, 0.13);
     drawTracked(g, String(text).toUpperCase(), padL, ty, px * 0.13, 'left');
-
-    const t = CORE.tex(c, { srgb: true, clamp: true });
-    const mat = new THREE.MeshStandardMaterial({
+    return CORE.tex(c, { srgb: true, clamp: true });
+  }
+  function signMat(t) {
+    return new THREE.MeshStandardMaterial({
       map: t, emissiveMap: t, emissive: 0xffffff, emissiveIntensity: 0.36,
       roughness: 0.62, metalness: 0.0, envMapIntensity: 0.3
     });
+  }
+
+  // Wall / hanging sign. Face points +z ('in'); pass {facing:'out'} to face -z.
+  //
+  // {back:true}   second readable face on the reverse, SHARING the front's texture
+  //               and material — one extra draw call, no extra texture memory.
+  // {back:'TEXT'} second face with its own copy.
+  // {back:false}  force single-faced (use on wall plates, to save the draw call).
+  //
+  // DEFAULT: any sign 3 m or wider gets a back automatically. Signs that big are
+  // the freestanding/post-mounted ones — bay title panels standing proud of the
+  // wall — and seen from behind a single-faced sign reads as a blank plate on a
+  // post ("signs standing in each bay with nothing on them"). Defaulting by size
+  // also fixes callers that cannot pass options.
+  // Even single-faced, the carcass is now dark powder-coat with a stiffening rib,
+  // so a back that IS seen reads as the back of a sign, not an unfinished one.
+  function label(text, width, o) {
+    o = o || {};
+    const w = width || 3.0;
+    const wantBack = (o.back === undefined) ? (w >= 3.0) : o.back;
+    const h = o.h || w * 0.22;
+    const W = 1024, H = Math.max(96, Math.round(W * h / w));
+    const mat = signMat(signFace(text, o, W, H));
+
     const grp = new THREE.Group();
-    const face = plane(w, h, mat, 0, 0, 0.031);
-    grp.add(face);
-    const back = box(w * 1.015, h * 1.06, 0.055, M.alum(), 0, 0, 0.0);
-    uvw(back, 0.6);
-    grp.add(back);
-    // hood
+    grp.add(plane(w, h, mat, 0, 0, 0.031));
+
+    const backMat = M.paint(0x3f464b, 0.66);
+    const carcass = box(w * 1.015, h * 1.06, 0.055, backMat, 0, 0, 0.0);
+    uvw(carcass, 0.6);
+    grp.add(carcass);
+
+    if (wantBack) {
+      const bt = (typeof o.back === 'string') ? o.back : String(text);
+      const m2 = (bt === String(text)) ? mat : signMat(signFace(bt, o, W, H));
+      const f2 = plane(w, h, m2, 0, 0, -0.031);
+      f2.rotation.y = Math.PI;               // presents the printed side rearward,
+      grp.add(f2);                           // text still reads left-to-right
+      const hood2 = box(w * 1.03, 0.03, 0.14, M.alum(), 0, h * 0.56, -0.07);
+      hood2.rotation.x = -0.28;
+      grp.add(hood2);
+    } else {
+      // stiffening rib + mounting standoffs, only meaningful on a wall plate
+      grp.add(box(w * 0.9, 0.05, 0.035, M.steelDark(), 0, 0, -0.045));
+      const so = [];
+      for (let i = 0; i < 2; i++) {
+        so.push(cyl(0.018, 0.018, 0.09, 8, M.steelLight(), (i ? 1 : -1) * w * 0.42, 0, -0.05));
+        so[so.length - 1].rotation.x = Math.PI / 2;
+      }
+      grp.add(merge(so, M.steelLight(), { uvScale: 0.2 }));
+    }
+
     const hood = box(w * 1.03, 0.03, 0.14, M.alum(), 0, h * 0.56, 0.07);
     hood.rotation.x = 0.28;
     grp.add(hood);
-    // mounting standoffs
-    const so = [];
-    for (let i = 0; i < 2; i++) {
-      so.push(cyl(0.018, 0.018, 0.09, 8, M.steelLight(), (i ? 1 : -1) * w * 0.42, 0, -0.05));
-      so[so.length - 1].rotation.x = Math.PI / 2;
-    }
-    grp.add(merge(so, M.steelLight(), { uvScale: 0.2 }));
     if (o.facing === 'out') grp.rotation.y = Math.PI;
     return grp;
   }
@@ -5919,21 +5954,53 @@ const KIT = (function () {
   }
 
   let activeLayer = 'ALL';
-  function setLayer(l) {
-    activeLayer = l || 'ALL';
+
+  // Flow presentation is a function of BOTH layer and x-ray, so it lives in one
+  // place and is re-applied whenever either changes.
+  //
+  // An isolated layer has to punch through a ghosted machine full of revealed
+  // internals. Dimming the world is not enough — the gate found bay 0's
+  // refrigerant circuit reduced to "a few faint violet dots" under HEAT + x-ray.
+  // So the active layer gets: 2.4x size, a 1.7x larger pixel ceiling, full
+  // opacity, its pure hue, a brightness gain, and a cap just over the bloom
+  // threshold. Under x-ray it also stops depth-testing and renders last, so the
+  // circuit reads THROUGH the cutaway instead of being buried inside it.
+  function applyFlowState() {
     const kinds = LAYER[activeLayer];
     const iso = activeLayer !== 'ALL';
     for (let i = 0; i < flows.length; i++) {
-      const f = flows[i];
+      const f = flows[i], u = f.mat.uniforms;
       const inLayer = !kinds || kinds.indexOf(f.kind) >= 0;
-      const u = f.mat.uniforms;
       // out-of-layer flows are dimmed to a trace, NOT hidden: same policy as
       // geometry, and it keeps the rest of the plant legible as context.
       f.points.visible = true;
-      if (!iso) { u.uSizeK.value = 1; u.uOpacity.value = f.baseOpacity; }
-      else if (inLayer) { u.uSizeK.value = 1.5; u.uOpacity.value = Math.min(1, f.baseOpacity * 1.45); }
-      else { u.uSizeK.value = 0.6; u.uOpacity.value = f.baseOpacity * 0.10; }
+      if (iso && inLayer) {
+        u.uSizeK.value = LAYER_SIZE_K;
+        u.uOpacity.value = 1;
+        u.uColor.value.copy(f.pureColor);
+        u.uGain.value = LAYER_GAIN;
+        u.uCap.value = POINT_CAP_LAYER;
+        f.maxPixK = LAYER_MAXPIX_K;
+        f.mat.depthTest = !xrayOn;
+        f.points.renderOrder = xrayOn ? 12 : 6;
+      } else {
+        u.uSizeK.value = iso ? 0.6 : 1;
+        u.uOpacity.value = iso ? f.baseOpacity * 0.10 : f.baseOpacity;
+        u.uColor.value.copy(f.baseColor);
+        u.uGain.value = 1;
+        u.uCap.value = POINT_CAP;
+        f.maxPixK = 1;
+        f.mat.depthTest = true;
+        f.points.renderOrder = 6;
+      }
+      // no needsUpdate: r128 reads depthTest from the material at draw time via
+      // WebGLState, so this costs no shader recompile.
     }
+  }
+
+  function setLayer(l) {
+    activeLayer = l || 'ALL';
+    applyFlowState();
     applyIsolation(activeLayer);
   }
   function setXray(b) {
@@ -5944,6 +6011,7 @@ const KIT = (function () {
       if (s.mesh.material !== want) s.mesh.material = want;
     }
     for (let i = 0; i < gutsList.length; i++) gutsList[i].visible = xrayOn;
+    applyFlowState();          // x-ray changes how an isolated layer must be drawn
   }
 
   // =========================================================================== 10
@@ -5994,17 +6062,23 @@ const KIT = (function () {
     'uniform vec3 uColor;',
     'uniform float uOpacity;',
     'uniform float uCap;',
+    'uniform float uGain;',
     'varying float vA;',
     'void main() {',
     '  vec4 t = texture2D( uMap, gl_PointCoord );',
     '  float a = t.a * uOpacity * vA;',
     '  if ( a < 0.006 ) discard;',
     // hard luminance cap: particles bypass tone mapping, so this is the only thing
-    // stopping a flow from tripping bloom. Must stay below CORE's bloom threshold.
-    '  gl_FragColor = vec4( min( uColor * t.rgb, vec3( uCap ) ), a );',
+    // stopping a flow from tripping bloom. Must stay below CORE's bloom threshold
+    // in normal viewing — an ISOLATED layer is allowed just over it, on purpose.
+    '  gl_FragColor = vec4( min( uColor * t.rgb * uGain, vec3( uCap ) ), a );',
     '}'
   ].join('\n');
   const POINT_CAP = 0.80;          // display-space; CORE bloom threshold is 0.92
+  // An isolated layer is the one place a flow is ALLOWED to glow: cap just above
+  // the bloom threshold so the active circuit picks up a halo and reads at a glance.
+  const POINT_CAP_LAYER = 0.97;
+  const LAYER_SIZE_K = 2.4, LAYER_GAIN = 1.35, LAYER_MAXPIX_K = 1.7;
 
   let pointPix = 700, pointMax = 24;
   function updatePointScale() {
@@ -6015,9 +6089,9 @@ const KIT = (function () {
     // ~28 px at 1600 px wide, scaled with resolution so it is a screen-fraction cap
     pointMax = Math.max(5, 28 * (w / 1600));
     for (let i = 0; i < flows.length; i++) {
-      const u = flows[i].mat.uniforms;
+      const f = flows[i], u = f.mat.uniforms;
       u.uPix.value = pointPix;
-      u.uMaxPix.value = pointMax;
+      u.uMaxPix.value = pointMax * (f.maxPixK || 1);
     }
   }
   // hook the scale update in front of every render (harness poses do not tick)
@@ -6043,15 +6117,22 @@ const KIT = (function () {
     geo.setAttribute('aAlpha', new THREE.BufferAttribute(alphaA, 1));
 
     const baseOpacity = o.opacity === undefined ? F.opacity : o.opacity;
+    const baseColor = new THREE.Color(o.color === undefined ? F.color : o.color);
+    // the same hue driven to full saturation, used when this flow's layer is isolated
+    const pureColor = baseColor.clone();
+    const mx = Math.max(pureColor.r, pureColor.g, pureColor.b);
+    if (mx > 0.001) pureColor.multiplyScalar(1 / mx);
+
     const mat = new THREE.ShaderMaterial({
       uniforms: {
         uMap: { value: T.sprite },
-        uColor: { value: new THREE.Color(o.color === undefined ? F.color : o.color) },
+        uColor: { value: baseColor.clone() },
         uOpacity: { value: baseOpacity },
         uPix: { value: pointPix },
         uMaxPix: { value: pointMax },
         uSizeK: { value: 1 },
-        uCap: { value: POINT_CAP }
+        uCap: { value: POINT_CAP },
+        uGain: { value: 1 }
       },
       vertexShader: POINT_VS,
       fragmentShader: POINT_FS,
@@ -6073,7 +6154,8 @@ const KIT = (function () {
       posA: posA, sizeA: sizeA, alphaA: alphaA,
       u: new Float32Array(count), seg: new Int32Array(count),
       off: new Float32Array(count * 3), life: new Float32Array(count),
-      baseOpacity: baseOpacity
+      baseOpacity: baseOpacity, baseColor: baseColor, pureColor: pureColor,
+      maxPixK: 1
     };
 
     for (let i = 0; i < count; i++) {
@@ -6412,7 +6494,8 @@ const HALL = (function () {
     add(wall(0.36, 9.6, 19.6, M.precast(), X0 - 0.18, 4.8, 2.6, 3));
     // title graphic
     const t = K.label('COOLING ATLAS', 9.2, {
-      h: 1.9, kicker: 'Seven ways a data center sheds heat', accent: '#5fb6d8'
+      h: 1.9, kicker: 'Seven ways a data center sheds heat', accent: '#5fb6d8',
+      back: false                                   // flat against the end wall
     });
     t.rotation.y = Math.PI / 2;
     t.position.set(X0 + 0.10, 5.1, 2.2);
@@ -6954,7 +7037,8 @@ const HALL = (function () {
 
     // end-wall title
     const t = K.label('THE WATER ROOM', 6.2, {
-      h: 1.35, kicker: 'What goes in, what comes out, how often, what is in it'
+      h: 1.35, kicker: 'What goes in, what comes out, how often, what is in it',
+      back: false                                   // flat against the end wall
     });
     t.rotation.y = -Math.PI / 2;
     t.position.set(WX1 - 0.10, 3.5, 3.0);
@@ -6994,7 +7078,9 @@ const HALL = (function () {
     add(K.merge(fas, M.paint(0x6f767b, 0.62), { uvScale: 1.1, cast: true }));
     add(K.box(0.24, 0.06, PZ1 - PZ0 - 0.6, M.lamp(0.95), XW - 0.66, 5.42, (PZ0 + PZ1) / 2));
 
-    const sign = K.label('THE WATER ROOM', 5.4, { h: 1.15, kicker: 'End of the spine' });
+    const sign = K.label('THE WATER ROOM', 5.4, {
+      h: 1.15, kicker: 'End of the spine', back: false   // sits on the fascia
+    });
     sign.rotation.y = -Math.PI / 2;
     sign.position.set(XW - 0.62, 6.55, (PZ0 + PZ1) / 2);
     add(sign);
@@ -16695,7 +16781,7 @@ window.HALL = HALL;
       signs.push(wrap);
       return wrap;
     }
-    facedLabel('WHERE PFAS ACTUALLY IS', 'three objects · everything else in this room is non-fluorinated',
+    facedLabel('WHERE PFAS ACTUALLY IS', 'three objects · none identified in the room’s other chemistry',
       1.30, 0.30, PFX - 0.325, 2.14, PFZ, 0);
     // plinth caption dropped to 0.42 and narrowed: at that height nothing on the case
     // — deck edge, bottom rail, card rail — can come between it and the camera
@@ -18333,9 +18419,14 @@ const APP = (() => {
     for (const def of built) {
       if (def.index === 7) continue;
       const x = CORE.BX(def.index);
-      // back-wall wayfinding panel
+      // back-wall wayfinding panel — stood proud of the wall on a backer so the
+      // wall's diagonal braces (z ≈ -6.9..-6.6) never cross the face
+      const backer = new THREE.Mesh(new THREE.BoxGeometry(4.5, 1.35, 0.08),
+        K.M.steelDark ? K.M.steelDark() : K.M.paint(0x2a2e33, 0.7));
+      backer.position.set(x, 2.65, -6.5);
+      S.add(backer);
       const wp = K.label(String(def.index + 1) + ' — ' + def.title, 4.2);
-      wp.position.set(x, 2.65, -6.92);
+      wp.position.set(x, 2.65, -6.42);
       S.add(wp);
       // bench at the walkway edge, offset from center
       const bench = new THREE.Group();

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Cooling Atlas — Seven ways a data center sheds heat</title><style>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Cooling Atlas — Colleague Edition</title><style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { width: 100%; height: 100%; overflow: hidden; background: #0b0e13; }
 body { font-family: 'Segoe UI', system-ui, sans-serif; color: #dfe6ee; }
@@ -2219,7 +2219,7 @@ parts: {
 
 "dx-crac/crac-unit": {
   name: "CRAC unit",
-  what: "CRAC stands for Computer Room Air Conditioner. It is a floor-standing air conditioner, and it works like the one in a house or a car: a loop of refrigerant picks up heat inside and carries it outside. Warm room air goes in the top, cold air comes out the bottom.",
+  what: "CRAC stands for Computer Room Air Conditioner. It is a floor-standing air conditioner holding one complete refrigeration loop — a loop being a fluid circling between the place it picks heat up and the place it drops it off, like the coolant loop in a car. Here that fluid is refrigerant, picking heat up at a cold coil indoors and dropping it at a hot coil outdoors. Warm room air goes in the top, cold air comes out the bottom.",
   moves: "Fans run constantly; the compressors switch on and off as the room demands.",
   cite: ["S3"]
 },
@@ -2233,7 +2233,7 @@ parts: {
 
 "dx-crac/evaporator-coil": {
   name: "Cold coil",
-  what: "A wall of thin copper tubes and aluminum fins folded into an A shape. Liquid refrigerant boils inside the tubes, and boiling is what pulls the heat out of the air passing over them — the same reason rubbing alcohol feels cold on skin as it evaporates.",
+  what: "A wall of thin copper tubes and aluminum fins folded into an A shape. This is where the refrigeration cycle begins: liquid refrigerant boils inside the tubes, and boiling is what pulls the heat out of the air passing over them — the same reason rubbing alcohol feels cold on skin as it evaporates. The refrigerant leaves carrying the room's heat.",
   moves: "Refrigerant enters as liquid and leaves as gas.",
   water: "Moisture in the room condenses on the cold fins, the way a glass of ice water sweats, and drips into a pan and a small drain. That trickle is the only liquid water this design handles.",
   cite: ["S3", "S6"]
@@ -2241,14 +2241,14 @@ parts: {
 
 "dx-crac/compressor": {
   name: "Compressor",
-  what: "The pump at the heart of any refrigeration loop. It squeezes the refrigerant gas, which makes it hot — hotter than the air outdoors. That is the whole trick: heat only moves toward something cooler, so the refrigerant is deliberately made hotter than the outdoor air it has to dump into.",
+  what: "The second step of the cycle, and the one that makes the whole thing work. Squeezing a gas makes it hot, so the compressor squeezes the refrigerant vapor until it is hotter than the air outdoors. Heat only moves from hot to cold, and this is what puts the refrigerant on the hot side of that arrangement, so its heat will flow outward on its own.",
   moves: "A spiral scroll orbits inside; it steps up and down to match the load.",
   cite: ["S3"]
 },
 
 "dx-crac/expansion-valve": {
   name: "Expansion valve",
-  what: "A small adjustable opening on the return side of the loop. Refrigerant squeezes through it, its pressure drops, and dropping pressure makes it cold — the same reason an aerosol can gets chilly when you spray it. It arrives back at the coil cold.",
+  what: "The last step of the cycle. Having dropped its heat outdoors, the refrigerant is still under pressure, so it squeezes through a small adjustable opening and expands. Letting a fluid expand makes it cold, the same reason an aerosol can gets chilly when you spray it. It arrives back at the cold coil ready to soak up more heat, and the cycle repeats.",
   moves: "A tiny motor widens and narrows the opening.",
   cite: ["S3"]
 },
@@ -2261,14 +2261,14 @@ parts: {
 
 "dx-crac/refrigerant-lines": {
   name: "Refrigerant lines",
-  what: "Two insulated copper pipes running out through the wall — hot gas out to the yard, cool liquid back. This is the spot where the heat actually leaves the building in this design. Federal rules are steering these refrigerants toward blends that do less climate damage when they leak.",
+  what: "The part of the refrigeration loop that leaves the building: two insulated copper pipes, hot vapor out to the yard and cool liquid back. This is the spot where the heat actually crosses the wall in this design. Federal rules are steering these refrigerants toward blends that do less climate damage when they leak.",
   moves: "Dense liquid one way, fast-moving gas the other.",
   cite: ["S5"]
 },
 
 "dx-crac/condenser": {
   name: "Outdoor condenser",
-  what: "A low box out in the yard with a coil and fans on top — the same thing as the outdoor half of a home air conditioner. Hot refrigerant gas hands its heat to outdoor air, turns back into liquid, and heads back inside.",
+  what: "A low box out in the yard with a coil and fans on top — the same thing as the outdoor half of a home air conditioner. The third step of the cycle happens here: the refrigerant, now hotter than the outdoor air, gives its heat away without being forced to, turns back into liquid, and heads back inside.",
   moves: "Refrigerant turns back to liquid along the coil; fans above pull air through it.",
   cite: ["S4"]
 },
@@ -2311,7 +2311,7 @@ parts: {
 
 "chilled-water/chiller": {
   name: "Chiller",
-  what: "The refrigeration machine for the whole building. It sits between two water loops: it chills the sealed loop that feeds the coils indoors, and it dumps that heat into a second, open loop that runs out to the cooling tower. The two waters never touch.",
+  what: "The middle of the bucket brigade, and the same refrigeration machine as bay 1 built at building scale. It sits between two water loops. The chilled water loop arrives from the room carrying heat; the chiller pulls that heat out and, using the evaporate-squeeze-dump-expand cycle, pushes it into the warmer condenser water loop headed for the tower. The two waters flow through the same machine and never touch.",
   moves: "A compressor runs inside; water flows through both of its big cylinders.",
   cite: ["S10"]
 },
@@ -2325,19 +2325,19 @@ parts: {
 
 "chilled-water/evaporator-barrel": {
   name: "Evaporator barrel",
-  what: "A steel cylinder packed with tubes. The indoor loop's water runs through the tubes, refrigerant boils around them, and the water leaves cold again on its way back to the coils.",
+  what: "Where the chiller takes heat off the chilled water loop. A steel cylinder packed with tubes: the loop's water runs through the tubes, refrigerant boils around the outside of them, and boiling is what pulls the heat out. The water leaves cold again, headed back to the coils in the room.",
   cite: ["S10"]
 },
 
 "chilled-water/condenser-barrel": {
   name: "Condenser barrel",
-  what: "The matching cylinder on the other side. Here the refrigerant hands its heat to the tower loop and turns back into liquid. Everything the servers made, plus the energy the compressor itself added, leaves the machine through here.",
+  what: "The matching cylinder on the other side, where the chiller hands its heat to the condenser water loop. The compressor has made the refrigerant hotter than that water, so the heat crosses over and the refrigerant turns back into liquid. Everything the servers made, plus the energy the compressor itself added, leaves the machine here on its way to the tower.",
   cite: ["S11"]
 },
 
 "chilled-water/chw-pump": {
   name: "Chilled-water pumps",
-  what: "The pumps that push the indoor loop around — out from the chiller to the coils in the hall and back again.",
+  what: "The pumps that drive the chilled water loop — the indoor one. It runs from the chiller out to the coils in the hall, picks up the room's heat there, and carries it back to the chiller. That is the brigade's first leg.",
   moves: "Impellers speed up and slow down as the coils call for water.",
   water: "This loop is sealed, or closed, in the trade's language. It is filled once, treated once, and then just circulates. In normal operation it neither uses up water nor sends any to a drain.",
   cite: ["S10"]
@@ -2345,7 +2345,7 @@ parts: {
 
 "chilled-water/cw-pump": {
   name: "Condenser-water pumps",
-  what: "The pumps for the outdoor loop, sending warmed water from the chiller out to the cooling tower and pulling cooled water back.",
+  what: "The pumps that drive the condenser water loop — the outdoor one. It collects the heat the chiller just pushed out, carries it to the cooling tower, and comes back cooler to collect more. That is the brigade's last leg before the sky.",
   moves: "Steady flow whenever the chiller is running.",
   cite: ["S1", "S11"]
 },
@@ -2492,14 +2492,14 @@ parts: {
 
 "evap-adiabatic/pump-skid": {
   name: "Process pump skid",
-  what: "One shared loop of warm fluid feeds all four machines in this bay, so the only differences left are in how each one sheds that heat: what gets wet, what evaporates, and what runs down a drain.",
+  what: "One shared loop of warm fluid feeds all four machines in this bay — open cooling tower, closed-circuit cooler, adiabatic cooler, dry cooler — so the only difference left between them is what gets wet.",
   moves: "Pumps run; the loop branches to each unit.",
   cite: ["S1"]
 },
 
 "evap-adiabatic/open-tower": {
   name: "Open cooling tower",
-  what: "The process water itself is sprayed over plastic sheets and touches the air directly. About one drop in a hundred evaporates, and that is what does the cooling; the rest falls back into the basin cooler and a little more mineral-rich. The water doing the cooling is the water being used up.",
+  what: "The first of the four. The working water itself is sprayed over plastic sheets and touches the air directly. About one drop in a hundred evaporates, and that is what does the cooling; the rest falls back into the basin cooler and a little more mineral-rich. The water doing the cooling is the water being used up.",
   moves: "Falling water, fan, plume.",
   water: "Uses water continuously while running, and drains concentrated water continuously. Of the water it consumes, roughly three-quarters leaves as vapor and the remaining quarter or so goes down the drain as liquid.",
   cite: ["S1", "S13", "S33"]
@@ -2507,21 +2507,21 @@ parts: {
 
 "evap-adiabatic/tower-fan": {
   name: "Tower fan",
-  what: "The fan pulling air up through the open tower. Same job as the tower fan in bay 2; it is repeated here so the four machines can be compared side by side.",
+  what: "The fan pulling air up through the open cooling tower. Same job as the tower fan in bay 2; it is repeated here so the four machines can be compared side by side.",
   moves: "Slow rotation.",
   cite: ["S13"]
 },
 
 "evap-adiabatic/fill": {
   name: "Fill",
-  what: "The plastic sheets inside the open tower where water and air meet. Spreading the water thin over as much surface as possible is the entire design goal, because that is where evaporation happens.",
+  what: "The plastic sheets inside the open cooling tower where water and air meet. Spreading the water thin over as much surface as possible is the entire design goal, because that is where evaporation happens.",
   moves: "Continuous sheets of water.",
   cite: ["S13"]
 },
 
 "evap-adiabatic/spray-header": {
   name: "Spray header",
-  what: "The nozzles that lay the returning warm water evenly across the fill of the open tower.",
+  what: "The nozzles that lay the returning warm water evenly across the fill of the open cooling tower.",
   moves: "Spray cones.",
   cite: ["S13"]
 },
@@ -2534,14 +2534,14 @@ parts: {
 
 "evap-adiabatic/basin": {
   name: "Basin",
-  what: "The collecting pan under the open tower. Both the fresh-water float valve and the drain tap sit on this side of the loop.",
+  what: "The collecting pan under the open cooling tower. Both the fresh-water float valve and the drain tap sit on this side of the loop.",
   moves: "Ripple; float valve.",
   cite: ["S13"]
 },
 
 "evap-adiabatic/blowdown-valve": {
   name: "Blowdown valve",
-  what: "The drain valve on the open tower. It bleeds water off continuously, in step with how much is evaporating, so the minerals left behind never build up to the point where they start coating the pipes with scale.",
+  what: "The drain valve on the open cooling tower. It bleeds water off continuously, in step with how much is evaporating, so the minerals left behind never build up to the point where they start coating the pipes with scale.",
   moves: "The valve modulates; flow down the drain rises and falls with the load.",
   water: "When someone asks where the water goes, this valve is the physical answer: it is the tower loop's continuous liquid discharge point.",
   cite: ["S33", "S44"]
@@ -2549,9 +2549,9 @@ parts: {
 
 "evap-adiabatic/closed-circuit-cooler": {
   name: "Closed-circuit cooler",
-  what: "Here the process fluid stays sealed inside a coil, and a separate captive supply of water is sprayed over the outside of that coil and evaporates. Closed circuit describes the fluid being cooled — not the water bill.",
+  what: "The second of the four, and the other machine people mean when they say evaporative cooling. The working water stays sealed inside a coil, and a separate captive supply is sprayed over the outside of that coil and evaporates. Closed circuit describes the working water — not the water bill.",
   moves: "Spray pump, fan, water cascading over the coil.",
-  water: "It still uses water and still drains water: the spray water concentrates minerals exactly like an open tower, only in a smaller captive pool. These units are often mistaken for waterless ones.",
+  water: "It still uses water and still drains water: the spray water concentrates minerals exactly like an open cooling tower, only in a smaller captive pool. These units are often mistaken for waterless ones.",
   cite: ["S14"]
 },
 
@@ -2570,16 +2570,16 @@ parts: {
 
 "evap-adiabatic/sump": {
   name: "Spray sump",
-  what: "The captive pool of water at the bottom of the closed-circuit cooler. Because that water evaporates, it needs topping up, treating, and draining — a miniature cooling tower wrapped around a sealed coil.",
-  water: "The sump's drain is this machine's liquid discharge: smaller than an open tower's, but the same thing.",
+  what: "The captive pool of water at the bottom of the closed-circuit cooler. Because that water evaporates, it needs topping up, treating, and draining — a miniature open cooling tower wrapped around a sealed coil.",
+  water: "The sump's drain is this machine's liquid discharge: smaller than the open cooling tower next to it, but the same thing.",
   cite: ["S14"]
 },
 
 "evap-adiabatic/adiabatic-cooler": {
   name: "Adiabatic cooler",
-  what: "A dry radiator with a trick: water is dripped onto pads in front of the coils, and as it evaporates it chills the incoming air before that air reaches the coil — a swamp cooler bolted to the front. The water cools the air; it never touches the process fluid, which stays sealed inside.",
+  what: "The third of the four. A dry cooler with a trick added: water is dripped onto pads in front of the coils, and as it evaporates it chills the incoming air before that air reaches the coil — a swamp cooler bolted to the front. The water cools the air; it never touches the process fluid, which stays sealed inside.",
   moves: "Fan row; pad valves opening in wet mode; the switch between wet and dry.",
-  numbers: "Uses up to about 95 percent less water than a conventional evaporative tower.",
+  numbers: "Uses up to about 95 percent less water than an open cooling tower.",
   water: "Uses a small amount of water, and mostly in hot weather. Most designs run the pad water once through, with no pool to treat and nothing to bleed off. Some designs do recycle pad water from a small sump and dump it now and then for hygiene — so little or nothing leaves as liquid is the accurate phrasing, not never.",
   cite: ["S15"]
 },
@@ -2594,15 +2594,15 @@ parts: {
 
 "evap-adiabatic/dry-coils": {
   name: "Dry coils",
-  what: "The finned coils of the adiabatic unit — and, with the pad water switched off, an ordinary dry cooler: a giant car radiator with fans, sealed loop, no water used and nothing drained. The catch is that it can never chill the fluid below the outdoor air temperature, so it has to be sized for the hottest hour of the year.",
+  what: "The finned coils of the adiabatic cooler — and, with the pad water switched off, the fourth machine in its own right: a dry cooler, which is a giant car radiator with fans. Sealed loop, no water used, nothing drained. The catch is that it can never chill the fluid below the outdoor air temperature, so it has to be sized for the hottest hour of the year.",
   moves: "Fans only, in dry mode.",
-  numbers: "Running dry takes roughly 10 to 35 percent more electricity on a hot afternoon than an evaporative machine doing the same job.",
+  numbers: "Running dry takes roughly 10 to 35 percent more electricity on a hot afternoon than an open cooling tower doing the same job — and that extra electricity carries its own water cost off-site, at the power plant, smaller and depending on what the local grid burns.",
   cite: ["S1"]
 },
 
 "evap-adiabatic/comparison-totem": {
   name: "Comparison totem",
-  what: "The bay's scorecard, one line per machine: what gets wet, whether water is used up, what liquid leaves, and whether the fluid loop is sealed. Open tower — the process water itself gets wet, uses water, drains continuously, open loop. Closed-circuit — captive spray water, uses water, drains from its sump, sealed loop. Adiabatic — the incoming air, small seasonal use, little or nothing leaves, sealed loop. Dry — nothing gets wet, no water, no drain, sealed loop.",
+  what: "The bay's scorecard, one line per machine, in order: what gets wet, whether water is used up, what liquid leaves, and whether the working loop is sealed. Open cooling tower — the working water itself gets wet, uses water, drains continuously, open loop. Closed-circuit cooler — captive spray water gets wet, uses water, drains from its sump, sealed loop. Adiabatic cooler — only the incoming air gets wet, small seasonal use, little or nothing leaves, sealed loop. Dry cooler — nothing gets wet, no water, no drain, sealed loop. Left to right, less and less water touches anything.",
   cite: ["S1", "S14", "S15"]
 },
 
@@ -2647,7 +2647,7 @@ parts: {
 
 "direct-to-chip/cdu": {
   name: "CDU",
-  what: "Coolant Distribution Unit — the border post between two loops: the rack-side loop that touches the chips, and the building water loop that runs out to the yard. One cabinet holds a heat exchanger, spare pumps, filters, and controls.",
+  what: "Coolant Distribution Unit — the border post between two loops: the rack-side loop that touches the chips, and the building water loop that runs out to the yard. Same bucket-brigade arrangement as the chiller plant, with smaller buckets carried closer to the chip. One cabinet holds a heat exchanger, spare pumps, filters, and controls.",
   moves: "Pumps, a control valve, a touchscreen; panels that open for swaps.",
   numbers: "One cabinet can serve about eight of these racks.",
   cite: ["S23", "S18"]
@@ -2655,7 +2655,7 @@ parts: {
 
 "direct-to-chip/plate-hx": {
   name: "Plate heat exchanger",
-  what: "A stack of thin stainless plates inside the CDU. Rack coolant flows down one set of gaps, building water down the next, and the heat passes through the metal between them. Two sealed systems, one handshake, no mixing.",
+  what: "A stack of thin stainless plates inside the CDU. Rack coolant flows down one set of gaps, building water down the next, and the heat passes through the metal between them. Two sealed systems, one handoff, no mixing. It does the chiller's job of passing heat from one loop to the next, but with no refrigeration inside — the chip coolant is already warmer than the building water, so the heat crosses on its own.",
   cite: ["S23", "S20"]
 },
 
@@ -2681,7 +2681,7 @@ parts: {
 
 "direct-to-chip/fws-loop": {
   name: "Facility water loop",
-  what: "The larger pipes that gather heat from all the CDUs and carry it out to the yard. How warm this loop is allowed to run is the design choice that decides everything downstream: warm enough, and the site needs no chillers at all.",
+  what: "The last leg of the brigade: larger pipes gathering heat from all the CDUs and carrying it out to the yard. How warm this loop is allowed to run is the design choice that decides everything downstream — warm enough, and the outdoor box can be a plain dry cooler with no chiller behind it.",
   water: "A sealed, treated loop. It is filled when the building is built and drained rarely if ever — the opposite of a cooling tower's constant in-and-out.",
   cite: ["S20"]
 },
@@ -2727,7 +2727,7 @@ parts: {
 
 "immersion/loop-1p": {
   name: "Oil circulation loop",
-  what: "Pumps and a heat exchanger that hand the tank's heat over to the building water loop. The oil stays in the tank circuit; the water carries the heat out to the yard.",
+  what: "Pumps and a heat exchanger that hand the tank's heat over to the building water loop — the same handoff between two loops seen at the chiller and at the CDU. The oil stays in the tank circuit; the water carries the heat out to the yard.",
   moves: "Pump impellers; the two fluids running past each other in the exchanger.",
   cite: ["S25"]
 },
@@ -2835,7 +2835,7 @@ parts: {
 
 "rear-door-hx/cdu": {
   name: "CDU",
-  what: "The row's coolant distribution unit — heat exchanger, pumps, and controls. It keeps the door loop separate from the building's water and holds it warm enough that the coils never condense moisture.",
+  what: "The row's coolant distribution unit — heat exchanger, pumps, and controls. The same two-loop arrangement as bay 5, at row size: it keeps the small door loop separate from the building's water and holds it warm enough that the coils never condense moisture.",
   moves: "Pumps; a valve modulating on the building side.",
   cite: ["S2"]
 },
@@ -2849,7 +2849,7 @@ parts: {
 // ============================ BAY 7 — THE WATER ROOM ============================
 
 "water-room/column-tower": {
-  name: "Column: open tower",
+  name: "Column: open cooling tower",
   what: "A glass column standing in for an open cooling tower. Water pours in at the top without stopping, and two streams leave — a large one as vapor and a steady liquid one down the drain. Neither pauses while the plant runs.",
   moves: "Continuous fill and continuous drain, side by side.",
   numbers: "U.S. data centers used about 17 billion gallons of water directly in 2023.",
@@ -2861,7 +2861,7 @@ parts: {
   name: "Column: closed-circuit cooler",
   what: "The sealed-coil evaporative unit. Its process fluid never leaves, but the water sprayed over the coil evaporates and concentrates just like a small tower — so this column still shows water going in continuously and a smaller stream going out.",
   moves: "Smaller but continuous fill and drain.",
-  water: "The same kind of discharge as the open tower, in smaller volume: concentrated minerals and treatment leftovers.",
+  water: "The same kind of discharge as the open cooling tower, in smaller volume: concentrated minerals and treatment leftovers.",
   cite: ["S14"]
 },
 
@@ -2875,7 +2875,7 @@ parts: {
 
 "water-room/column-closed-loop": {
   name: "Column: closed loop",
-  what: "One fill when the building opens, then a flat line. The level barely moves for years, and the drain shows a single flush at commissioning plus rare blips for repairs. This is the shape for chilled-water loops, chip-cooling loops, and rear-door loops alike.",
+  what: "One fill when the building opens, then a flat line. A sealed loop just circulates: the level barely moves for years, and the drain shows a single flush at commissioning plus rare blips for repairs. This is the shape for chilled water loops, chip coolant loops, and rear-door loops alike — any loop that never meets the air.",
   moves: "A one-time fill; occasional single blips on the drain.",
   numbers: "A tight closed loop loses less than 5 percent of its water in a year.",
   cite: ["S36", "S37", "S39"]
@@ -2956,31 +2956,31 @@ chapters: [
   { cam: { pos: [-23, 2.7, -2.2], look: [-8, 2.5, 7], dur: 4 },
     text: "Every system here answers two questions. One: how do you pick the heat up off the chips — with air, or with liquid? Two: how do you push it out of the building — with a refrigeration machine, evaporating water, outside air, or a plain radiator?", layer: "HEAT" },
   { cam: { pos: [-16, 3.0, -5], look: [4, 2.6, 6], dur: 4.5 },
-    text: "The hall is laid out in that order. Bays 1 and 2, the old all-air way. Bay 3, the weather. Bay 4, the four outdoor options side by side. Bays 5 and 6, liquid at the chip. Bay 7, a retrofit. Then the Water Room scores them all.", layer: "ALL" }
+    text: "Every bay here is a complete system: it picks the heat up, moves it, and pushes it outdoors. What changes from bay to bay is how one link in that chain is done — and every one of those changes exists because someone ran into a specific problem.", layer: "ALL" }
 ]},
 
 { id: "ch1", title: "Air-cooled DX (CRAC)", bay: 0, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 1 is the old way, and the simplest. Air picks the heat up off the servers, and an air conditioner standing in the room pushes it outdoors — both halves of the job in one machine. Everything later in the hall is a variation on one half or the other." },
+    text: "Bay 1 is air cooling, with the air conditioner built right into the room — one room-sized refrigerator per hall, self-contained and simple. It was plenty when halls were small. Picking the heat up is easy; getting it outdoors is not." },
   { pov: "rack-aisle", dur: 4, layer: "AIR",
-    text: "Cold air rises out of holes in the floor tiles, gets pulled through the servers, and comes out the back much hotter. Doors and panels pen that hot air in so it cannot loop back to the fronts, and a ceiling duct carries it to the unit." },
+    text: "The easy part first. Cold air rises out of holes in the floor tiles, gets pulled through the servers, and comes out the back much hotter. Doors and panels pen that hot air in so it cannot drift back around to the fronts." },
   { pov: "crac-internals", dur: 4.5, act: "xray:1",
-    text: "Inside the cabinet, top to bottom: filters, a cold coil, fans, compressors. Refrigerant boils in the coil and soaks up the room's heat, then the compressor squeezes it until it is hotter than the air outside, so it can dump that heat there." },
+    text: "Now the hard part. Heat only moves from hot to cold, and a summer afternoon is hotter than the room — so a machine has to force it. That machine is refrigeration, and your kitchen fridge and a window air conditioner are this exact machine." },
   { pov: "wall-crossing", dur: 3.5, act: "xray:0",
-    text: "Here is where the heat crosses the wall: two insulated copper pipes, and no water anywhere in this design. What it spends instead is electricity. This is the least efficient of the mainstream layouts, which is why the rest of the hall exists." },
+    text: "The trick: a refrigerant soaks up heat as it evaporates in the cold coil. The compressor squeezes that vapor until it is hotter than the outdoor air, so its heat flows out through these two pipes on its own. A valve then lets it expand and go cold again." },
   { pov: "condenser", dur: 4,
-    text: "Out in the yard the refrigerant hands its heat to outdoor air and turns back into liquid. Next door, this one cabinet gets pulled apart: the refrigeration moves out to a central plant, and water carries heat between the pieces." }
+    text: "Evaporate, squeeze, dump, expand — that circle is a loop: fluid moving between where it picks heat up and where it drops it off, like a car's coolant loop. This one carries refrigerant and no water. Running the compressor is what it all costs." }
 ]},
 
 { id: "ch2", title: "Chilled water plant", bay: 1, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 2 changes only the second half of the job — how heat gets out of the building. In the room, nothing changes: air still picks the heat up. But the refrigeration moves to a central plant, and two water loops appear to shuttle heat along." },
+    text: "Bay 2 is a chilled water plant: instead of an air conditioner in every hall, one big central chiller, which at building scale is cheaper. Room air warms a coil, a chilled water loop takes that heat to the chiller, and a second loop carries it to the tower." },
   { pov: "crah-internals", dur: 4.5, layer: "AIR", act: "xray:1",
-    text: "The cabinet in the room looks the same, but there is no air conditioner inside — just fans, filters, and a coil full of cold water. Hot air crosses the coil, the water warms up, and the water carries the heat out of the room." },
+    text: "The first handoff. The box in the room looks the same as bay 1 but holds no refrigeration — just fans, filters, and a coil of cold water. Hot air crosses the coil and the water warms. That warm water heads for the chiller." },
   { pov: "chiller", dur: 4.5,
-    text: "The chiller is the plant's engine. It chills the sealed loop feeding the coils indoors, and dumps that heat, plus the work its own compressor added, into a second open loop headed for the tower. The two waters meet but never mix." },
+    text: "The chiller is the same machine as bay 1, scaled up and moved out of the room. It sits between the two loops: refrigerant evaporates to pull heat out of the cooler loop, then the compressor squeezes it hot enough to hand that heat to the warmer one." },
   { pov: "wall-crossing", dur: 3.5, act: "xray:0", layer: "WATER",
-    text: "Here the wall crossing is plumbing. Indoors, a sealed loop filled once and kept. Outdoors, an open loop that meets the air at the tower — and loses water there, continuously, for as long as the plant runs." },
+    text: "The two loops differ in one way that matters. The indoor one is sealed — filled once and kept. The outdoor one is open: it meets the air at the tower, and it loses water there continuously, for as long as the plant runs." },
   { pov: "tower", dur: 4.5,
     text: "The tower is where the heat finally leaves, as vapor. Warm water spreads over plastic sheets and falls through moving air; about one drop in a hundred evaporates, and that is the cooling. A modest plant goes through millions of gallons a year." },
   { pov: "tower-water", dur: 5, layer: "WATER", act: "rate:blowdown:2.5",
@@ -2989,7 +2989,7 @@ chapters: [
 
 { id: "ch3", title: "Free cooling", bay: 2, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 3 answers the second question a different way: use the weather. When the air outside is cooler than the exhaust — which is most hours of the year in a cold climate — no refrigeration is needed at all." },
+    text: "Bay 3 is free cooling. Running that compressor is the expensive part, and outdoor air costs nothing — so this bay skips the chiller entirely whenever the air outside is cold enough to do the job, which in Minnesota is most of the year." },
   { pov: "intake", dur: 4, layer: "AIR",
     text: "Outdoor air comes in through louvers and is blended with warm return air to land on the right supply temperature, then crosses a deep wall of filters. The dampers redo that arithmetic continuously as the evening cools." },
   { pov: "fan-wall", dur: 3.5,
@@ -2997,27 +2997,27 @@ chapters: [
   { pov: "hx-core", dur: 4.5, act: "xray:1",
     text: "For sites that would rather not let outdoor air touch the servers, there is an indirect version: hall air and outdoor air run through alternating channels in a block of thin plates, trading heat through the metal without ever mixing." },
   { pov: "relief", dur: 4, act: "xray:0",
-    text: "Air that is not reused leaves through the relief louvers, and that is the whole job: heat out as warm air, no water used, nothing drained. Next door, the outdoor machines that do this job are lined up side by side." }
+    text: "Air that is not reused leaves through the relief louvers, and that is the whole job: heat out as warm air, no water used, nothing drained. Next door, the outdoor boxes every one of these systems needs get lined up side by side." }
 ]},
 
-{ id: "ch4", title: "Evaporative, adiabatic, dry", bay: 3, steps: [
+{ id: "ch4", title: "The four outdoor boxes", bay: 3, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 4 is the comparison shelf for the second half of the job. Four machines in the yard, all moving heat from a fluid loop into the outdoors. They look alike and get confused constantly. What separates them is what gets wet." },
+    text: "You have been seeing boxes out on the yard since bay 1 — a condenser, a cooling tower. Every system needs one, and there are only four kinds. Bay 4 lines them up, because choosing between them is choosing between water and electricity." },
   { pov: "open-tower", dur: 4.5, layer: "WATER",
-    text: "Open tower: the working water itself is sprayed into moving air. About one drop in a hundred evaporates, and that is the cooling. What stays behind gets more concentrated, so the basin bleeds a little away continuously." },
+    text: "The first two are what people mean by evaporative cooling: both work by evaporating water. In the open cooling tower, the water being cooled is itself sprayed into the air — about one drop in a hundred evaporates, and what stays behind must be bled off." },
   { pov: "closed-circuit", dur: 4.5,
-    text: "Closed-circuit cooler: the working fluid stays sealed inside a coil, and a separate captive supply of water rains over that coil and evaporates. Closed describes the fluid, not the water bill — this machine still drains." },
+    text: "The closed-circuit cooler evaporates water too, but keeps the working water sealed inside a coil while a separate spray does the evaporating on the outside. Closed describes the working water, not the water bill — this one still drains." },
   { pov: "adiabatic", dur: 4.5, act: "rate:pads:1",
-    text: "Adiabatic cooler: water wets pads that chill the incoming air, like a swamp cooler, with a sealed coil behind them. The water cools the air, never the fluid, and only on hot days — up to 95 percent less water than a tower." },
+    text: "The adiabatic cooler wets only the incoming air. Water trickles down pads and chills that air before it reaches a sealed coil, exactly like a swamp cooler. It runs wet only on hot days — up to 95 percent less water than an open cooling tower." },
   { pov: "water-lines", dur: 4.5, layer: "WATER",
-    text: "Follow the drain lines. The open tower and the spray sump run to the drain constantly. The adiabatic drain sits mostly idle, with an occasional flush for hygiene. The dry cooler has no water line at all." },
+    text: "The dry cooler is the fourth: a big radiator, nothing wet at all. That is the ladder, left to right — less and less water touches anything. Watch the drain lines: constant, constant, barely, none." },
   { pov: "overview", dur: 4,
-    text: "The trade is plain: evaporative machines spend water to save electricity, dry machines spend electricity to save water, and the adiabatic middle gets wet only on hot days. Every bay so far has changed the second half. Next door, the first half changes." }
+    text: "The trade is plain: the wet machines spend water to save electricity, the dry cooler spends electricity to save water — though electricity is not free of water either, since power plants use cooling water too. Next door, liquid comes all the way to the chip." }
 ]},
 
 { id: "ch5", title: "Direct-to-chip liquid", bay: 4, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 5 is about the first half of the job — getting heat off the chip with liquid instead of air. For decades a rack drew a few kilowatts and air was plenty. An AI rack draws more than a hundred, and air simply cannot keep up." },
+    text: "Bay 5 is direct-to-chip cooling: instead of blowing air past the processors, thin pipes carry liquid right onto each one. The newest AI chips run too hot for air to keep up. Everything downstream stays familiar — loops, a handoff, an outdoor box." },
   { pov: "rack", dur: 4.5, act: "explode:0.6",
     text: "At the back of the rack, two vertical pipes with a connection for every tray. Most of the rack's heat leaves in the coolant, and a fraction still leaves by air. Any one tray can be pulled out without stopping its neighbors." },
   { pov: "cold-plate", dur: 4.5, act: "explode:0",
@@ -3027,12 +3027,12 @@ chapters: [
   { pov: "wall-crossing", dur: 3.5, act: "xray:0",
     text: "The wall crossing is two sealed loops handing off heat. They hold surprisingly little water — a few dozen gallons at the cabinet — filled at commissioning and kept. Nothing runs to a drain here on an ordinary day." },
   { pov: "dry-cooler", dur: 4.5,
-    text: "Warm coolant is what unlocks the yard. At these temperatures outdoor air can take the heat almost year-round in a cold climate, so plain radiators with fans will do: no chillers, no evaporation, no water used." }
+    text: "Warm coolant unlocks the yard: at these temperatures outdoor air can take the heat almost year-round in a cold climate, so the outdoor box can be the dry cooler — not a drop of water. Next door, the same liquid idea goes all the way: whole servers submerged." }
 ]},
 
 { id: "ch6", title: "Immersion", bay: 5, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 6 pushes the first half of the job further still: the servers go into the liquid. Two versions here — an open bath of oil that gets pumped around, and a sealed tank whose fluid boils right on the chips." },
+    text: "Bay 6 is immersion cooling. The last bay put liquid onto each chip; this one lowers the whole computer into it. Two versions — an open bath of oil that gets pumped around, and a sealed tank whose fluid boils right on the chips." },
   { pov: "tub", dur: 4.5,
     text: "Single-phase: servers stand upright in a clear oil that electricity will not pass through, and that never boils. Warm oil spills over a lip at the rim, gets pumped through a heat exchanger, and comes back cooler." },
   { pov: "lifted-blade", dur: 4,
@@ -3042,12 +3042,12 @@ chapters: [
   { pov: "condenser", dur: 4,
     text: "Water-cooled tubes above the bath turn that vapor back into liquid, and it rains down again. The tank has to stay shut: every lid opening loses fluid as vapor, and the fluid is the expensive part." },
   { pov: "drums", dur: 4.5,
-    text: "That fluid is PFAS, and 3M, which made most of it, finished leaving the PFAS business at the end of 2025. No non-fluorinated replacement had been proven at this scale by mid-2026. The hardware works; the supply does not." }
+    text: "That fluid is PFAS, and 3M, which made most of it, finished leaving the PFAS business at the end of 2025, with no replacement proven at this scale by mid-2026. Next door, no exotic fluid at all: an ordinary air-cooled room, upgraded in place." }
 ]},
 
 { id: "ch7", title: "Rear-door heat exchangers", bay: 6, steps: [
   { pov: "overview", dur: 4,
-    text: "Bay 7 upgrades the first half of the job without rebuilding the room. Swap a rack's back door for a water-filled radiator and the exhaust gets cooled right there. Old halls run out of airflow long before they run out of power." },
+    text: "Bay 7 is the rear-door heat exchanger, a retrofit. An old air-cooled room runs out of airflow long before it runs out of electrical capacity, and rebuilding it is expensive — so each rack's back door becomes a water-filled radiator." },
   { pov: "door", dur: 4.5,
     text: "The passive door is a car radiator standing on end. The servers' own fans push their exhaust through it, so the door draws no power of its own, and the air rejoins the room close to the temperature it started at." },
   { pov: "active-door", dur: 4,
@@ -3055,16 +3055,16 @@ chapters: [
   { pov: "manifold", dur: 4,
     text: "Pipes along the row feed every door through its own shut-off valve, and a distribution cabinet keeps the door loop separate from the building water and warm enough that the coils never sweat." },
   { pov: "hoses", dur: 4,
-    text: "The door swings wide on flexible hoses with self-sealing couplings, so the rack opens without breaking the loop. The same hoses, pipes, and cabinets show up again in bay 5 — water at the rack is a step, not a leap." }
+    text: "The door swings wide on flexible hoses with self-sealing couplings, so the rack opens without breaking the loop. That is all seven systems. What remains is the question they differ on most: what each one does with water." }
 ]},
 
 { id: "ch8", title: "The Water Room", bay: 7, steps: [
   { pov: "overview", dur: 4,
-    text: "The Water Room scores all seven systems on the water question — which, as the hall has shown, is almost entirely a question about the second half of the job. Five columns, one shared drain, two chemistry benches, one display case." },
+    text: "The Water Room scores bay 4's four outdoor boxes, plus the sealed loops, on the water question. Everything measured in this room is water used at the site. Five columns, one shared drain, two chemistry benches, one display case." },
   { pov: "columns", dur: 5,
-    text: "The columns run live. Open tower: constant fill, constant drain. Closed-circuit: the same, smaller. Adiabatic: a sip on hot days. Sealed loop: one fill, then a flat line for years. Immersion: no water at all." },
+    text: "The columns run live. Open cooling tower: constant fill, constant drain. Closed-circuit cooler: the same, smaller. Adiabatic cooler: a sip on hot days. Sealed loop: one fill, then a flat line for years. Immersion: no water in the tank itself — its outside loop is sealed, like the one before it." },
   { pov: "tower-vs-closed", dur: 5, layer: "WATER",
-    text: "Here is the whole contrast. A big tower drains tens of thousands of gallons a day, every day it runs. A sealed loop holds a fixed amount of water, lets it go once at startup, and after that only when something is repaired." },
+    text: "Here is the whole contrast. A big open cooling tower drains tens of thousands of gallons a day, every day it runs. A sealed loop holds a fixed amount of water, lets it go once at startup, and after that only when something is repaired." },
   { pov: "chem-bench", dur: 5, layer: "CHEM",
     text: "Blowdown is two things: the minerals already in the local water, concentrated, and the leftovers of treatment — disinfectant, scale inhibitors, corrosion inhibitors. It leaves through a sewer, a creek, or reuse, always under permit." },
   { pov: "pfas-case", dur: 5,
@@ -3075,11 +3075,11 @@ chapters: [
 
 { id: "ch9", title: "Choosing", bay: null, steps: [
   { cam: { pos: [96, 2.6, -4], look: [108, 2.5, 6], dur: 4.5 },
-    text: "Back to the two questions. How is the heat picked up — air, or liquid? How is it pushed out of the building — a refrigeration machine, evaporating water, outside air, or a dry radiator? Every real data center is one answer to each." },
+    text: "Back to the two questions. How is the heat picked up — air, or liquid? How is it pushed out of the building — a refrigeration machine, evaporating water, outside air, or a dry cooler? Every real data center is one answer to each." },
   { cam: { pos: [104, 2.8, -4.5], look: [116, 2.6, 2], dur: 4.5 },
-    text: "The water question lives almost entirely in that second answer. Evaporating water saves electricity and spends water; a dry radiator saves water and spends electricity. How warm the chips will run decides how hard that bites." },
+    text: "The water question sits in that second answer. Going dry is a real, certain saving in the site's own water use — but the extra electricity has a water cost out at the power plants: smaller, indirect, and grid-dependent. Wind and solar use almost none." },
   { cam: { pos: [110, 3.0, -4], look: [126, 2.4, 2], dur: 5 },
-    text: "Where it is heading: AI density is forcing liquid onto the chip, warm loops make dry radiators affordable, and new builds increasingly seal the water loop entirely. Free-range mode opens every bay — click anything labeled." }
+    text: "Where it is heading: AI density is forcing liquid onto the chip, warm loops make dry coolers affordable, and new builds increasingly seal the water loop entirely. Free-range mode opens every bay — click anything labeled." }
 ]}
 
 ],
@@ -5411,12 +5411,8 @@ const KIT = (function () {
     g.putImageData(img, 0, 0);
   }
 
-  // Wall / hanging sign. Face points +z ('in'); pass {facing:'out'} to face -z.
-  function label(text, width, o) {
-    o = o || {};
-    const w = width || 3.0;
-    const h = o.h || w * 0.22;
-    const W = 1024, H = Math.max(96, Math.round(W * h / w));
+  // one printed sign face -> texture. Factored so a sign can carry two of them.
+  function signFace(text, o, W, H) {
     const c = CORE.cvs(W, H), g = c.getContext('2d');
     g.fillStyle = '#111820'; g.fillRect(0, 0, W, H);
     const gr = g.createLinearGradient(0, 0, 0, H);
@@ -5439,29 +5435,68 @@ const KIT = (function () {
     g.fillStyle = o.ink || '#e9f1f8';
     const px = fitTracked(g, String(text).toUpperCase(), avail, Math.round(H * (o.kicker ? 0.42 : 0.52)), '500', FAM, 0.13);
     drawTracked(g, String(text).toUpperCase(), padL, ty, px * 0.13, 'left');
-
-    const t = CORE.tex(c, { srgb: true, clamp: true });
-    const mat = new THREE.MeshStandardMaterial({
+    return CORE.tex(c, { srgb: true, clamp: true });
+  }
+  function signMat(t) {
+    return new THREE.MeshStandardMaterial({
       map: t, emissiveMap: t, emissive: 0xffffff, emissiveIntensity: 0.36,
       roughness: 0.62, metalness: 0.0, envMapIntensity: 0.3
     });
+  }
+
+  // Wall / hanging sign. Face points +z ('in'); pass {facing:'out'} to face -z.
+  //
+  // {back:true}   second readable face on the reverse, SHARING the front's texture
+  //               and material — one extra draw call, no extra texture memory.
+  // {back:'TEXT'} second face with its own copy.
+  // {back:false}  force single-faced (use on wall plates, to save the draw call).
+  //
+  // DEFAULT: any sign 3 m or wider gets a back automatically. Signs that big are
+  // the freestanding/post-mounted ones — bay title panels standing proud of the
+  // wall — and seen from behind a single-faced sign reads as a blank plate on a
+  // post ("signs standing in each bay with nothing on them"). Defaulting by size
+  // also fixes callers that cannot pass options.
+  // Even single-faced, the carcass is now dark powder-coat with a stiffening rib,
+  // so a back that IS seen reads as the back of a sign, not an unfinished one.
+  function label(text, width, o) {
+    o = o || {};
+    const w = width || 3.0;
+    const wantBack = (o.back === undefined) ? (w >= 3.0) : o.back;
+    const h = o.h || w * 0.22;
+    const W = 1024, H = Math.max(96, Math.round(W * h / w));
+    const mat = signMat(signFace(text, o, W, H));
+
     const grp = new THREE.Group();
-    const face = plane(w, h, mat, 0, 0, 0.031);
-    grp.add(face);
-    const back = box(w * 1.015, h * 1.06, 0.055, M.alum(), 0, 0, 0.0);
-    uvw(back, 0.6);
-    grp.add(back);
-    // hood
+    grp.add(plane(w, h, mat, 0, 0, 0.031));
+
+    const backMat = M.paint(0x3f464b, 0.66);
+    const carcass = box(w * 1.015, h * 1.06, 0.055, backMat, 0, 0, 0.0);
+    uvw(carcass, 0.6);
+    grp.add(carcass);
+
+    if (wantBack) {
+      const bt = (typeof o.back === 'string') ? o.back : String(text);
+      const m2 = (bt === String(text)) ? mat : signMat(signFace(bt, o, W, H));
+      const f2 = plane(w, h, m2, 0, 0, -0.031);
+      f2.rotation.y = Math.PI;               // presents the printed side rearward,
+      grp.add(f2);                           // text still reads left-to-right
+      const hood2 = box(w * 1.03, 0.03, 0.14, M.alum(), 0, h * 0.56, -0.07);
+      hood2.rotation.x = -0.28;
+      grp.add(hood2);
+    } else {
+      // stiffening rib + mounting standoffs, only meaningful on a wall plate
+      grp.add(box(w * 0.9, 0.05, 0.035, M.steelDark(), 0, 0, -0.045));
+      const so = [];
+      for (let i = 0; i < 2; i++) {
+        so.push(cyl(0.018, 0.018, 0.09, 8, M.steelLight(), (i ? 1 : -1) * w * 0.42, 0, -0.05));
+        so[so.length - 1].rotation.x = Math.PI / 2;
+      }
+      grp.add(merge(so, M.steelLight(), { uvScale: 0.2 }));
+    }
+
     const hood = box(w * 1.03, 0.03, 0.14, M.alum(), 0, h * 0.56, 0.07);
     hood.rotation.x = 0.28;
     grp.add(hood);
-    // mounting standoffs
-    const so = [];
-    for (let i = 0; i < 2; i++) {
-      so.push(cyl(0.018, 0.018, 0.09, 8, M.steelLight(), (i ? 1 : -1) * w * 0.42, 0, -0.05));
-      so[so.length - 1].rotation.x = Math.PI / 2;
-    }
-    grp.add(merge(so, M.steelLight(), { uvScale: 0.2 }));
     if (o.facing === 'out') grp.rotation.y = Math.PI;
     return grp;
   }
@@ -5881,21 +5916,53 @@ const KIT = (function () {
   }
 
   let activeLayer = 'ALL';
-  function setLayer(l) {
-    activeLayer = l || 'ALL';
+
+  // Flow presentation is a function of BOTH layer and x-ray, so it lives in one
+  // place and is re-applied whenever either changes.
+  //
+  // An isolated layer has to punch through a ghosted machine full of revealed
+  // internals. Dimming the world is not enough — the gate found bay 0's
+  // refrigerant circuit reduced to "a few faint violet dots" under HEAT + x-ray.
+  // So the active layer gets: 2.4x size, a 1.7x larger pixel ceiling, full
+  // opacity, its pure hue, a brightness gain, and a cap just over the bloom
+  // threshold. Under x-ray it also stops depth-testing and renders last, so the
+  // circuit reads THROUGH the cutaway instead of being buried inside it.
+  function applyFlowState() {
     const kinds = LAYER[activeLayer];
     const iso = activeLayer !== 'ALL';
     for (let i = 0; i < flows.length; i++) {
-      const f = flows[i];
+      const f = flows[i], u = f.mat.uniforms;
       const inLayer = !kinds || kinds.indexOf(f.kind) >= 0;
-      const u = f.mat.uniforms;
       // out-of-layer flows are dimmed to a trace, NOT hidden: same policy as
       // geometry, and it keeps the rest of the plant legible as context.
       f.points.visible = true;
-      if (!iso) { u.uSizeK.value = 1; u.uOpacity.value = f.baseOpacity; }
-      else if (inLayer) { u.uSizeK.value = 1.5; u.uOpacity.value = Math.min(1, f.baseOpacity * 1.45); }
-      else { u.uSizeK.value = 0.6; u.uOpacity.value = f.baseOpacity * 0.10; }
+      if (iso && inLayer) {
+        u.uSizeK.value = LAYER_SIZE_K;
+        u.uOpacity.value = 1;
+        u.uColor.value.copy(f.pureColor);
+        u.uGain.value = LAYER_GAIN;
+        u.uCap.value = POINT_CAP_LAYER;
+        f.maxPixK = LAYER_MAXPIX_K;
+        f.mat.depthTest = !xrayOn;
+        f.points.renderOrder = xrayOn ? 12 : 6;
+      } else {
+        u.uSizeK.value = iso ? 0.6 : 1;
+        u.uOpacity.value = iso ? f.baseOpacity * 0.10 : f.baseOpacity;
+        u.uColor.value.copy(f.baseColor);
+        u.uGain.value = 1;
+        u.uCap.value = POINT_CAP;
+        f.maxPixK = 1;
+        f.mat.depthTest = true;
+        f.points.renderOrder = 6;
+      }
+      // no needsUpdate: r128 reads depthTest from the material at draw time via
+      // WebGLState, so this costs no shader recompile.
     }
+  }
+
+  function setLayer(l) {
+    activeLayer = l || 'ALL';
+    applyFlowState();
     applyIsolation(activeLayer);
   }
   function setXray(b) {
@@ -5906,6 +5973,7 @@ const KIT = (function () {
       if (s.mesh.material !== want) s.mesh.material = want;
     }
     for (let i = 0; i < gutsList.length; i++) gutsList[i].visible = xrayOn;
+    applyFlowState();          // x-ray changes how an isolated layer must be drawn
   }
 
   // =========================================================================== 10
@@ -5956,17 +6024,23 @@ const KIT = (function () {
     'uniform vec3 uColor;',
     'uniform float uOpacity;',
     'uniform float uCap;',
+    'uniform float uGain;',
     'varying float vA;',
     'void main() {',
     '  vec4 t = texture2D( uMap, gl_PointCoord );',
     '  float a = t.a * uOpacity * vA;',
     '  if ( a < 0.006 ) discard;',
     // hard luminance cap: particles bypass tone mapping, so this is the only thing
-    // stopping a flow from tripping bloom. Must stay below CORE's bloom threshold.
-    '  gl_FragColor = vec4( min( uColor * t.rgb, vec3( uCap ) ), a );',
+    // stopping a flow from tripping bloom. Must stay below CORE's bloom threshold
+    // in normal viewing — an ISOLATED layer is allowed just over it, on purpose.
+    '  gl_FragColor = vec4( min( uColor * t.rgb * uGain, vec3( uCap ) ), a );',
     '}'
   ].join('\n');
   const POINT_CAP = 0.80;          // display-space; CORE bloom threshold is 0.92
+  // An isolated layer is the one place a flow is ALLOWED to glow: cap just above
+  // the bloom threshold so the active circuit picks up a halo and reads at a glance.
+  const POINT_CAP_LAYER = 0.97;
+  const LAYER_SIZE_K = 2.4, LAYER_GAIN = 1.35, LAYER_MAXPIX_K = 1.7;
 
   let pointPix = 700, pointMax = 24;
   function updatePointScale() {
@@ -5977,9 +6051,9 @@ const KIT = (function () {
     // ~28 px at 1600 px wide, scaled with resolution so it is a screen-fraction cap
     pointMax = Math.max(5, 28 * (w / 1600));
     for (let i = 0; i < flows.length; i++) {
-      const u = flows[i].mat.uniforms;
+      const f = flows[i], u = f.mat.uniforms;
       u.uPix.value = pointPix;
-      u.uMaxPix.value = pointMax;
+      u.uMaxPix.value = pointMax * (f.maxPixK || 1);
     }
   }
   // hook the scale update in front of every render (harness poses do not tick)
@@ -6005,15 +6079,22 @@ const KIT = (function () {
     geo.setAttribute('aAlpha', new THREE.BufferAttribute(alphaA, 1));
 
     const baseOpacity = o.opacity === undefined ? F.opacity : o.opacity;
+    const baseColor = new THREE.Color(o.color === undefined ? F.color : o.color);
+    // the same hue driven to full saturation, used when this flow's layer is isolated
+    const pureColor = baseColor.clone();
+    const mx = Math.max(pureColor.r, pureColor.g, pureColor.b);
+    if (mx > 0.001) pureColor.multiplyScalar(1 / mx);
+
     const mat = new THREE.ShaderMaterial({
       uniforms: {
         uMap: { value: T.sprite },
-        uColor: { value: new THREE.Color(o.color === undefined ? F.color : o.color) },
+        uColor: { value: baseColor.clone() },
         uOpacity: { value: baseOpacity },
         uPix: { value: pointPix },
         uMaxPix: { value: pointMax },
         uSizeK: { value: 1 },
-        uCap: { value: POINT_CAP }
+        uCap: { value: POINT_CAP },
+        uGain: { value: 1 }
       },
       vertexShader: POINT_VS,
       fragmentShader: POINT_FS,
@@ -6035,7 +6116,8 @@ const KIT = (function () {
       posA: posA, sizeA: sizeA, alphaA: alphaA,
       u: new Float32Array(count), seg: new Int32Array(count),
       off: new Float32Array(count * 3), life: new Float32Array(count),
-      baseOpacity: baseOpacity
+      baseOpacity: baseOpacity, baseColor: baseColor, pureColor: pureColor,
+      maxPixK: 1
     };
 
     for (let i = 0; i < count; i++) {
@@ -6374,7 +6456,8 @@ const HALL = (function () {
     add(wall(0.36, 9.6, 19.6, M.precast(), X0 - 0.18, 4.8, 2.6, 3));
     // title graphic
     const t = K.label('COOLING ATLAS', 9.2, {
-      h: 1.9, kicker: 'Seven ways a data center sheds heat', accent: '#5fb6d8'
+      h: 1.9, kicker: 'Seven ways a data center sheds heat', accent: '#5fb6d8',
+      back: false                                   // flat against the end wall
     });
     t.rotation.y = Math.PI / 2;
     t.position.set(X0 + 0.10, 5.1, 2.2);
@@ -6916,7 +6999,8 @@ const HALL = (function () {
 
     // end-wall title
     const t = K.label('THE WATER ROOM', 6.2, {
-      h: 1.35, kicker: 'What goes in, what comes out, how often, what is in it'
+      h: 1.35, kicker: 'What goes in, what comes out, how often, what is in it',
+      back: false                                   // flat against the end wall
     });
     t.rotation.y = -Math.PI / 2;
     t.position.set(WX1 - 0.10, 3.5, 3.0);
@@ -6956,7 +7040,9 @@ const HALL = (function () {
     add(K.merge(fas, M.paint(0x6f767b, 0.62), { uvScale: 1.1, cast: true }));
     add(K.box(0.24, 0.06, PZ1 - PZ0 - 0.6, M.lamp(0.95), XW - 0.66, 5.42, (PZ0 + PZ1) / 2));
 
-    const sign = K.label('THE WATER ROOM', 5.4, { h: 1.15, kicker: 'End of the spine' });
+    const sign = K.label('THE WATER ROOM', 5.4, {
+      h: 1.15, kicker: 'End of the spine', back: false   // sits on the fascia
+    });
     sign.rotation.y = -Math.PI / 2;
     sign.position.set(XW - 0.62, 6.55, (PZ0 + PZ1) / 2);
     add(sign);
@@ -16657,7 +16743,7 @@ window.HALL = HALL;
       signs.push(wrap);
       return wrap;
     }
-    facedLabel('WHERE PFAS ACTUALLY IS', 'three objects · everything else in this room is non-fluorinated',
+    facedLabel('WHERE PFAS ACTUALLY IS', 'three objects · none identified in the room’s other chemistry',
       1.30, 0.30, PFX - 0.325, 2.14, PFZ, 0);
     // plinth caption dropped to 0.42 and narrowed: at that height nothing on the case
     // — deck edge, bottom rail, card rail — can come between it and the camera
@@ -18295,9 +18381,14 @@ const APP = (() => {
     for (const def of built) {
       if (def.index === 7) continue;
       const x = CORE.BX(def.index);
-      // back-wall wayfinding panel
+      // back-wall wayfinding panel — stood proud of the wall on a backer so the
+      // wall's diagonal braces (z ≈ -6.9..-6.6) never cross the face
+      const backer = new THREE.Mesh(new THREE.BoxGeometry(4.5, 1.35, 0.08),
+        K.M.steelDark ? K.M.steelDark() : K.M.paint(0x2a2e33, 0.7));
+      backer.position.set(x, 2.65, -6.5);
+      S.add(backer);
       const wp = K.label(String(def.index + 1) + ' — ' + def.title, 4.2);
-      wp.position.set(x, 2.65, -6.92);
+      wp.position.set(x, 2.65, -6.42);
       S.add(wp);
       // bench at the walkway edge, offset from center
       const bench = new THREE.Group();
